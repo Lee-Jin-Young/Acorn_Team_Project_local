@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+#capsLockMessage {
+    position: absolute;
+    top: 100;
+    left: -188px;
+    background-color: rgb(241, 149, 149); /* 배경색상 설정 */
+    color: black; /* 글자색상 설정 */
+    padding: 8px; /* 여백 설정 */
+    border-radius: 2px; /* 모서리 둥글게 설정 */
+    z-index: 1;
+    display: none;
+    margin-top: 3px;
+    font-size: 15px;
+    color: white;
+}
+
+#capsLockMessage2 {
+    position: absolute;
+    top: 100;
+    left: -188px;
+    background-color: rgb(241, 149, 149); /* 배경색상 설정 */
+    color: black; /* 글자색상 설정 */
+    padding: 8px; /* 여백 설정 */
+    border-radius: 2px; /* 모서리 둥글게 설정 */
+    z-index: 1;
+    display: none;
+    margin-top: 3px;
+    font-size: 15px;
+    color: white;
+}
+
+.arrow_box {
+	position: relative;
+}
+
+.arrow_box:after, .arrow_box:before {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: ;
+	border-left-color: rgb(241, 149, 149);
+	border-width: 8px;
+	margin-top: -8px;
+}

@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/support/support_inquire.css" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 	
@@ -82,15 +84,16 @@
 					</c:choose>
 				</ul>
 				<h3 class="main_title">문의 답변하기</h3>
-				<form action="${pageContext.request.contextPath}/support/support_inquire_insert" class="area_form" method="post">
+			
+				<form action="${pageContext.request.contextPath}/support/support_inquire_answer" class="area_form" method="post">
 					<div class="row-wrap">
 						<div class="input_name">
 							<h4 class="label">ID</h4>
-							<input type="text" class="writer" name="writer" value="${dto.id}" readonly />
+							<input type="text" class="writer" name="writer" value="${dto.writer}" readonly />
 						</div>
 						<div class="input_email">
 							<h4 class="label">이메일 *</h4>
-							<input type="text" class="email" name="email" value="${dto.email}" readonly />
+							<input type="text" class="email" name="email" value="${dto.user_email}" readonly />
 							<p class="tip_txt">* 답변 받을 이메일 주소를 확인해 주세요.</p>
 						</div>
 					</div>
@@ -98,43 +101,36 @@
 						<div class="input_title">
 							<h4 class="label">제목</h4>
 							<select name="category" id="category" class="title_select">
-								<option selected="selected" class="inquire_select">문의분류</option>
-								<option value="1">회원</option>
-								<option value="2">모임신청</option>
-								<option value="3">모임개설</option>
-								<option value="0">기타</option>
+								<option selected="selected" class="inquire_select">
+								<c:choose>
+									<c:when test="${dto.category == 1}">회원</c:when>
+									<c:when test="${dto.category == 2}">모임신청</c:when>
+									<c:when test="${dto.category == 3}">모임개설</c:when>
+									<c:when test="${dto.category == 0}">기타</c:when>
+								</c:choose>
+								</option>
 							</select>
-							<input type="text" class="inquire_title" name="title" placeholder="제목을 입력해주세요" />
+							<input type="text" class="inquire_title" name="title" placeholder="제목을 입력해주세요" value="${dto.title }" readonly/> 
 						</div>
 					</div>
 					<div class="row-wrap">
 						<div class="input_text">
 							<h4 class="label">내용 *</h4>
-							<textarea name="content" placeholder="북메이트를 이용하시면서 궁금한 점이나 어려운점, 모임 관련 내용이나 북메이트의 전반적인 문의를 입력 해 주세요." readonly>${tmp.content }</textarea>
+							<textarea name="content" placeholder="북메이트를 이용하시면서 궁금한 점이나 어려운점, 모임 관련 내용이나 북메이트의 전반적인 문의를 입력 해 주세요." readonly>${dto.content }</textarea>
 						</div>
 					</div>
+				
 					<div class="row-wrap">
 						<div class="input_text">
 							<h4 class="label">답변 내용 *</h4>
-							<textarea name="content"></textarea>
+							<textarea name="answer" cols="30" rows="15" >${dto.answer}</textarea>
 						</div>
 					</div>
-					<div class="row-wrap">
-						<div class="input_agreement">
-							<h4 class="label">
-								개인 정보 수집
-								<div style="margin-left:13px">이용 동의</div>
-							</h4>
-							<label>
-							<input class="privacy_check" type="checkbox" name="confirm" value="1" />
-								"작성해주신 이메일, 전화번호는 문의내용 확인 및 답변처리 용도로 쓰이며 3년간 보관 후 파기합니다."
-							</label>
-						</div>
-					</div>
+					
 					<p class="info_message">
 						이 사이트는 reCAPTCHA에 의해 보호되며 Google 개인 정보 취급 방침 및 서비스 약관이 적용됩니다.
 					</p>
-					<button type="submit" class="btn_submit">답변등록</button>
+					<button type="submit" class="btn_submit" id="answer-btn">답변등록</button>
 				</form>
 			</div>
 		</div>

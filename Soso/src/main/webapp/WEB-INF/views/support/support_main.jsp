@@ -8,14 +8,7 @@
 <meta charset="UTF-8">
 <title>고객센터</title>
 <link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
-<style>
-	.area_faq ul li.faq_category{
-		margin-right: 40px;
-		width: 100px;
-		color: #666;
-		display: inline-block;
-	}
-</style>
+
 <link rel="shortcut icon" type="image/x-icon" href="https://genfavicon.com/tmp/icon_7cacead7cd8483ca41a810db418dc8ab.ico">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/support/support_main.css" />

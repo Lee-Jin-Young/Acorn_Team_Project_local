@@ -91,7 +91,7 @@
 						</div>
 						<div class="input_email">
 							<h4 class="label">이메일 *</h4>
-							<input type="text" class="email" name="email" value="${dto.email}" readonly />
+							<input type="text" class="email" name="user_email" value="${dto.email}" readonly />
 							<p class="tip_txt">* 답변 받을 이메일 주소를 확인해 주세요.</p>
 						</div>
 					</div>
@@ -112,6 +112,12 @@
 						<div class="input_text">
 							<h4 class="label">내용 *</h4>
 							<textarea name="content" placeholder="북메이트를 이용하시면서 궁금한 점이나 어려운점, 모임 관련 내용이나 북메이트의 전반적인 문의를 입력 해 주세요."></textarea>
+						</div>
+					</div>
+					<div class="row-wrap" style="display: none">
+						<div class="input_text">
+							<h4 class="label">답변 내용 *</h4>
+							<textarea name="answer" placeholder="북메이트를 이용하시면서 궁금한 점이나 어려운점, 모임 관련 내용이나 북메이트의 전반적인 문의를 입력 해 주세요."></textarea>
 						</div>
 					</div>
 					<div class="row-wrap">

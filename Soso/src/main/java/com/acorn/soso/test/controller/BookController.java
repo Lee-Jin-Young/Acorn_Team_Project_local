@@ -31,7 +31,7 @@ public class BookController {
 		return dto;
 	}
 	
-	@PostMapping("/test/saveBook")
+	@PostMapping("/test/bookUpdate")
 	public ResponseEntity<String> saveBook(@RequestBody List<BookDto> bookList) {
 	    try {
 	        BookService.saveBook(bookList);
@@ -53,5 +53,20 @@ public class BookController {
 	public String bookList(Model model, HttpServletRequest request) {
 		BookService.getBookList(model, request);
 		return "test/bookTest";
+	}
+	
+	//책 업데이트 폼 이동
+	@GetMapping("/test/bookUpdateForm")
+	public String bookUpdateForm(Model model, int group_num) {
+		BookService.bookList(group_num, model);
+		return "test/bookUpdateForm";
+	}
+	
+	//책 삭제 기능(ajax로 삭제하기)
+	@ResponseBody
+	@RequestMapping("/test/bookDelete")
+	public boolean bookDelete(int group_num, String isbn) {
+		BookService.bookDelete(isbn, group_num);
+		return true;
 	}
 }

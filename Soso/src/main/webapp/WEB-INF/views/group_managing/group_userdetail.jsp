@@ -44,28 +44,36 @@
 					</div>
 					<div class="group_meet_contents">
 						<h2 style="line-height: 2.5; font-size: 30px;">모임정보</h2>
-						<p class="text" style="line-height: 2.5; font-size: 18px;">모임장 : ${dto.manager_id}</p>
-						<p class="text" style="line-height: 2.5; font-size: 18px;">모임 시간 : ${dto.meeting_time}</p>
-						<p class="text" style="line-height: 2.5; font-size: 18px;">모임 장소 : ${dto.meeting_loc}</p>
-						<p class="text" style="line-height: 2.5; font-size: 18px;">가입 인원 : ${dto.now_people} 명</p>
+						<li style="line-height: 2.5;">
+							<span style="font-size: 18px;">모임장 : ${dto.manager_id}</span>
+						</li>
+						<li style="line-height: 2.5;">
+							<span style="font-size: 18px;">모임 시간 : ${dto.meeting_time}</span>
+						</li>
+						<li style="line-height: 2.5;">
+							<span style="font-size: 18px;">모임 장소 : ${dto.meeting_loc}</span>
+						</li>
+						<li style="line-height: 2.5;">
+							<span style="font-size: 18px;">가입 인원 : ${dto.now_people} 명</span>
+						</li>
 					</div>
-					<div class="group_detail_contents">
-						<h2 style="line-height: 2.5; font-size: 30px;">이런분을 찾습니다!</h2>
+					<div class="group_meet_detail_contents">
+						<h2 style="line-height: 2.5; font-size: 30px;">모임규칙</h2>
 						<ul>
 							<li style="line-height: 2.5;">
-								1. <span style="font-size: 18px;"> 책은 모임전에 읽을 수 있는 사람</span>
+								1. <span style="font-size: 18px;"> 책은 모임 전에 읽기</span>
 							</li>
 							<li style="line-height: 2.5;">
-	 							2. <span style="font-size: 18px;"> 모임에 지각 안하는 사람</span>
+	 							2. <span style="font-size: 18px;"> 모임에 지각 하지 않기</span>
 	 						</li>
 	 						<li style="line-height: 2.5;">
-	 							3. <span style="font-size: 18px;"> 소통하고 싶은 사람</span>
+	 							3. <span style="font-size: 18px;"> 사람들과 소통 많이 하기</span>
 	 						</li>
 	 						<li style="line-height: 2.5;">
 	 							4. <span style="font-size: 18px;"> 독서 경험이 없는 사람</span>
 	 						</li>
 	 						<li style="line-height: 2.5;">
-	 							5. <span style="font-size: 18px;"> 20~30대 젊은 사람</span>
+	 							5. <span style="font-size: 18px;"> 20~30대와 어울리기</span>
 	 						</li>
 						</ul>
 					</div> 

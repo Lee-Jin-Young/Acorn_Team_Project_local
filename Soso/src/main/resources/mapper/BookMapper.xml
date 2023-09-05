@@ -9,8 +9,12 @@
         (#{group_num}, #{title}, #{link}, #{image}, #{isbn}, #{description})
     </insert>
     <select id="bookList" parameterType="int" resultType="bookDto">
-    	SELECT title, link, image, description
+    	SELECT group_num, title, link, image, isbn, description
     	FROM BOOK_TB
     	WHERE group_num = #{group_num}
     </select>
+    <delete id="bookDelete" parameterType="bookDto">
+    	DELETE BOOK_TB
+    	WHERE isbn = #{isbn} AND group_num = #{group_num}
+    </delete>
 </mapper>

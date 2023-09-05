@@ -51,12 +51,14 @@
             data-aos-easing="ease-in-sine">북메이트 찾기</h3>
             <div class="theme_search">
             	<form action="list" method="get">
+    			<input type="hidden" name="genre" value="${param.genre}">
             	<input type="text" placeholder="검색어.." value="${keyword}" name="keyword" />
             		<select name="condition" id="condition">
             			<option value="name_caption" ${condition eq 'name_caption' ? 'selected' : '' }>모임명 +내용</option>
             			<option value="name"  ${condition eq 'name' ? 'selected' : '' }>모임명 </option>
             			<option value="writer"  ${condition eq 'manager_id' ? 'selected' : '' }>모임장</option>
             		</select>
+
             	<button type="submit">검색</button>
             	</form>
             </div>

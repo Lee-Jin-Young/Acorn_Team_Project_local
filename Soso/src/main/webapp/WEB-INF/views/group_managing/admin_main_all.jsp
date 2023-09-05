@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>북메이트 관리</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/group_managing_user_main.css" />
@@ -63,19 +64,19 @@
                     	<div id="likedNumber">
 							<div>❤ ${tmp.like_num }</div>
 							<div>
-								<a href="${pageContext.request.contextPath}/group_managing/memberList?group_num=${tmp.num}">${tmp.now_people} / ${tmp.max_people}
-							</a>
+								<div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="여길 누르면 소모임 멤버관리를 할 수 있어요!!~" data-bs-placement="top">
+									 <a href="${pageContext.request.contextPath}/group_managing/memberList?group_num=${tmp.num}">${tmp.now_people} / ${tmp.max_people}</a>
+								</div>
 							</div>
 						</div>
-
-                        		<c:choose>
-									<c:when test="${fn:length(tmp.img_path) < 32}">
-										<div class="user_content_img"><img src="${pageContext.request.contextPath}/resources/images/main/001.jpg"/></div>
-									</c:when>
-									<c:otherwise>
-										<div class="user_content_img"><img src="${pageContext.request.contextPath}${tmp.img_path}"/></div>
-									</c:otherwise>
-								</c:choose>
+                       		<c:choose>
+								<c:when test="${fn:length(tmp.img_path) < 32}">
+									<div class="user_content_img"><img src="${pageContext.request.contextPath}/resources/images/main/001.jpg"/></div>
+								</c:when>
+								<c:otherwise>
+									<div class="user_content_img"><img src="${pageContext.request.contextPath}${tmp.img_path}"/></div>
+								</c:otherwise>
+							</c:choose>
                        		<div class="user_content_text">
                        			<ul class="">
 		                            	<li class="title">${tmp.name}</li>
@@ -92,11 +93,16 @@
                 </div>
 	        </c:forEach>
     	</div>
-
     </section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
 		AOS.init();
+	</script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<script>
+		const memberlinks = document.querySelectorAll('[data-bs-toggle=popover]');
+        [...memberlinks].map(item => new bootstrap.Popover(item));
 	</script>
 </body>
 </html>

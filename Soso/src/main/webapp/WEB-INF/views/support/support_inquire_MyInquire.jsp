@@ -96,7 +96,16 @@
 														<td class="title">
 															<a href="">${tmp.title }</a>
 														</td>
-														<td class="status">답변대기</td>
+														<td class="status">
+															<c:choose>
+																<c:when test="${empty tmp.answer }">
+																	답변대기
+																</c:when>
+																<c:otherwise>
+																	답변완료
+																</c:otherwise>
+															</c:choose>
+														</td>
 													</tr>
 													<tr class="btn-area">
 														<td><button type="button" class="btn_more">답변보기</button></td>
@@ -107,6 +116,14 @@
 																<div class="description">
 																	<button data-num="${tmp.cs_num}" type="submit" class="delete-btn">삭제</button>
 																	${tmp.content }
+																	<c:choose>
+																		<c:when test="${tmp.answer not empty }">
+																			${tmp.answer }
+																		</c:when>
+																		<c:otherwise>
+																			
+																		</c:otherwise>
+																	</c:choose>
 																</div>
 															</div>
 														</td>
@@ -136,10 +153,27 @@
 				document.querySelectorAll(".delete-btn").forEach((item)=>{
 					item.addEventListener("click", (e)=>{
 						e.preventDefault();
-							const csNum=e.target.getAttribute("data-num");
-							location.href="${pageContext.request.contextPath}/support/support_inquire_delete?cs_num=" + csNum;
-					});
+						const isTrue = Swal.fire({
+					  		title: "문의를 삭제하시겠습니까?",
+					  		text: "",
+					  		icon: 'warning',
+					  		showCancelButton: true,
+					  		confirmButtonColor: 'rgb(13, 110, 253)',
+					  		cancelButtonColor: 'rgb(248, 162, 146)',
+					  		confirmButtonText: '확인',
+					  		cancelButtonText: '취소',
+							}).then((result) => {
+					      	if (result.isConfirmed) {
+					      		Swal.fire('삭제 되었습니다.','success');
+					      		const csNum=e.target.getAttribute("data-num");
+								location.href="${pageContext.request.contextPath}/support/support_inquire_delete?cs_num=" + csNum;
+					      	}else if(result.isDismissed){
+					      		location.href="${pageContext.request.contextPath}/support/support_inquire_MyInquire";
+					      	}
+					    });
+					});	
 				});
+		
 		</script>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>

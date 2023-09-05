@@ -20,4 +20,6 @@ public class InquireDto {
 	private String content;
 	private int confirm;
 	private String regdate;
+	private String user_email;
+	private String answer;
 }

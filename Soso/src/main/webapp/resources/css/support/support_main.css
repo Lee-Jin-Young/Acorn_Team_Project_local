@@ -69,8 +69,9 @@ h2.black, h3.black{ color: #333; }
 	.faq_category{
 		margin-right: 40px;
 		width: 100px;
-		color: #666;
+		color: rgb(157 128 63);
 		display: inline-block;
+		font-weight: 500;
 	}
 	.faq_question:hover, .notice_title:hover{
 		text-decoration:underline;

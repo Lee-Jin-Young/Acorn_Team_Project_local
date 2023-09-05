@@ -25,8 +25,8 @@
 
 	<insert id="insert" parameterType="inquireDto">
 		INSERT INTO CS_TB
-		(cs_num, writer, category, title, content, confirm, regdate)
-		VALUES(cs_seq.NEXTVAL, #{writer}, #{category}, #{title}, #{content}, #{confirm}, TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'))
+		(cs_num, writer, category, title, content, confirm, user_email, answer, regdate)
+		VALUES(cs_seq.NEXTVAL, #{writer}, #{category}, #{title}, #{content}, #{confirm}, #{user_email}, #{answer}, TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'))
 	</insert>
 	
 	<select id="getData" parameterType="int" resultType="inquireDto">
@@ -40,7 +40,7 @@
 	</delete>
 	<update id="update" parameterType="inquireDto">
 		UPDATE CS_TB
-		SET category = #{category}, title = #{title}, content = #{content}
+		SET answer = #{answer}, content = #{content}
 		WHERE cs_num = #{cs_num}
 	</update>	
 </mapper>

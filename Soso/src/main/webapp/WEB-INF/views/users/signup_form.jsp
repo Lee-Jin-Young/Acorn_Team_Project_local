@@ -9,6 +9,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/users/capsLock.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
@@ -17,7 +18,7 @@
 	<jsp:include page="/WEB-INF/views/include/navbar_c.jsp">
 		<jsp:param value="signup" name="current" />
 	</jsp:include>
-	<div class="container">
+	<div class="container" >
 		<p class="title">회원 가입</p>
 		<form action="${pageContext.request.contextPath}/users/signup" method="post" id="myForm">
 			<div class="mb-4">
@@ -30,22 +31,42 @@
 				<input class="form-control" type="text" name="id" id="id" autocomplete='off'/>
 				<div><span id="result_checkId" style="font-size: 12px;"></span></div>
 			</div>
-			<div class="mb-4">
+			<div class="mb-4 abc" >
 				<label class="control-label mb-2" for="pwd">비밀번호</label>
 				<div class="input-group">
-					<input class="form-control" type="password" name="pwd" id="pwd" /> 
+					<input class="form-control" type="password" name="pwd" id="pwd" onkeyup="checkCapsLock(event)"/> 
 					<button class="btn btn-outline-gray bi-eye-slash" type="button" id="openpwd"></button>
+					<div id="capsLockMessage" class="arrow_box">Caps Lock이 켜져 있습니다</div>
 				</div> 
 				<div class="invalid-feedback" id="pwd-feedback">최소 8자 이상, 20글자 이하로 문자와 숫자, 특수 문자를 각각 하나 이상 조합하세요.</div>
 			</div>
 			<div class="mb-4">
 				<label class="control-label mb-2" for="pwd2">비밀번호 확인</label>
 				<div class="input-group">
-					<input class="form-control" type="password" name="pwd2" id="pwd2"/>
+					<input class="form-control" type="password" name="pwd2" id="pwd2" onkeyup="checkCapsLock2(event)"/>
 					<button class="btn btn-outline-gray bi-eye-slash" type="button" id="openpwd2"></button>
+					<div id="capsLockMessage2" class="arrow_box">Caps Lock이 켜져 있습니다</div>
 				</div>
-				<div class="invalid-feedback" id="pwd2-feedback">비밀번호가 일치하지 않습니다.</div> 
+				<div class="invalid-feedback" id="pwd2-feedback">비밀번호가 일치하지 않습니다.</div>
 			</div>
+			<script>
+				const capsLockMessage = document.getElementById("capsLockMessage");
+				function checkCapsLock(event)  {
+		        	if (event.getModifierState("CapsLock")) {
+		        		capsLockMessage.style.display = "block"; // 팝오버 표시
+		           	} else {
+		           		capsLockMessage.style.display = "none"; // 팝오버 숨김
+		           	}
+		         }
+				const capsLockMessage2 = document.getElementById("capsLockMessage2");
+				function checkCapsLock2(event)  {
+		        	if (event.getModifierState("CapsLock")) {
+		        		capsLockMessage2.style.display = "block"; // 팝오버 표시
+		           	} else {
+		           		capsLockMessage2.style.display = "none"; // 팝오버 숨김
+		           	}
+		         }
+			</script>
 			<div class="mb-4">
 				<label class="control-label mb-2" for="email">이메일</label> <input
 					class="form-control" type="text" name="email" id="email" autocomplete='off'/>

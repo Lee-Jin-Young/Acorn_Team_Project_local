@@ -152,7 +152,7 @@
 				<button type="submit">수정</button>
 				<a style="background-color: black; color:white" class="deleteBtn">해산하기</a>
 				<a style="background-color: black; color:white; margin-left:1rem;" class="btn mt-3" 
-					href="${pageContext.request.contextPath}/test/booksearch?num=${dto.num}">책 등록하기</a>
+					href="${pageContext.request.contextPath}/test/bookUpdateForm?group_num=${dto.num}" id="bookUpdateLink" name="bookUpdateLink">책 수정&삭제</a>
 			</div>
 			<!-- db에 저장하기 위한 이미지 경로 값 -->
 			<input type="hidden" name="img_path" value="${ dto.img_path }"/>
@@ -164,7 +164,17 @@
 		</form>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+		
 		<script>
+			$("#bookUpdateLink").click(function (event) {
+				event.preventDefault();
+			    // 새 창을 열기 위한 URL
+			    var newWindowUrl = "${pageContext.request.contextPath}/test/bookUpdateForm?group_num=${dto.num}";
+			
+			    // 새 창 열기
+			    window.open(newWindowUrl, "bookUpdateForm", "width=600,height=400");
+			});
+		
 			$(".deleteBtn").css("cursor", "pointer").click(()=>{
 				Swal.fire({
 		      		title: `정말로 소모임을 해산하겠습니까?`,

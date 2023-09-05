@@ -1,11 +1,22 @@
 @charset "UTF-8";
 
+body{
+	background-color: #f5f6f7;
+}
+
+#jjim_title{
+	font-size:2rem;
+	font-weight: 600;
+	text-align: center;
+	margin: 50px 0;
+}
+
 .jjim_container {
     display: flex;
     border: 2px solid rgb(222, 226, 230);
     border-radius: 25px;
     height: 250px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 #jjim_item_one{
@@ -14,12 +25,15 @@
 	flex-direction:column;
 	justify-content: center;
 	align-items: center;
+	padding: 10px;
 }
 
-#jjim_item_one div img{
-	width: 100px;
+#jjim_item_one div:nth-child(1) img{
+	width: 120px;
+	height: 120px;
 	border-radius: 50%;
 	margin-bottom: 15px;
+	border: 3px solid rgb(211, 195, 169);
 }
 
 .jjim_subtitle{
@@ -30,17 +44,19 @@
 
 #jjim_item_two{
 	width: 60%;
+	padding: 0 20px;
+	margin: 30px 0;
+	border-right: 1px solid rgb(222, 226, 230);
+	border-left: 1px solid rgb(222, 226, 230);
 }
 
 #jjim_item_two_header{
 	display: flex;
 	justify-content: space-between;
-	padding-right: 30px;
-	margin: 25px 0;
+	margin: 5px 0;
 }
 
 #jjim_item_two_body{
-	padding-right: 20px;
 	margin: 10px 0;
 }
 
@@ -54,18 +70,21 @@
 #group_caption{
 	height: 80px;
 	cursor: default;
-	overflow:hidden;
+	overflow:visible;
 	padding: 0 5px;
+	font-size: 14px;
+	background-color: #f5f6f7;
 }
 
 #jjim_date{
 	display:flex;
 	justify-content: center;
+	margin-top: 20px;
 }
 
 #jjim_item_three{
 	width: 20%;
-	padding-top: 50px;
+	padding: 50px 0;
 }
 
 #jjim_item_three .group_deadlined_dt{
@@ -82,7 +101,7 @@
 #jjim_item_three .group_join_btn{
 	display: flex;
 	justify-content: center;
-	margin-top: 35px;
+	margin-top: 20px;
 }
 
 #jjim_item_three .join{

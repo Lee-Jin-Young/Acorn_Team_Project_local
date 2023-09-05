@@ -35,12 +35,12 @@ public class GroupNumInterceptor implements HandlerInterceptor {
                 if (!isValidAccess(user_id, group_num)) {
                     // 유효하지 않은 경우 예외 처리 로직을 추가
                     // 여기에서는 가입 페이지로 리다이렉트하도록 변경
-                    response.sendRedirect("/group/group_page"); // 가입 페이지로 리다이렉트
+                    response.sendRedirect("/group_managing/group_errorpage"); // 가입 페이지로 리다이렉트
                     return false;
                 }
             } catch (NumberFormatException e) {
                 // 숫자 변환에 실패한 경우 예외 처리
-                response.sendRedirect("/group/group_page"); // 가입 페이지로 리다이렉트
+                response.sendRedirect("/group_managing/group_errorpage"); // 가입 페이지로 리다이렉트
                 return false;
             }
         }

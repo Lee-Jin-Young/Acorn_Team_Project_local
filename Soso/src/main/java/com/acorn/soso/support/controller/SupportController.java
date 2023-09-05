@@ -156,14 +156,21 @@ public class SupportController {
 		inquireService.insert(dto);
 		return "support/support_inquire_insert";
 	}
+	@PostMapping("/support/support_inquire_answer")
+	public String support_inquire_answer(InquireDto dto, Model model) {
+		inquireService.update(dto, model);
+		return "support/support_inquire_answer";
+	}
 	@GetMapping("/support/support_inquire_MyInquire")
 	public String support_inquire_MyInquire(HttpSession session, Model model) {
 		inquireService.getList(session, model);
 		return "support/support_inquire_MyInquire";
 	}
 	@GetMapping("/support/support_inquire_answerform")
-	public String support_inquire_answerform(HttpSession session, Model model) {
-		inquireService.getList(session, model);
+	public String support_inquire_answerform(int cs_num,HttpSession session, Model model) {
+		userService.getInfo(session, model);
+		inquireService.getData(cs_num, model);
+		
 		return "support/support_inquire_answerform";
 	}
 	@GetMapping("/support/support_inquire_inquireStatus")
@@ -180,7 +187,7 @@ public class SupportController {
 	public String support_inquire_delete(int cs_num, Model model, HttpSession session) {
 		String id = (String)session.getAttribute("id");
 		InquireDto dto = inquireService.getData(cs_num, model);
-		if(id.equals("admin") || dto.getWriter().equals(id)) {
+		if("admin".equals(id) || (dto.getWriter() != null && dto.getWriter().equals(id))) {
 			inquireService.delete(cs_num, model);
 		} else{
 			throw new DontEqualException("다른 사람의 문의 내역을 삭제할 수 없습니다!");

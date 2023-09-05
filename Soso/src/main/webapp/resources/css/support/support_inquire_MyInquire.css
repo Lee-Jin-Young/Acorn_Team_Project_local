@@ -134,6 +134,9 @@
 	    font-weight: bold;
 	    background-color: #f7f7f7;
 	}
+	th.num{
+		display:none;
+	}
 	th.date{
 		width: 140px;
 	}
@@ -157,6 +160,9 @@
 	}
 	.main-data .summary-data td {
     	padding: 25px 0;
+	}
+	.main-data td.num{
+		display:none;
 	}
 	.main-data td.date {
 	    width: 140px;
