@@ -11,8 +11,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/community/community_detail.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/include/navbar_c.jsp">
@@ -77,18 +75,54 @@
 				<c:forEach var="tmp" items="${commentList }">
 					<c:choose>
 						<c:when test="${tmp.deleted eq 1}">
-							<div>삭제된 댓글 입니다.</div>
+							<div class="delete_comment">삭제된 댓글 입니다.</div>
 						</c:when>
 						<c:otherwise>
-							
 							<!-- 프로필 사진 없을 때 -->
 							<c:if test="${ empty tmp.profile }">
-								<svg class="profile-image" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-								  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-								  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-								</svg>
-								<span><b>${tmp.writer }</b></span>
-								<span>${tmp.regdate }</span>
+							<div class="comment">
+								<div class="comment_profile">
+									<div class="comment_profile_left">
+										<c:if test="${tmp.comment_num eq tmp.comment_group }">
+											<div id="reli${tmp.comment_num }"></div>
+										</c:if>
+										<c:if test="${tmp.comment_num ne tmp.comment_group }">
+											<div id="reli${tmp.comment_num }" class="re">ㄴ</div>
+										</c:if>
+										<div class="profile-image">
+											<svg class="profile-image" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+											  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+											  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+											</svg>
+										</div>
+										<img src="" alt="" />
+										<img class="profile-image" src="${pageContext.request.contextPath}${tmp.profile }"/>
+										<span><b>${tmp.writer }</b></span>
+										<span class="regdate">${tmp.regdate }</span>
+									</div>
+									<c:if test="${ (id ne null) and (tmp.writer eq id) }">
+										<div class="comment_btn">
+											<a data-num="${tmp.comment_num }" class="update-link" href="javascript:">수정</a>
+											<a data-num="${tmp.comment_num }" class="delete-link" href="javascript:">삭제</a>
+										</div>
+									</c:if>
+								</div>
+								<div style="display:flex">
+									<c:if test="${tmp.comment_num ne tmp.comment_group }">
+										<div style="margin-right:12%"></div>
+									</c:if>
+									<c:if test="${tmp.comment_num ne tmp.comment_group }">
+										<div class="target_id">@<i>${tmp.target_id }</i></div>
+									</c:if>
+									<pre id="pre${tmp.comment_num }" class="comments_content">${tmp.content }</pre>
+								</div>
+								<div style="display:flex">
+									<c:if test="${tmp.comment_num ne tmp.comment_group }">
+										<div style="margin-right:12%"></div>
+									</c:if>
+									<a data-num="${tmp.comment_num }" href="javascript:" class="reply-link">답글 달기</a>
+								</div>				
+							</div>
 							</c:if>
 							<!-- 프로필 사진 있을 때 -->
 							<c:if test="${not empty tmp.profile }">
@@ -170,7 +204,6 @@
 			}
 		}
 	</script>
-	
 	<script>
 		//댓글 NULL 알림
 		$("#insertButton").click(function(){
@@ -235,7 +268,7 @@
 			
 			//현재 바닥까지 스크롤 했고 로딩중이 아니고 현재 페이지가 마지막이 아니라면
 			if(isBottom && !isLoading && !isLast){
-				document.querySelector(".loader").style.display="block";
+				/* document.querySelector(".loader").style.display="block"; */
 				
 				isLoading=true;
 				
@@ -306,7 +339,9 @@
 							//만일 삭제 성공이면 
 							if(data.isSuccess){
 								//댓글이 있는 곳에 삭제된 댓글입니다를 출력해 준다. 
-								document.querySelector("#reli"+num).innerText="삭제된 댓글입니다.";
+								/* document.querySelector("#reli"+num).innerText="삭제된 댓글입니다."; */
+								//페이지 새로고침
+								 location.reload();
 							}
 						});
 					}

@@ -35,5 +35,6 @@ public class GroupJoinDaoImpl implements GroupJoinDao{
 	@Override
 	public void managerJoin(GroupDto groupDto) {
 		session.insert("join.managerJoin", groupDto);
+		session.update("join.updateNow", groupDto);
 	}
 }

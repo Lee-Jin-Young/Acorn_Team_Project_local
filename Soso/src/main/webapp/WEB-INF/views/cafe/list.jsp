@@ -51,28 +51,26 @@
             </table>
         </div>
         <!-- 페이징 처리 -->
-		<div class="mb-4">
-			<ul class="pagination" style="justify-content: center;">
-				<c:if test="${startPageNum ne 1 }">
-					<li class="page-item">
-						<a class="page-link animate__animated" 
-							href="${pageContext.request.contextPath}/group_managing/group_userdetail?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedK}&num=${num}">Prev</a>
-					</li>
-				</c:if>
-				<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
-					<li class="page-item ${pageNum eq i ? 'active' : '' }">
-						<a class="page-link animate__animated" 
-							href="${pageContext.request.contextPath}/group_managing/group_userdetail?pageNum=${i}&condition=${condition}&keyword=${encodedK}&num=${num}">${i}</a>
-					</li>
-				</c:forEach>
-				<c:if test="${endPageNum lt totalPageCount }">
-					<li class="page-item">
-						<a class="page-link animate__animated" 
-							href="${pageContext.request.contextPath}/group_managing/group_userdetail?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedK}&num=${num}">Next</a>
-					</li>
-				</c:if>				
-			</ul>
-		</div>
+    	<ul class="pagination">
+			<c:if test="${startPageNum ne 1 }">
+				<li class="page-item">
+					<a class="page-link animate__animated" 
+					href="${pageContext.request.contextPath}/group_managing/group_userdetail?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedK}&num=${num}">Prev</a>
+				</li>
+			</c:if>
+			<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
+				<li class="page-item ${pageNum eq i ? 'active' : '' }">
+					<a class="page-link animate__animated" 
+						href="${pageContext.request.contextPath}/group_managing/group_userdetail?pageNum=${i}&condition=${condition}&keyword=${encodedK}&num=${num}">${i}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${endPageNum lt totalPageCount }">
+				<li class="page-item">
+					<a class="page-link animate__animated" 
+						href="${pageContext.request.contextPath}/group_managing/group_userdetail?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedK}&num=${num}">Next</a>
+				</li>
+			</c:if>				
+		</ul>
 </div>
 
 

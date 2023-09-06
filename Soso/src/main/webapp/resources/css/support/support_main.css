@@ -72,6 +72,7 @@ h2.black, h3.black{ color: #333; }
 		color: rgb(157 128 63);
 		display: inline-block;
 		font-weight: 500;
+		font-size: 20px;
 	}
 	.faq_question:hover, .notice_title:hover{
 		text-decoration:underline;
@@ -79,6 +80,7 @@ h2.black, h3.black{ color: #333; }
 	.area_faq ul li p{
 		width: 440px;
 		display: inline-block;
+		font-size: 19px;
 	}
 	.area_faq .faq_more{
 		float: right;
@@ -103,6 +105,7 @@ h2.black, h3.black{ color: #333; }
 	}
 	.area_notice li{
 		margin: 20px 0;
+		font-size: 19px;
 	}
 	/* 운영시간 */
 	.area_contact{

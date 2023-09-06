@@ -19,6 +19,7 @@
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp">
 		<jsp:param value="home" name="current"/>
 	</jsp:include>
+	<!-- 상단 레이아웃 -->
 	    <main id="main-banner" class="main-banner-06">
 	        <div class="inner-wrap">
 	            <div class="title">
@@ -37,7 +38,7 @@
 	            </div>
 	        </div>
 	    </main>	
-		<!-- 메인 메뉴바 시작 -->
+		<!-- 메인 메뉴바 -->
 		<ul class="menu_bar">
 			<li class="menu_home">
 				<a class="nav-link active" href="${pageContext.request.contextPath }/support/support_main">고객센터</a>
@@ -69,7 +70,7 @@
 				</c:otherwise>
 			</c:choose>
 		</ul>
-		<!-- 메인 컨텐츠 시작 -->
+		<!-- 메인 컨텐츠 -->
 		<div class="main_content">
 		<!-- 자주하는 질문 세션 -->
 		<div class="area_faq">

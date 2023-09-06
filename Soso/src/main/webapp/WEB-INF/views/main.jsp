@@ -6,24 +6,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>북메이트</title>
 	<meta property="og:title" content="북메이트" /> 
-	<!-- <meta property="og:url" content=" URL" /> -->
-	<!-- <meta property="og:image" content="https://i.postimg.cc/wT1nG67v/bookmate-or-image.jpg" />  -->
 	<meta property="og:image" content="${path }/resources/images/main/bookmate_or_image.jpg" /> 
 	<meta property="og:description" content="함께하는 독서모임 , 북메이트" /> 
  	<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
-	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="${path }/resources/css/swiper-bundle.min.css" type="text/css">
     <link rel="stylesheet" href="${path }/resources/css/main.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" >
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <script src="${path }/resources/js/jquery-1.12.0.min.js"></script>
-    <script src="${path }/resources/js/jquery.easing.1.3.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${path }/resources/js/swiper-bundle.min.js"></script>
-    <script src="${path }/resources/js/common.js"></script>
     <script src="${path }/resources/js/main.js"></script>
+    <title>북메이트</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp">
@@ -34,27 +30,24 @@
             <div class="swiper-wrapper">
                     <div class="swiper-slide main01 main-img"></div> 
                     <div class="swiper-slide main02 main-img"></div> 
-                    <div class="swiper-slide main03 main-img"></div> 
+                    <div class="swiper-slide main03 main-img"></div>
+                    <div class="swiper-slide main04 main-img"></div>
+                    <div class="swiper-slide main05 main-img"></div>
             </div>
             <div id="box">
                 <span class="text"></span><span class="blink">|</span>
             </div>
-              <!-- 08-02 수정중 -->
-            <!-- <div class="slide-btn">
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-play-stop-btn">
-                    <img class="play-btn" src="./images/play-btn.svg" alt="play-slide">
-                </div>
-            </div> -->
+			<div class="slide-btn">
+               <div class="swiper-button-prev"></div>
+               <div class="swiper-button-next"></div>
+            </div>
         </div>
     </main>
-    
-
     <section class="popular">
         <div class="inner-wrap">
             <h3 class="title black" data-aos="fade-up"
             data-aos-offset="300"
+            data-aos-once="false"
             data-aos-easing="ease-in-sine">인기 독서 모임</h3>
             <!-- <div class="slide_btn">
                 <div class="swiper-button-prev prev"></div>
@@ -68,16 +61,6 @@
 	                   <a href="${pageContext.request.contextPath}/group/group_page?num=${tmp.num }">
 	                       <div class="mate_content_img">
 	                           <img src="${pageContext.request.contextPath}${tmp.img_path}">
-	                           	<!-- 신청 마감일시 마감버튼 보이게 -->
-								<c:set var="now" value="<%= new java.util.Date() %>" />
-								<c:set var="nowDate"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set> 
-								<c:choose>
-									<c:when test="${tmp.deadline_dt lt nowDate}">
-										<div class="deadline_btn">마감</div>
-									</c:when>
-									<c:otherwise>
-									</c:otherwise>
-								</c:choose>	
 	                       </div>
 	                       <div class="mate_content_text">
 	                           <p class="mate_content_title">${tmp.name}</p>
@@ -90,6 +73,13 @@
 	           </div>
 	        	</c:forEach>
 	        </div>
+	        <div class="inner-wrapper">
+	        <div data-aos="fade-up"
+           		data-aos-offset="100"
+            	data-aos-easing="ease-in-sine" class="button">
+                <a href="${pageContext.request.contextPath}/group/list?genre=-1" class="about-button">북메이트 더보기</a>
+            </div>
+	        </div>
          </div>
      
         </div>
@@ -97,7 +87,7 @@
     <section class="about-us">
         <div class="inner-wrap">
             <h3 class="title black" data-aos="fade-up"
-            data-aos-offset="300"
+            data-aos-offset="100"
             data-aos-easing="ease-in-sine">ABOUT US</h3>
             <div class="about-content">
                 <p data-aos="fade-up"
@@ -107,23 +97,23 @@
 			                    배우고 성장하는 북클럽
                 </p>
                 <ul data-aos="fade-up"
-                data-aos-offset="300"
+                data-aos-offset="100"
                 data-aos-easing="ease-in-sine" class="circle">
                     <li>독서</li>
                     <li>모임</li>
                     <li>토론</li>
                 </ul>
                 <p data-aos="fade-up"
-                data-aos-offset="300"
+                data-aos-offset="100"
                 data-aos-easing="ease-in-sine" class="serif">
                 공동체 독서모임 연결 함께하는 독서 모임, <br>
                 배우고 성장하는 북클럽
                 </p>
             </div>
             <div data-aos="fade-up"
-            data-aos-offset="300"
+            data-aos-offset="100"
             data-aos-easing="ease-in-sine" class="button">
-                <a href="${pageContext.request.contextPath}/group_managing/user_main" class="about-button">신청하기</a>
+                <a href="${pageContext.request.contextPath}/group_managing/user_main" class="about-button">개설하기</a>
             </div>
         </div>
     </section>
@@ -167,28 +157,32 @@
             </div>
             <div class="business-content pcol06 tcol06 mcol12">
                 <ul>
-                    <div data-aos="flip-right" data-aos-offset="300"
+                    <div data-aos="flip-right" data-aos-offset="100"
+                    data-aos-once="false"
                     data-aos-easing="ease-in-sine">
                         <li>
                             <p>soso1</p>
                             <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
                         </li>
                     </div>
-                    <div data-aos="flip-left" data-aos-offset="300"
+                    <div data-aos="flip-left" data-aos-offset="100"
+                    data-aos-once="false"
                     data-aos-easing="ease-in-sine">
                         <li>
                             <p>soso1</p>
                             <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
                         </li>
                     </div>
-                    <div data-aos="flip-right" data-aos-offset="300"
+                    <div data-aos="flip-right" data-aos-offset="100"
+                    data-aos-once="false"
                     data-aos-easing="ease-in-sine">
                         <li>
                             <p>soso1</p>
                             <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
                         </li>
                     </div>
-                    <div data-aos="flip-left" data-aos-offset="300"
+                    <div data-aos="flip-left" data-aos-offset="100"
+                    data-aos-once="false"
                     data-aos-easing="ease-in-sine">
                         <li>
                             <p>soso1</p>
@@ -270,6 +264,7 @@
             <div class="map-content pcol06 tcol06 mcol12">
                 <ul>
                     <div data-aos="flip-right" data-aos-offset="400"
+                    data-aos-once="false"
                     data-aos-easing="ease-in-sine">
                         <li>
                             <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
@@ -277,6 +272,7 @@
                         </li>
                     </div>
                     <div data-aos="flip-left" data-aos-offset="400"
+                    data-aos-once="false"
                     data-aos-easing="ease-in-sine">
                         <li>
                             <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
@@ -284,6 +280,7 @@
                         </li>
                     </div>
                     <div data-aos="flip-left" data-aos-offset="400"
+                    data-aos-once="false"
                     data-aos-easing="ease-in-sine">
                         <li>
                             <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
@@ -305,24 +302,6 @@
 			"mapHeight" : "450"
 		}).render();
 	</script>
-    <!-- 글씨 타이핑 스크립트 -->
-    <script>
-        const content = "함께 하는 독서 모임 , 북메이트 ";
-        const text = document.querySelector(".text");
-        text.textContent = "";
-        let txtIdx = 0;
-        function typing(){
-            let txt = content[txtIdx++];
-            if (txt == undefined) return;
-            text.innerHTML += txt=== "\n" ? "<br/>": txt;
-            if (txtIdx > content.length) {
-                txtIdx = 0;
-            }else{
-                setTimeout(typing, 300)
-            }
-        }
-        typing();
-    </script>  
     <script>
         AOS.init();
 
@@ -358,33 +337,6 @@
         });
     });
     </script>
-     <script>
-         const scrollTop = function () {
-        // create HTML button element
-        const scrollBtn = document.createElement("button");
-        scrollBtn.innerHTML = "TOP";
-        scrollBtn.setAttribute("id", "scroll-btn");
-        document.body.appendChild(scrollBtn);
-        // hide/show button based on scroll distance
-        const scrollBtnDisplay = function () {
-            window.scrollY > window.innerHeight
-            ? scrollBtn.classList.add("show")
-            : scrollBtn.classList.remove("show");
-        };
-        window.addEventListener("scroll", scrollBtnDisplay);
-        // scroll to top when button clicked
-        const scrollWindow = function () {
-            if (window.scrollY != 0) {
-            setTimeout(function () {
-                window.scrollTo(0, window.scrollY - 50);
-                scrollWindow();
-            }, 10);
-            }
-        };
-        scrollBtn.addEventListener("click", scrollWindow);
-        };
-        scrollTop();
-     </script>
       
 </body>
 </html>

@@ -31,6 +31,8 @@ h3.title{font-size:1.3rem; font-weight: 500;}
 .insert-form button:hover, .update-form button:hover, .re-insert-form button:hover, .comment-form button:hover{background-color: rgb(209 199 177 / 64%);   color:#fff; font-weight:bold;}
 .comment_profile_left { display: flex;width: 70%;}
 .comment_profile_left .re{padding: 0 3% 0 5%;font-size: 2rem;color: #c0c0c0;}
+.comments .delete_comment{display:flex;padding: 2% 0;
+    border-bottom: 1px solid #c6c6c6;}
 .comments .comment_profile{display:flex; align-items: center; justify-content: space-between;}
 .comments .comment_profile .profile-image{padding: 3px; position: relative; object-fit: cover; overflow: hidden; width:40px; height:40px; border-radius:50%; border: 2px solid #dcd1b9; background-clip: content-box, border-box; margin-right:2%; }
 .comments .comment_profile .regdate{font-weight:300;font-size:0.7rem;margin-left:2%;}

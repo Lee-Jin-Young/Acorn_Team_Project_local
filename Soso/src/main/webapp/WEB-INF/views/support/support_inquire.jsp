@@ -11,14 +11,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/support/support_inquire.css" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp">
 		<jsp:param value="home" name="current"/>
 	</jsp:include>
+	<!-- 상단 배너 레이아웃 -->
     <main id="main-banner" class="main-banner-06">
         <div class="inner-wrap">
             <div class="title">
@@ -30,7 +29,7 @@
             </div>
             <div class="indicator">
                 <div class="home circle">
-                    <a href="#" title="메인페이지가기"><img src="${path }/resources/images/sub/icon_home.svg" alt="홈버튼이미지"></a>
+                    <a href="" title="메인페이지가기"><img src="${path }/resources/images/sub/icon_home.svg" alt="홈버튼이미지"></a>
                 </div>
                 <div class="main-menu circle">BOOKMATE</div>
 
@@ -63,6 +62,7 @@
 			</c:otherwise>
 		</c:choose>
 	</ul>
+	<!-- 문의하기 메뉴바 -->
 		<div class="body_area">
 			<div class="main_content">
 				<ul class="inquire_navi">
@@ -73,7 +73,7 @@
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li>
+							<li class="active">
 								<a href="${pageContext.request.contextPath }/support/support_inquire">1:1 문의하기</a>
 							</li>
 							<li>
@@ -82,8 +82,10 @@
 						</c:otherwise>
 					</c:choose>
 				</ul>
+				<!-- 문의하기 폼 양식 -->
 				<h3 class="main_title">1:1 문의하기</h3>
 				<form action="${pageContext.request.contextPath}/support/support_inquire_insert" class="area_form" method="post">
+
 					<div class="row-wrap">
 						<div class="input_name">
 							<h4 class="label">ID</h4>
@@ -95,6 +97,7 @@
 							<p class="tip_txt">* 답변 받을 이메일 주소를 확인해 주세요.</p>
 						</div>
 					</div>
+					<!-- 제목 -->
 					<div class="row-wrap">
 						<div class="input_title">
 							<h4 class="label">제목</h4>
@@ -108,18 +111,21 @@
 							<input type="text" class="inquire_title" name="title" placeholder="제목을 입력해주세요" />
 						</div>
 					</div>
+					<!-- 내용 -->
 					<div class="row-wrap">
 						<div class="input_text">
-							<h4 class="label">내용 *</h4>
+							<h4 class="label">내용 * </h4>
 							<textarea name="content" placeholder="북메이트를 이용하시면서 궁금한 점이나 어려운점, 모임 관련 내용이나 북메이트의 전반적인 문의를 입력 해 주세요."></textarea>
 						</div>
 					</div>
+					<!-- 답변내용  (admin 관리 기능을 위한 폼 사용자에게 보여주지 않음) -->
 					<div class="row-wrap" style="display: none">
 						<div class="input_text">
 							<h4 class="label">답변 내용 *</h4>
 							<textarea name="answer" placeholder="북메이트를 이용하시면서 궁금한 점이나 어려운점, 모임 관련 내용이나 북메이트의 전반적인 문의를 입력 해 주세요."></textarea>
 						</div>
 					</div>
+					<!-- 개인정보 수집 동의  -->
 					<div class="row-wrap">
 						<div class="input_agreement">
 							<h4 class="label">
@@ -135,6 +141,7 @@
 					<p class="info_message">
 						이 사이트는 reCAPTCHA에 의해 보호되며 Google 개인 정보 취급 방침 및 서비스 약관이 적용됩니다.
 					</p>
+					<!-- 등록 버튼  -->
 					<button type="submit" class="btn_submit">1:1 문의하기</button>
 				</form>
 			</div>

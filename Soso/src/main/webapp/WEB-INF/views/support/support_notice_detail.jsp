@@ -7,55 +7,9 @@
 <meta charset="UTF-8">
 <title>공지사항</title>
 <link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
-<style>
-	.detail_notice{
-		margin-top: 14px;
-		border-top: 2px solid black;
-	}
-	.notice_head{
-		line-height: 18px;
-		background-color: #f7f7f7;
-	}
-	.notice_head .info{
-		float: right;
-		margin-right: 40px;
-		font-size: 14px;
-	}
-	.notice_content {
-	    margin: 0 0 20px;
-	    padding: 46px 50px 54px;
-	    border-top: 1px solid #d3d3d3;
-	    border-bottom: 1px solid #d3d3d3;
-	    line-height: 19px;
-	    overflow: hidden;
-	}
-	/* 목록 버튼 css */
-	.btn_list{
-	    width: 130px;
-	    height: 48px;
-	    display: flex;
-	    justify-content: center;
-	    border-radius: 0;
-	    border: 1px solid #d8d8d8;
-	    background-color: #f7f7f7;
-	    text-align: center;
-	    line-height: 48px;
-	    font-size: 14px;
-	    color: #333;
-	}
-	.btn_list:hover{
-		color: rgb(157 128 63);
-		font-weight: 600;
-	}
-	.admin_menu{
-		width: 100%;
-		display: flex;
-		justify-content: center;
-	}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/support/support_notice_detail.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/support/support_inquire.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
@@ -85,19 +39,20 @@
 			<a class="nav-link" href="${pageContext.request.contextPath }/support/support_inquire">문의하기</a>
 		</li>
 	</ul>
+	<!-- 메인컨텐츠 -->
 		<div class="body_area">
 			<div class="main_content">
-				<h3 style="font-size:20px">공지사항</h3>
+				<h3 class="detail_title">공지사항</h3>
 				<article class="detail_notice">
 					<input type="hidden" name="notice_num" value="${dto.notice_num }"/>
 					<div class="notice_head">
-						<h6 class="title" style="display:inline-block">${dto.title }</h6>
+						<h6 class="title">${dto.title }</h6>
 						<span class="info">
 							<span>작성일 : ${dto.regdate }</span>
 						</span>
 					</div>
 					<div class="notice_content">
-						<textarea cols="30" rows="25">${dto.content }</textarea>
+						<textarea cols="30" rows="25" readonly>${dto.content }</textarea>
 					</div>
 					<p class="info_message">
 						이 사이트는 reCAPTCHA에 의해 보호되며 Google 개인 정보 취급 방침 및 서비스 약관이 적용됩니다.
@@ -135,7 +90,7 @@
 			      		const noticeNum=e.target.getAttribute("data-num");
 			      		location.href="${pageContext.request.contextPath}/support/support_notice_delete?notice_num="+noticeNum;
 			      	}else if(result.isDismissed){
-			      		location.href="${pageContext.request.contextPath}/support/support_notice";
+			      		location.href="${pageContext.request.contextPath}/support/support_detail?notice_num="+noticeNum;
 			      	}
 			    });
 			});	

@@ -1,24 +1,7 @@
 @charset "UTF-8";
 
 
-/* 상단 배너 */
-.head{
-	background-image:url("https://static.onoffmix.com/images/pc/default/notice_bg.png");
-	height:360px;
-	background-size:cover;
-	overflow:hidden;
-}
-.head h2{
-	text-align:center;
-	margin:116px auto 20px;
-}
-.head p{
-	text-align:center;
-	font-size:20px;
-}
-.faq{
-	display: inline-block;
-}
+
 /*메인 메뉴바 */
 	.menu_bar{
 		width:100%;
@@ -48,36 +31,7 @@
 		font-weight: 600;
 		border-bottom: 3px solid rgb(157 128 63);
 	}
-	/*페이지 네이션*/
-	.pagination_wrap{
-		margin: 20px 0 40px;
-		text-align: center;
-		width: 100%;
-	}
-	.pagination{
-		display: inline-block;
-		vertical-align: middle;
-	}
-	.pagination_ul li{
-		float: left;
-	}
-	.pagination_ul li a{
-		width: 28px;
-		margin: 0 11px;
-	}
-	.pageination_ul li.active{
-		color: rgb(157 128 63);
-		font-weight: 600;
-		border-bottom: 3px solid rgb(157 128 63);
-	}
-	.pageination_ul li>a:hover{
-		color: rgb(157 128 63);
-		font-weight: 600;
-		border-bottom: 3px solid rgb(157 128 63);
-	}
-	.page-item{
-		font-size: 20px;
-	}
+	
 	/* 공지사항 전체 레이아웃 */
 	.content_wrap{
 	    position: relative;
@@ -95,8 +49,8 @@
 	}
 	/* 공지사항 테이블 레이아웃 */
 	h3.title{
-		font-size: 20px;
-		font-weight: bold;
+		font-size: 22px;
+		font-weight: 500;
 	}
 	table .notice{
 		margin-top: 16px;
@@ -108,20 +62,34 @@
 	    border-collapse: collapse;
 	    table-layout: fixed;
 	}
-
+	/* 테이블 헤드 부분 */
 	table th {
 	    padding: 22px 0;
-	    font-size: 16px;
-	    font-weight: bold;
+	    font-size: 19px;
+	    font-weight: 500;
 	    background-color: #f7f7f7;
+	}
+	th.category{
+		width: 180px;
+	}
+	th.title{
+		width: 900px;
+	}
+	th.date{
+		width: 200px;
 	}
 	table tbody{
 		border-bottom: 1px solid #d8d8d8;
 	}
+	/* 분류 부분 */
 	table td {
 		box-sizing: border-box;
 		text-align: center;
 		padding: 25px 0 ;
+		font-size: 18px;
+	}
+	table .td_category{
+		color: rgb(157 128 63);
 	}
 	table td.title{
 		text-align:left;
@@ -135,17 +103,39 @@
 	table tbody tr {
 	    border-top: 1px solid #e4e4e4;
 	}
-	th.category{
-		width: 180px;
-	}
-	th.title{
-		width: 900px;
-	}
-	th.date{
-		width: 200px;
-	}
 	.notice_title:hover{
 		text-decoration:underline;
+	}
+	/*페이지 네이션*/
+	.pagination_wrap{
+		margin: 20px 0 40px;
+		text-align: center;
+		width: 100%;
+	}
+	.pagination{
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.pagination_ul li{
+		float: left;
+	}
+	.pagination_ul li a{
+		width: 28px;
+		margin: 0 11px;
+	}
+	/* 페이징 번호에 hover 효과 추가 */
+	 .pagination_ul li.page-item a:hover {
+	    text-decoration: underline;
+	  }
+
+  	/* 클릭된 페이지 번호에 색깔 입히기 */
+	.pagination_ul li.page-item.active a {
+	   color: rgb(157 128 63);
+	   font-weight: 400; 
+	}
+	/*페이징 번호 크기*/
+	.page-item{
+		font-size: 25px;
 	}
 	/* 관리자 메뉴 css (admin 계정일때만 보임) */
 	.admin_menu{

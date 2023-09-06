@@ -13,6 +13,9 @@
 .cafe_table thead th { background-color: #dad2bfba; text-transform: capitalize;}
 .cafe_table tbody tr:nth-child(even) { background-color: #0000000b;}
 .cafe_table tbody .title:hover { font-weight:500;}
+.cafe_table .pagination{display:flex; justify-content: center;}
+.cafe_table .pagination li a{padding: 10px 20px;}
+.cafe_table .pagination li a:hover {color: rgb(226 148 148 / 92%); text-decoration: underline;}
 
 
 

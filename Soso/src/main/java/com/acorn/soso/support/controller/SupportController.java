@@ -168,7 +168,7 @@ public class SupportController {
 	}
 	@GetMapping("/support/support_inquire_answerform")
 	public String support_inquire_answerform(int cs_num,HttpSession session, Model model) {
-		userService.getInfo(session, model);
+		//userService.getInfo(session, model);
 		inquireService.getData(cs_num, model);
 		
 		return "support/support_inquire_answerform";
@@ -177,11 +177,6 @@ public class SupportController {
 	public String support_inquire_inquireStatus(HttpSession session, Model model) {
 		inquireService.getList2(session, model);
 		return "support/support_inquire_inquireStatus";
-	}
-	@PostMapping("/support/support_inquire_update")
-	public String support_inquire_update(InquireDto dto, Model model) {
-		inquireService.update(dto, model);
-		return "redirect:/support/support_inquire_MyInquire";
 	}
 	@GetMapping("/support/support_inquire_delete")
 	public String support_inquire_delete(int cs_num, Model model, HttpSession session) {

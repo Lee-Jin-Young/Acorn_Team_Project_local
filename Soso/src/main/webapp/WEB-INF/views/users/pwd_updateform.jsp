@@ -20,19 +20,20 @@
         <p class="title">비밀번호 수정</p>
         <form action="${pageContext.request.contextPath}/users/pwd_update" method="post" id="myForm">
             <div>
-                <label class="form-label" for="newPwd">새 비밀번호</label>
+                <label class="form-label mb-2" for="newPwd">새 비밀번호</label>
                 <input class="form-control" type="password" name="newPwd" id="newPwd"/>
                 <div class="invalid-feedback pwd-feedback">최소 8자 이상으로 문자와 숫자, 특수 문자를 각각 하나 이상 조합하세요.</div>
             </div>
-            
-            <div>
-                <label class="form-label" for="newPwd2">새 비밀번호 확인</label>
+            <div class="mt-2">
+                <label class="form-label mb-2" for="newPwd2">새 비밀번호 확인</label>
                 <input class="form-control" type="password" id="newPwd2"/>
                 <div class="invalid-feedback pwd2-feedback">비밀번호가 일치하지 않습니다.</div> 
             </div>
+            <div class="d-flex justify-content-center mt-3">
+            	<button class="btn btn-join me-4" type="submit" disabled>수정하기</button>
+            	<button class="btn btn-cancle" type="reset">리셋</button>
+            </div>
             
-            <button class="btn btn-join" type="submit" disabled>수정하기</button>
-            <button class="btn btn-cancle" type="reset">리셋</button>
         </form>
     </div>
     <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

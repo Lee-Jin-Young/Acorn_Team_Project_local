@@ -86,6 +86,7 @@
 				<h3 class="main_title">문의 답변하기</h3>
 			
 				<form action="${pageContext.request.contextPath}/support/support_inquire_answer" class="area_form" method="post">
+					<input type="hidden" name="cs_num" value="${dto.cs_num }"/>
 					<div class="row-wrap">
 						<div class="input_name">
 							<h4 class="label">ID</h4>
@@ -123,7 +124,7 @@
 					<div class="row-wrap">
 						<div class="input_text">
 							<h4 class="label">답변 내용 *</h4>
-							<textarea name="answer" cols="30" rows="15" >${dto.answer}</textarea>
+							<textarea name="answer" cols="30" rows="15" ></textarea>
 						</div>
 					</div>
 					

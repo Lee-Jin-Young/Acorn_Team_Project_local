@@ -4,11 +4,8 @@
 <mapper namespace="faq">
 	<sql id="searchCondition">
 		<choose>
-			<when test="category != null and question != null">
-				WHERE category LIKE '%'||#{category}||'%' OR question LIKE '%'||#{question}||'%'
-			</when>
-			<when test="category != null">
-				WHERE category LIKE '%'||#{category}||'%'
+			<when test="question != null">
+				WHERE question LIKE '%'||#{question}||'%'
 			</when>
 		</choose>
 	</sql>

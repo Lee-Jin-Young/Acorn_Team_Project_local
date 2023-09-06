@@ -160,6 +160,8 @@ public class GroupServiceImpl implements GroupService{
         GroupDto dto = new GroupDto();
         dto.setStartRowNum((pageNum - 1) * PAGE_ROW_COUNT + 1);
         dto.setEndRowNum(pageNum * PAGE_ROW_COUNT);
+        //임시로 수정
+        dto.setGenre(genre);
 
         if (!keyword.equals("")) {
             if (condition.equals("name_caption")) {
@@ -172,7 +174,7 @@ public class GroupServiceImpl implements GroupService{
             }
         }
 
-        List<GroupDto> list = dao.getGroupsByGenreAndSearch(genre, dto);
+        List<GroupDto> list = dao.getGroupsByGenreAndSearch(dto);
 
         int totalRow = dao.getCount(dto);
 
@@ -844,51 +846,61 @@ public class GroupServiceImpl implements GroupService{
 		GroupDto dto = new GroupDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
-			      
-			      
-
-				if(!keyword.equals("")) {
-					if(condition.equals("name_caption")) {
-				    	dto.setName(keyword);
-				    	dto.setCaption(keyword);
-				    	}else if(condition.equals("name")) {
-				    		dto.setName(keyword);
-				    	}else if(condition.equals("writer")) {
-				    		dto.setManager_id(keyword);
-				    	}
-				    }
-			      
-
-			      List<GroupDto> viewList = dao.getViewList(dto);
-			      	//전체글의 갯수
-					int totalRow=dao.getCount(dto);
-					
-					//하단 시작 페이지 번호 
-					int startPageNum = 1 + ((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
-					//하단 끝 페이지 번호
-					int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
-					
-
-					//전체 페이지의 갯수
-					int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
-					//끝 페이지 번호가 전체 페이지 갯수보다 크다면 잘못된 값이다.
-					if(endPageNum > totalPageCount){
-						endPageNum=totalPageCount; //보정해 준다.
-					}
-
-			      	      
-			      //request 영역에 담아주기
-			      model.addAttribute("viewList", viewList);   //소모임 조회수  list
-			      model.addAttribute("keyword", keyword);
-			      model.addAttribute("encodedK", encodedK);
-			      model.addAttribute("condition", condition);
-			      model.addAttribute("pageNum", pageNum);
-			      model.addAttribute("startPageNum", startPageNum);
-			      model.addAttribute("endPageNum", endPageNum);
-			      model.addAttribute("totalPageCount", totalPageCount);
-			      model.addAttribute("totalRow", totalRow);
-
 		
-	}
+		//Genre를 얻어와서 -1이 아니면 DTO에 넣어준다.
+		String genreParam = request.getParameter("genre");
+		int genre = -1;
+		if (genreParam != null && !genreParam.isEmpty()) {
+		    try {
+		        genre = Integer.parseInt(genreParam);
+		        
+		    } catch (NumberFormatException e) {
+		        // 숫자로 변환할 수 없는 경우에 대한 처리
+		        e.printStackTrace(); // 또는 로깅
+		    }
+		}
+		
+        dto.setGenre(genre);
 
+		if(!keyword.equals("")) {
+			if(condition.equals("name_caption")) {
+		    	dto.setName(keyword);
+		    	dto.setCaption(keyword);
+		    	}else if(condition.equals("name")) {
+		    		dto.setName(keyword);
+		    	}else if(condition.equals("writer")) {
+		    		dto.setManager_id(keyword);
+		    	}
+		    }
+		List<GroupDto> viewList = dao.getViewList(dto);
+		
+		
+		
+	    //전체글의 갯수
+		int totalRow=dao.getCount(dto);
+			
+		//하단 시작 페이지 번호 
+		int startPageNum = 1 + ((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
+		//하단 끝 페이지 번호
+		int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
+		
+
+		//전체 페이지의 갯수
+		int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+		//끝 페이지 번호가 전체 페이지 갯수보다 크다면 잘못된 값이다.
+		if(endPageNum > totalPageCount){
+			endPageNum=totalPageCount; //보정해 준다.
+		}
+
+	      //request 영역에 담아주기
+	      model.addAttribute("viewList", viewList);   //소모임 조회수  list
+	      model.addAttribute("keyword", keyword);
+	      model.addAttribute("encodedK", encodedK);
+	      model.addAttribute("condition", condition);
+	      model.addAttribute("pageNum", pageNum);
+	      model.addAttribute("startPageNum", startPageNum);
+	      model.addAttribute("endPageNum", endPageNum);
+	      model.addAttribute("totalPageCount", totalPageCount);
+	      model.addAttribute("totalRow", totalRow);
+	}
 }

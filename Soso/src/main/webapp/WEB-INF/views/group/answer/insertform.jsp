@@ -8,38 +8,6 @@
 <title>소모임 문의사항</title>
 <link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/groupfaq.css" />
-<style>
-
-	/* 확인, 취소 버튼 */
-	#submitBtn, #resetBtn{
-		border : 2px solid black;
-		border-radius : 10px;
-		display : inline-block; /* 필요한 만큼만 감싸기 */
-		justify-content : flex-end;
-	    padding: 5px 10px; /* 원하는 패딩 값 설정 */
-	}
-	/* 제목 */
-	#q_title{
-		margin : 1rem;
-		font-size : larger;
-	}
-	/* 문의내용 */
-	#q_content, #a_answer{
-		resize : none;
-		border : 1px solid black;
-		border-radius : 10px;
-		outling : none;
-		background-color : #0000000b;
-		width : 80%;
-		margin-left: 2rem;
-		margin-top : 1rem;
-		margin-bottom: 1rem;
-		padding : 1rem;
-	
-	}
-
-
-</style>
 </head>
 <body>
 	<div class="container">

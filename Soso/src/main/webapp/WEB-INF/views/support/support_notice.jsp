@@ -18,6 +18,7 @@
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp">
 		<jsp:param value="home" name="current"/>
 	</jsp:include>
+	<!-- 상단 배너 -->
     <main id="main-banner" class="main-banner-06">
         <div class="inner-wrap">
             <div class="title">
@@ -29,7 +30,7 @@
             </div>
             <div class="indicator">
                 <div class="home circle">
-                    <a href="#" title="메인페이지가기"><img src="${path }/resources/images/sub/icon_home.svg" alt="홈버튼이미지"></a>
+                    <a href="" title="메인페이지가기"><img src="${path }/resources/images/sub/icon_home.svg" alt="홈버튼이미지"></a>
                 </div>
                 <div class="main-menu circle">BOOKMATE</div>
 
@@ -69,6 +70,7 @@
 		</c:choose>
 	</ul>
 	<!-- 메인 메뉴바 끝 -->
+	<!-- 공지사항 메인 컨텐츠 -->
 	<div class="content_wrap">
 		<div class="main_content">
 			<h3 class="title">공지사항</h3>
@@ -83,7 +85,7 @@
 				<tbody>
 					<c:forEach var="tmp" items="${notice_list }">
 					<tr>
-						<td>
+						<td class="td_category">
 							<c:choose>
 								<c:when test="${tmp.category == 1}">공지</c:when>
 								<c:when test="${tmp.category == 2}">업데이트</c:when>

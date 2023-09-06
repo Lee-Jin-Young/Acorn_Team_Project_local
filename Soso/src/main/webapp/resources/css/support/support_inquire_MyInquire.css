@@ -5,31 +5,14 @@
 #content{
 	min-width: 1280px;
 }
-/*상단 배너*/
-	.head{
-		background-image: url("https://static.onoffmix.com/images/pc/default/inquire_bg.png");
-		height:360px;
-		background-size: cover;
-		overflow: hidden;
-		display: block;
-	}
-	h2.main_title{
-		margin: 116px auto 20px;
-		text-align: center;
-		font-size: 46px;
-		padding:7px 0;
-	}
-	p.sub_text{
-		text-align: center;
-		font-size: 20px;
-	}
+
 /*메인 메뉴바 */
-.menu_bar{
-	width:100%;
-	height:80px;
-	box-sizing: border-box;
-	text-align: center;
-}
+	.menu_bar{
+		width:100%;
+		height:80px;
+		box-sizing: border-box;
+		text-align: center;
+	}
 /*메인 메뉴바 */
 	.menu_bar{
 		width:100%;
@@ -59,14 +42,13 @@
 		font-weight: 600;
 		border-bottom: 3px solid rgb(157 128 63);
 	}
-/* 바디 폭 조정 */
+/* 나의 문의내역 전체 레이아웃 */
 	.body_area{
 		position: relative;
 		box-sizing: border-box;
 		width: 1280px;
 		margin: 0 auto;
 	}
-/* 메인 컨텐츠 */
 	.main_content{
 		margin: 100px auto 90px;
 		box-sizing: border-box;
@@ -88,6 +70,10 @@
 	display: inline-block;
 	box-sizing: border-box;
 }
+.inquire_navi .active{
+	color: rgb(157 128 63);
+	font-weight: 400;
+}
 .inquire_navi li a:hover{
 	text-decoration:underline;
 }
@@ -95,11 +81,10 @@
 	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
-	font-size: 16px;
+	font-size: 20px;
 	display: block;
 	border: 1px solid #d8d8d8;
 	border-right: none;
-	color:black;
 	display: flex;
     justify-content: center;
     align-items: center;
@@ -112,7 +97,8 @@
 }
 /* 나의 문의 내역 전체 레이아웃 */
 	h3.title{
-		font-size: 20px;
+		font-size: 22px;
+		font-weight:500;
 	}
 	table {
 		width: 100%;
@@ -130,8 +116,8 @@
 	}
 	table th {
 	    padding: 22px 0;
-	    font-size: 16px;
-	    font-weight: bold;
+	    font-size: 19px;
+	    font-weight: 500;
 	    background-color: #f7f7f7;
 	}
 	th.num{
@@ -160,6 +146,13 @@
 	}
 	.main-data .summary-data td {
     	padding: 25px 0;
+    	font-size: 19px;
+	}
+	.main-data .summary-data .title .inquire_title:hover{
+		text-decoration:underline;
+	}
+	.status p{
+		color: rgb(157 128 63);
 	}
 	.main-data td.num{
 		display:none;
@@ -188,18 +181,31 @@
 	table tbody tr:first-child {
     	border-top: none;
 	}
-	/* 답변 보기 버튼 레이아웃 */
-	.main_data .btn_more {
-	    width: 14px;
-	    height: 8px;
-	    position: absolute;
-	    top: 29px;
-	    right: 30px;
-	    background: transparent url("https://static.onoffmix.com/images/pc/default/faq_bg.png") no-repeat center center;
-	}
 	/* 답변 내용 레이아웃 */
-	.main-data.detail-data {
-   		display: table-row;
+	.inquire_question,.inquire_answer{
+		display: flex;
+	}
+	.inquire_q,.inquire_a{
+	    font-size: 3rem;
+	    font-weight: 100;
+	}
+	.inquire_q{
+		color: #c1c4c3;
+	}
+	.inquire_a{
+		color: rgb(166 223 170 / 89%);
+		padding-top: 2%;
+	}
+	#content,#answer{
+	    padding-bottom: 2%;
+	    line-height: 2rem;
+	    margin-left: 6%;
+	    width: 0%;
+	    min-width: 75%;
+	    font-size:19px;
+	}
+	#answer{
+		padding-top: 2%;
 	}
 	.detail-td{
 		padding: 37px 50px;
@@ -213,14 +219,15 @@
 	    line-height: 19px;
 	    word-break: break-all;
 	}
+	/* 삭제 버튼 및 관리자 답변 버튼 레이아웃 */
 	.main-data .detail-data .inquiry-content .delete-btn {
 	    position: absolute;
 	    right: 3px;
 	    border: none;
 	    background-color: transparent;
-	    font-size: 14px;
+	    font-size: 19px;
 	    color: #666;
-	    vertical-align: middle
+	    margin-right:70px;
 	}
 	
 	.main-data .detail-data .inquiry-content .delete-btn:hover,.main-data .detail-data .inquiry-content .answer-btn:hover  {
@@ -234,24 +241,6 @@
 	    font-size: 14px;
 	    color: #666;
 	}
-	
-	/* 답변 토글 css */
-	.btn_more{
-		width:100%;
-		height: 64px;
-		top: 0;
-		left: 0;
-		z-index: 1;
-		text-decoration: none;
-		text-align: left;
-		cursor: pointer;
-		overflow: hidden;
-		text-indent: -9999em;
-		position: absolute;
-		box-sizing: border-box;
-		display: block;
-	}
-
 
 
 

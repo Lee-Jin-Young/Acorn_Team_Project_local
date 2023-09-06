@@ -4,22 +4,7 @@
 #content{
 	min-width: 1280px;
 }
-/*상단 배너*/
-.head{
-	background-image: url("https://static.onoffmix.com/images/pc/default/inquire_bg.png");
-	height:360px;
-	background-size: cover;
-	overflow: hidden;
-	display: block;
-}
-h3.main_title{
-	font-size: 20px;
-	font-weight:bold
-}
-p.sub_text{
-	text-align: center;
-	font-size: 20px;
-}
+
 /*메인 메뉴바 */
 	.menu_bar{
 		width:100%;
@@ -49,51 +34,54 @@ p.sub_text{
 		font-weight: 600;
 		border-bottom: 3px solid rgb(157 128 63);
 	}
-/* 바디 폭 조정 */
-.body_area{
-	position: relative;
-	box-sizing: border-box;
-	width: 1280px;
-	margin: 0 auto;
-}
-/* 메인 컨텐츠 */
-.main_content{
-	margin: 100px auto 90px;
-	box-sizing: border-box;
-	width: 100%;
-	min-height: 260px;
-}
-/* 문의사항 네비바*/
-.inquire_navi{
-	width: 100%;
-	height: auto;
-	margin-bottom: 80px;
-	box-sizing: border-box;
-	font-size:0;
-	text-align: center;
-}
-.inquire_navi li{
-	width: 320px;
-	height: 50px;
-	display: inline-block;
-	box-sizing: border-box;
-}
-.inquire_navi li a:hover{
-	text-decoration:underline;
-}
-.inquire_navi li a{
-	width: 100%;
-	height: 100%;
-	box-sizing: border-box;
-	font-size: 16px;
-	display: block;
-	border: 1px solid #d8d8d8;
-	border-right: none;
-	color:black;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-}
+	
+/* 문의하기 전체 레이아웃 */
+	.body_area{
+		position: relative;
+		box-sizing: border-box;
+		width: 1280px;
+		margin: 0 auto;
+	}
+	.main_content{
+		margin: 100px auto 90px;
+		box-sizing: border-box;
+		width: 100%;
+		min-height: 260px;
+	}
+
+/* 문의하기 메뉴바*/
+	.inquire_navi{
+		width: 100%;
+		height: auto;
+		margin-bottom: 80px;
+		box-sizing: border-box;
+		text-align: center;
+	}
+	.inquire_navi li{
+		width: 320px;
+		height: 50px;
+		display: inline-block;
+		box-sizing: border-box;
+	}
+	.inquire_navi .active{
+		color: rgb(157 128 63);
+		font-weight: 400;
+	}
+	.inquire_navi li a:hover{
+		text-decoration:underline;
+	}
+	.inquire_navi li a{
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		display: block;
+		border: 1px solid #d8d8d8;
+		border-right: none;
+		display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    font-size : 20px;
+	}
 .inquire_navi li a.my_inquire{
 	border-right: 1px solid #d8d8d8;
 }
@@ -101,6 +89,10 @@ p.sub_text{
 	border-right: 1px solid #d8d8d8;
 }
 /* 폼양식 */
+h3.main_title{
+	font-size: 22px;
+	font-weight:500;
+}
 .area_form{
 	margin: 14px 0 0;
 	border-top: 2px solid black;
@@ -119,7 +111,7 @@ p.sub_text{
 	height: 48px;
 	padding: 0 20px;
 	background-color: #fff;
-	font-size: 14px;
+	font-size: 18px;
 }
 input[type="text"], input[type="email"], 
 input[type="password"], input[type="number"], 
@@ -136,7 +128,7 @@ input[type="tel"] {
 h4.label{
 	display: inline-block;
 	width: 120px;
-	font-size:16px;
+	font-size:19px;
 	line-height: 48px;
 	font-weight: normal;
 	letter-spacing: -1px;
@@ -148,9 +140,10 @@ h4.label{
     position: relative;
 }
 .area_form .row-wrap >div .tip_txt {
-   	padding-left: 20px;
+   	margin-right:380px;
    	display: inline-block;
    	font-size: 14px;
+   	float:right;
 }
 .area_form select {
     width: 160px;
@@ -170,35 +163,6 @@ h4.label{
 	width: 880px;
 }
 
-.input_file .file_box{
-	width: 1050px;
-	display: inline-block;
-}
-.input_file .btn_upload {
-    float: left;
-    width: 160px;
-    height: 48px;
-    line-height: 46px;
-    border-radius: 0;
-	border-color: #d8d8d8;
-	border: 1px solid #d8d8d8;
-    background-color: #f7f7f7;
-    color: #333333;
-    font-size: 14px;
-    vertical-align: middle;
-    letter-spacing: normal;
-    text-align: center;
-    cursor: pointer;
-
-}
-.input_file .file_wrap {
-    margin-top: 10px;
-    margin-left: 294px;
-    font-size: 12px;
-}
-.input_file .file_wrap .tip_file{
-	color: gray;
-}
 .area_form .row-wrap:last-of-type {
    border: none;
    border-bottom: 2px solid #333;
@@ -221,17 +185,22 @@ label {
    border: 1px solid #d8d8d8;
    background-color: #fff;
 }
+/* 문의하기 버튼 레이아웃*/
 .area_form .btn_submit {
     width: 240px;
     height: 60px;
     margin: 0 auto;
     display: block;
-    border: 1px solid #3187e9;
+    border: 1px solid rgb(157 128 63);
     border-radius: 30px;
-    background-color: #4195f5;
+    background-color: rgb(157 128 63);
     color: #fff;
     font-size: 18px;
 }
+.area_form .btn_submit:hover{
+	font-weight: 600;
+}
+/* 하단 인포 메세지 */
 .info_message {
     margin-top: 20px;
     padding-bottom: 50px;

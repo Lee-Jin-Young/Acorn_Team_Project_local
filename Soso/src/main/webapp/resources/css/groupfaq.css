@@ -1,8 +1,11 @@
 @charset "UTF-8";
-.cafe_table #faqInsert{float: right; cursor:pointer;}
-.cafe_table #faqInsert:hover, .cafe_table .qna_question a:hover, .cafe_table .qna_answer a:hover { font-weight:500; text-decoration: underline;}
+
+
+ #faqInsert{margin-bottom: 2%; cursor:pointer;}
+ #faqInsert:hover, .cafe_table .qna_question a:hover, .cafe_table .qna_answer a:hover { font-weight:500; text-decoration: underline;}
 
 pre{white-space: pre-wrap;}  
+.cafe_table{width:100%;}
 .cafe_table .table__body { max-height: calc(89% - 1.6rem); margin: .8rem auto; border-radius: .6rem; overflow: auto; overflow: overlay;}
 .cafe_table table { width: 100%;}
 .cafe_table table, th, td { border-collapse: collapse; padding: 1rem; text-align: left;}
@@ -22,12 +25,35 @@ pre{white-space: pre-wrap;}
 .cafe_table .pagination{display:flex; justify-content: center;}
 .cafe_table .pagination li a{padding: 10px 20px;}
 .cafe_table .pagination li a:hover {color: rgb(226 148 148 / 92%); text-decoration: underline;}
+.review_delete{display: inline-block; float: right;}
+.review_delete:hover{text-decoration:underline;}
 
+.faq_form{width:100%}
 
+textarea#q_content {
+    height: 0;
+    min-height: 249px;
+    background-color: #eee;
+    margin: 2% 0;
+    padding: 1%;
+}
 
+input#q_title {
+    background-color: #eee;
+    padding: 1%;
+}
 
-
-
+button#submitBtn, button#resetBtn {
+    border: 1px solid #d4cab5;
+    padding: 1% 2%;
+    border-radius: 10px;
+    margin-right: 2%;
+    color: #d4cab5;
+}
+button#submitBtn:hover, button#resetBtn:hover{
+	background-color: #d4cab5;
+	color:#fff;
+}
 
 
 

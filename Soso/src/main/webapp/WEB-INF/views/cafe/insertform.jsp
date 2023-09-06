@@ -21,52 +21,53 @@
 			<div class="grid_wrapper">
 				<select class="select_box" id="select" name="header" >
 			      <option selected>게시글 말머리</option>
-			      <option value="1">책 제목</option>
-			      <option value="2">사진 / 영상</option>
+			      <option value="1">책 추천</option>
+			      <option value="2">책 내용</option>
 			      <option value="3">수다</option>
 			      <option value="4">정보 / 일정</option>
 			    </select>
              </div>
 			<div class="form_header">
                 <div class="form_label">
-                     <label for="groupName">TITLE</label>
+                     <label for="groupName">글제목</label>
                 </div>
-                <input class="form_input" type="text" name="title" id="title" placeholder="입력..."/>
+                <input class="form_input" type="text" name="title" id="title" placeholder="글 제목을 입력하세요"/>
            	</div>
-               <script>
-		            document.querySelector("#image_btn").addEventListener("click", (e) => {
-						e.preventDefault();
-		                document.querySelector("#image").click()
-					});
-					document.querySelector("#image").addEventListener("change", (e) => {
-						const files = e.target.files;
-						if(files.length > 0){
-							const reader = new FileReader();
-							reader.onload = (event) => {
-								const data=event.target.result;
-								document.querySelector("#image_preview").setAttribute("src", data);
-							};
-							reader.readAsDataURL(files[0]);
-						}
-					});
-					document.querySelector("#on_off").addEventListener("change", (e) => {
-						if(e.target.value == 0){
-							document.querySelector("#meeting_loc").value = "온라인"
-						} else {
-							document.querySelector("#meeting_loc").value = ""
-						}
-					});
-				</script>
-
-			<div>
-				<textarea name="content" id="content" rows="2" placeholder=""></textarea>
-			</div>
-
+           	<div class="form_header">
+                <div class="form_label">
+                     <label for="groupName">글내용</label>
+                </div>
+                <textarea name="content" id="content" rows="2" placeholder="글 내용을 입력하세요"></textarea>
+           	</div>
 			<div id="form_button">
 				<button type="submit">등록</button>
 			</div>
 		</form>
 	</div>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<script>
+           document.querySelector("#image_btn").addEventListener("click", (e) => {
+			e.preventDefault();
+               document.querySelector("#image").click()
+		});
+		document.querySelector("#image").addEventListener("change", (e) => {
+			const files = e.target.files;
+			if(files.length > 0){
+				const reader = new FileReader();
+				reader.onload = (event) => {
+					const data=event.target.result;
+					document.querySelector("#image_preview").setAttribute("src", data);
+				};
+				reader.readAsDataURL(files[0]);
+			}
+		});
+		document.querySelector("#on_off").addEventListener("change", (e) => {
+			if(e.target.value == 0){
+				document.querySelector("#meeting_loc").value = "온라인"
+			} else {
+				document.querySelector("#meeting_loc").value = ""
+			}
+		});
+	</script>
 </body>
 </html>

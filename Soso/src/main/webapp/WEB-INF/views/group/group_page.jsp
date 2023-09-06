@@ -78,14 +78,14 @@
 		<!-- 참석후기 -->
 		<div class="group_review" >
 			<div class="inner-wrap">
-				<h2 class="title black">참여 후기</h2>
+				<h2 class="title black">기대평</h2>
 				<div class="reviewList" style="width:80%;">
 				<!-- forEach를 사용해서 댓글 출력(나중에는 분기 써서 댓글이 없을 때는 다른 페이지 표시) -->
 					<c:choose>
 						<c:when test="${empty commentList}">
 							<div class="card">
 								<div class="card-body">
-									<p class="card-text">아직 후기가 없어요</p>
+									<p class="card-text">아직 기대평이 없어요</p>
 								</div>
 							</div>
 						</c:when>
@@ -121,7 +121,7 @@
 										<textarea name="content" id="content" style="resize : none;" readonly>${tmp.content}</textarea>
 									</div>
 									<c:if test="${sessionScope.id == tmp.writer || sessionScope.id == manager_id}">
-										<a href="${pageContext.request.contextPath}/group/review_delete?num=${tmp.review_num }&group_num=${tmp.group_num}">삭제</a>
+										<a class="review_delete" href="${pageContext.request.contextPath}/group/review_delete?num=${tmp.review_num }&group_num=${tmp.group_num}">삭제</a>
 									</c:if>
 								</div>
 							</c:forEach>
@@ -139,11 +139,13 @@
 		<div class="inner-wrap">
 			<div id="faq">
 				<h2 class="title black">문의하기</h2>
-			</div>
-			<div style="width : 100%;">
-			<div id="Parse_Area"gt;lt;></div>
-		</div>		
+			</div>		
 		</div>
+
+			<div id="Parse_Area"gt;lt;>
+			<!-- 문의하기 목록 -->
+			</div>
+
 		<!-- 플로팅 하단 고정 -->
 		<div class="banner-inner-wrap">
 			<div class="group_banner">
@@ -196,7 +198,7 @@
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
 										  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
 										</svg>
-										<div id="jjimCount">${jjimCount }</div>
+										<%-- <div id="jjimCount">${jjimCount }</div> --%>
 									</div>	
 								</c:when>
 								<c:otherwise>
@@ -204,7 +206,7 @@
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
 										  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 										</svg>
-										<div id="jjimCount">${jjimCount }</div>
+										<%-- <div id="jjimCount">${jjimCount }</div> --%>
 									</div>
 								</c:otherwise>
 							</c:choose>

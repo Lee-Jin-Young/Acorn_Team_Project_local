@@ -5,17 +5,17 @@
 	<select id="getList" parameterType="String" resultType="inquireDto">
 		SELECT *
 		FROM
-				(SELECT cs_num, writer, category, title, content, user_email, To_CHAR(regdate, 'YY.MM.DD') as regdate
-				FROM CS_TB
-				ORDER BY cs_num desc)
+			(SELECT cs_num, writer, answer, category, title, content, user_email, To_CHAR(regdate, 'YY.MM.DD') as regdate
+			FROM CS_TB
+			ORDER BY cs_num desc)
 		where writer = #{id}
 	</select>
 	<select id="getList2" parameterType="String" resultType="inquireDto">
 		SELECT *
 		FROM
-				(SELECT cs_num, writer, category, title, content, user_email, To_CHAR(regdate, 'YY.MM.DD') as regdate
-				FROM CS_TB
-				ORDER BY cs_num desc)
+			(SELECT cs_num, writer, answer, category, title, content, user_email, To_CHAR(regdate, 'YY.MM.DD') as regdate
+			FROM CS_TB
+			ORDER BY cs_num desc)
 	</select>
 	
 	<select id="getCount" parameterType="inquireDto" resultType="int">
@@ -40,7 +40,7 @@
 	</delete>
 	<update id="update" parameterType="inquireDto">
 		UPDATE CS_TB
-		SET answer = #{answer}, content = #{content}
+		SET answer = #{answer}
 		WHERE cs_num = #{cs_num}
 	</update>	
 </mapper>

@@ -24,5 +24,10 @@
 		(num, group_Num, user_Id, isjoin, request_dt)
 		VALUES (join_seq.NEXTVAL, #{num}, #{manager_id}, 0, TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'))
 	</insert>
+	<update id="updateNow" parameterType="groupDto">
+		UPDATE group_tb
+		SET now_people = now_people + 1
+		WHERE num = #{num}
+	</update>
 </mapper>
 

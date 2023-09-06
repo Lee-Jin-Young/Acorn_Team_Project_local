@@ -65,11 +65,8 @@ public class GroupDaoImpl implements GroupDao{
     }
 
 	@Override
-    public List<GroupDto> getGroupsByGenreAndSearch(int genre, GroupDto dto) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("genre", genre);
-        params.put("dto", dto);
-        return session.selectList("group.getGroupsByGenreAndSearch", params);
+    public List<GroupDto> getGroupsByGenreAndSearch(GroupDto dto) {
+        return session.selectList("group.getGroupsByGenreAndSearch", dto);
     }
 	
 	//group_num의 시퀀스 얻어내

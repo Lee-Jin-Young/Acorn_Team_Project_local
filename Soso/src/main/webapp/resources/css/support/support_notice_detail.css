@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+/*메인 메뉴바 */
+	.menu_bar{
+		width:100%;
+		height:80px;
+		box-sizing: border-box;
+		text-align: center;
+	}
+	.menu_bar li{
+		margin: 0 40px;
+		display: inline-block;
+		cursor: pointer;
+	}
+	.menu_bar li >a{
+		display: block;
+		color: #8a8a8a;
+		font-size: 20px;
+		height: 80px;
+		line-height: 78px;
+	}
+	.menu_bar li .active{
+		color: rgb(157 128 63);
+		font-weight: 600;
+		border-bottom: 3px solid rgb(157 128 63);
+	}
+	.menu_bar li>a:hover{
+		color: rgb(157 128 63);
+		font-weight: 600;
+		border-bottom: 3px solid rgb(157 128 63);
+	}
+	/* 문의하기 전체 레이아웃 */
+	.body_area{
+		position: relative;
+		box-sizing: border-box;
+		width: 1280px;
+		margin: 0 auto;
+	}
+	.main_content{
+		margin: 100px auto 90px;
+		box-sizing: border-box;
+		width: 100%;
+		min-height: 260px;
+	}
+	/* 공지사항 메인 컨텐츠*/
+	.detail_title{
+		font-size:20px;
+		font-weight:500;
+	}
+	.detail_notice{
+		margin-top: 14px;
+		border-top: 2px solid black;
+	}
+	.notice_head{
+		line-height: 18px;
+		background-color: #f7f7f7;
+		font-size: 19px;
+	}
+	.notice_head h6.title{
+		margin-left:20px;
+		display:inline-block;
+	}
+	.notice_head .info{
+		float: right;
+		margin-right: 40px;
+		font-size: 19px;
+		line-height: 4rem;
+		font-size: 14px;
+	}
+	.notice_content {
+	    margin: 0 0 20px;
+	    padding: 46px 50px 54px;
+	    border-top: 1px solid #d3d3d3;
+	    border-bottom: 1px solid #d3d3d3;
+	    line-height: 19px;
+	    overflow: hidden;
+	    font-size:18px;
+	}
+	/* 목록 버튼 레이아웃 */
+	.btn_list{
+	    width: 130px;
+	    height: 48px;
+	    display: flex;
+	    justify-content: center;
+	    border-radius: 0;
+	    border: 1px solid #d8d8d8;
+	    background-color: #f7f7f7;
+	    text-align: center;
+	    line-height: 48px;
+	    font-size: 20px;
+	    color: #333;
+	    margin-top:18px;
+	    font-size: 14px;
+	    color: #333;
+	}
+	.btn_list:hover{
+		color: rgb(157 128 63);
+		font-weight: 600;
+	}
+	.admin_menu{
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}

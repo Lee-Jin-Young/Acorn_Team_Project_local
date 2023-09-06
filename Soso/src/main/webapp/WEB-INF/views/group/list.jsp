@@ -76,8 +76,8 @@
             </div>
             <div class="mate_content_theme">
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/group/viewList">인기순</a></li>
-                    <li><a href="${pageContext.request.contextPath}/group/list?genre=-1">최신순</a></li>
+                    <li><a href="${pageContext.request.contextPath}/group/viewList?genre=${param.genre}">인기순</a></li>
+                    <li><a href="${pageContext.request.contextPath}/group/list?genre=${param.genre}">최신순</a></li>
                 </ul>
             </div>
         </div>

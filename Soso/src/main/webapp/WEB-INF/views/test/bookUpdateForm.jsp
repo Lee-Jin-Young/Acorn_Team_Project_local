@@ -6,23 +6,45 @@
 <head>
 <meta charset="UTF-8">
 <title>책 업데이트 & 삭제</title>
+<link rel="stylesheet" href="${path }/resources/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${path }/resources/css/common.css" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </head>
+<style>
+	.bookList button{
+		background-color:#fff;
+		color:red;
+		border:none;
+	}
+	.bookList button:hover{
+		text-decoration:underline;
+	}
+</style>
 <body>
-	<button type="button" id="addBook" name="addBook">책 추가하기</button>
-	<table border="1">
-			<c:forEach var="tmp" items="${booklist }">
-				<tr>
-					<td></td>
-					<td><img src="${tmp.image }" alt="${tmp.title }" width="100" /></td>
-					<td><a href="${tmp.link }">${tmp.title }</a></td>
-					<td><button class="deleteBookBtn" data-isbn="${tmp.isbn}" data-group-num="${tmp.group_num}">삭제</button></td>
-				</tr>
-			</c:forEach>
-	</table>
+	<div class="container">
+		<h3>책 목록 수정하기 </h3>
+		<table class="table">
+				<c:forEach var="tmp" items="${booklist }">
+					<tr>
+						<td scope="col"></td>
+						<td scope="col"><img src="${tmp.image }" alt="${tmp.title }" width="100" /></td>
+						<td scope="col"><a href="${tmp.link }">${tmp.title }</a></td>
+						<td scope="col"><button class="deleteBookBtn btn btn-outline-danger" data-isbn="${tmp.isbn}" data-group-num="${tmp.group_num}">삭제</button></td>
+					</tr>
+				</c:forEach>
+		</table>
+	</div>
 <!-- 책 검색 공간(임시) -->
 <!-- 책 정보 추가 -->
-<div class="bookList" style="overflow : auto; display : flex;"></div>
-<button type="submit"id="updateBook" name="updateBook">수정 목록 제출</button>	
+<div class="container">
+	<div class="bookList container" style="display:flex; overflow:auto;"></div>
+</div>
+<div class="container" style="margin:3%;">
+	<button type="button" id="addBook" name="addBook" class="btn btn-outline-success">책 추가하기</button>
+	<button type="submit" id="updateBook" name="updateBook" class="btn btn-outline-primary">수정 목록 제출</button>
+</div>
+	
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
@@ -99,7 +121,7 @@ function displayBookList() {
         }
 
         // 삭제 버튼 추가
-        const deleteButton = $("<button>").text("삭제");
+        const deleteButton = $("<button>").text("삭제 X");
         deleteButton.click(function () {
             deleteBook(index);
         });

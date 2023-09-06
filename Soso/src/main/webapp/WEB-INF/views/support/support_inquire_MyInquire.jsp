@@ -11,12 +11,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/support/support_inquire_MyInquire.css" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp">
 		<jsp:param value="home" name="current"/>
 	</jsp:include>
+	<!-- 상단 배너 레이아웃 -->
     <main id="main-banner" class="main-banner-06">
         <div class="inner-wrap">
             <div class="title">
@@ -48,10 +50,21 @@
 		<li class="menu_notice">
 			<a class="nav-link" href="${pageContext.request.contextPath }/support/support_notice">공지사항</a>
 		</li>
-		<li class="menu_inquire">
-			<a class="nav-link active" href="${pageContext.request.contextPath }/support/support_inquire">문의하기</a>
-		</li>
+		<!-- Admin 계정으로 로그인 했을때 문의하기를 누르면 바로 사용자 문의 접수내역으로 이동 되도록 -->
+		<c:choose>
+			<c:when test="${isAdmin }">
+				<li class="menu_inquire">
+					<a class="nav-link" href="${pageContext.request.contextPath }/support/support_inquire_inquireStatus">문의하기</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="menu_inquire">
+					<a class="nav-link" href="${pageContext.request.contextPath }/support/support_inquire">문의하기</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
 	</ul>
+		<!-- 문의하기 메뉴바 -->
 		<div class="body_area">
 			<div class="main_content">
 				<ul class="inquire_navi">
@@ -65,7 +78,7 @@
 							<li>
 								<a href="${pageContext.request.contextPath }/support/support_inquire">1:1 문의하기</a>
 							</li>
-							<li>
+							<li class="active">
 								<a class="my_inquire" href="${pageContext.request.contextPath }/support/support_inquire_MyInquire">나의 문의내역</a>
 							</li>
 						</c:otherwise>
@@ -83,7 +96,7 @@
 					<tbody>
 						<c:choose>
 							<c:when test="${empty list}">
-							 	<p>문의하신 내역이 없습니다.</p>
+							 	<p style="font-size:19px">문의하신 내역이 없습니다.</p>
 							 </c:when>
 							 <c:otherwise>
 								<c:forEach var="tmp" items="${list}">
@@ -94,35 +107,38 @@
 													<tr class="summary-data">
 														<td class="date">${tmp.regdate }</td>
 														<td class="title">
-															<a href="">${tmp.title }</a>
+															<a class="inquire_title" href="">${tmp.title }</a>
 														</td>
 														<td class="status">
-															<c:choose>
-																<c:when test="${empty tmp.answer }">
-																	답변대기
-																</c:when>
-																<c:otherwise>
-																	답변완료
-																</c:otherwise>
-															</c:choose>
+															<c:if test="${empty tmp.answer}">
+															        답변대기
+															 </c:if>
+															 <c:if test="${not empty tmp.answer}">
+															 	<p>답변완료</p>
+															 </c:if>
 														</td>
 													</tr>
-													<tr class="btn-area">
-														<td><button type="button" class="btn_more">답변보기</button></td>
-													</tr>
+									
+													<!-- 답변 영역 레이아웃 -->
 													<tr class="detail-data">
 														<td class="detail-td">
 															<div class="inquiry-content">
 																<div class="description">
 																	<button data-num="${tmp.cs_num}" type="submit" class="delete-btn">삭제</button>
-																	${tmp.content }
+																	<div class="inquire_question">
+																		<span class="inquire_q">Q</span>
+																		<pre id="content">${tmp.content }</pre>
+																	</div>
 																	<c:choose>
-																		<c:when test="${tmp.answer not empty }">
-																			${tmp.answer }
-																		</c:when>
-																		<c:otherwise>
-																			
-																		</c:otherwise>
+																	<c:when test="${not empty tmp.answer }">
+																	<div class="inquire_answer">
+																		<span class="inquire_a">A</span>
+																		<pre id="answer">${tmp.answer }</pre>
+																	</div>
+																	</c:when>
+																	<c:otherwise>
+																		
+																	</c:otherwise>
 																	</c:choose>
 																</div>
 															</div>
@@ -143,7 +159,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script>
 				$(document).ready(function(){
-					$(".btn_more").click(function(e){
+					$(".inquire_title").click(function(e){
 						e.preventDefault();
 						$(this).closest(".main-data").find(".detail-td").toggle();
 					});

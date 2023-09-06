@@ -19,6 +19,7 @@
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp">
 		<jsp:param value="home" name="current"/>
 	</jsp:include>
+	<!-- 상단 레이아웃 -->
     <main id="main-banner" class="main-banner-06">
         <div class="inner-wrap">
             <div class="title">
@@ -30,7 +31,7 @@
             </div>
             <div class="indicator">
                 <div class="home circle">
-                    <a href="#" title="메인페이지가기"><img src="${path }/resources/images/sub/icon_home.svg" alt="홈버튼이미지"></a>
+                    <a href="" title="메인페이지가기"><img src="${path }/resources/images/sub/icon_home.svg" alt="홈버튼이미지"></a>
                 </div>
                 <div class="main-menu circle">BOOKMATE</div>
 
@@ -72,8 +73,8 @@
 	<!-- 메인 메뉴바 끝 -->
 	<!-- 검색 창 시작 -->
 	<div class="search">
-		<form action="" class="search_form" method="get">
-			<input type="text" value="${keyword}"name="keyword" class="search_main" placeholder="예) 회원가입, 로그인, 결제 등" />
+		<form action="${pageContext.request.contextPath}/support/support_faq" class="search_form" method="get">
+			<input type="text" value="${keyword}"name="keyword" class="search_main" placeholder="예) 회원가입, 모임신청, 로그인 등" />
 			<input type="submit" class="search_cs"/>
 		</form>
 	</div>
@@ -98,6 +99,7 @@
 					<a href="${pageContext.request.contextPath }/support/support_faq_etc?category=0">기타(${categoryZeroRow })</a>
 				</li>
 			</ul>
+			<!-- FAQ 메인 컨텐츠  -->
 			<h3 class="faq">전체(${totalRow})</h3>
 			<div class="tab_content">
 			<ul>
@@ -115,7 +117,7 @@
 								</c:choose>
 							</div>
 							<h5 class="detail">
-								<a class="faq_question" href="${pageContext.request.contextPath}/support/support_faq?faq_num=${tmp.faq_num}" id="faq-question-${tmp.faq_num}">
+								<a class="faq_question" href="">
 				                    ${tmp.question}
 				                </a>
 							</h5>
@@ -146,11 +148,34 @@
 		</div>
 		
 	</div>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<!-- 페이징  -->
+		<div class="pagination_wrap">
+			<nav class="pagination">
+				<ul class="pagination_ul">
+					<c:if test="${startPageNum ne 1 }">
+						<li class="page-item">
+							<a href="support_faq?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedK}">Prev</a>
+						</li>
+					</c:if>
+					<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+						<li class="page-item ${pageNum eq i ? 'active' : '' }">
+							<a href="support_faq?pageNum=${i }&condition=${condition}&keyword=${encodedK}">${i }</a>
+						</li>
+					</c:forEach>
+					<c:if test="${endPageNum lt totalPageCount }">
+						<li class="page-item">
+							<a href="support_faq?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedK}">Next</a>
+						</li>
+					</c:if>				
+				</ul>
+			</nav>
+		</div>
+		<!-- 스크립트 답변 토글 및 관리자 기능 -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script>
 			$(document).ready(function(){
 			
-				$(".btn_more").click(function(e){
+				$(".faq_question").click(function(e){
 					e.preventDefault();
 					$(this).closest(".dropbox").find(".detail_content").toggle();
 				});
@@ -182,27 +207,6 @@
 			});
 			
 	</script>
-
-		<nav style="display:flex; justify-content:center; margin-bottom:30px;">
-			<ul class="pagination" style="display:flex; justify-content:space-around; width:30%">
-				<c:if test="${startPageNum ne 1 }">
-					<li class="page-item">
-						<a class="page-link animate__animated" href="support_faq?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedK}">Prev</a>
-					</li>
-				</c:if>
-				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
-					<li class="page-item ${pageNum eq i ? 'active' : '' }">
-						<a class="page-link animate__animated" href="support_faq?pageNum=${i }&condition=${condition}&keyword=${encodedK}">${i }</a>
-					</li>
-				</c:forEach>
-				<c:if test="${endPageNum lt totalPageCount }">
-					<li class="page-item">
-						<a class="page-link animate__animated" href="support_faq?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedK}">Next</a>
-					</li>
-				</c:if>				
-			</ul>
-		</nav>
-	</div>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>

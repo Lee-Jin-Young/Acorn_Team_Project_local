@@ -16,6 +16,7 @@
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp">
 		<jsp:param value="home" name="current"/>
 	</jsp:include>
+	<!-- 상단 배너 -->
     <main id="main-banner" class="main-banner-06">
         <div class="inner-wrap">
             <div class="title">
@@ -94,7 +95,9 @@
 										<c:when test="${tmp.category == 0}">기타</c:when>
 								</c:choose>
 							</div>
-							<h5 class="detail">${tmp.question }</h5>
+							<h5 class="detail">
+								<a class="faq_question" href="">${tmp.question}</a>
+							</h5>
 						</div>
 						<div class="detail_content">
 							<span style="line-height: 24px;">
@@ -122,40 +125,55 @@
 			</div>
 		</div>
 	<div>
-		<nav style="display:flex; justify-content:center; margin-bottom:30px;">
-			<ul class="pagination" style="display:flex; justify-content:space-around; width:30%">
+	<!-- 페이징 처리 -->
+	<div class="pagination_wrap">
+		<nav class="pagination">
+			<ul class="pagination_ul">
 				<c:if test="${startPageNum ne 1 }">
 					<li class="page-item">
-						<a class="page-link animate__animated" href="support_faq?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedK}">Prev</a>
+						<a href="support_faq?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedK}">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 					<li class="page-item ${pageNum eq i ? 'active' : '' }">
-						<a class="page-link animate__animated" href="support_faq?pageNum=${i }&condition=${condition}&keyword=${encodedK}">${i }</a>
+						<a href="support_faq?pageNum=${i }&condition=${condition}&keyword=${encodedK}">${i }</a>
 					</li>
 				</c:forEach>
 				<c:if test="${endPageNum lt totalPageCount }">
 					<li class="page-item">
-						<a class="page-link animate__animated" href="support_faq?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedK}">Next</a>
+						<a href="support_faq?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedK}">Next</a>
 					</li>
 				</c:if>				
 			</ul>
 		</nav>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script>
-		
-			$(document).ready(function(){
-				
-				$(".btn_more").click(function(e){
-					e.preventDefault();
-					$(this).closest(".dropbox").find(".detail_content").toggle();
-				});
-				// 처음에는 숨겨두기
-				$(".detail_content").hide();
-			});
-		</script>
 	</div>
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<!-- 스크립트 답변 토글 및 관리자 기능 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		document.querySelectorAll(".pagination a").forEach(function(item){
+			//item 은 a 의 참조값이다 모든 a 요소에 mouseover 이벤트가 발생했을때 실행할 함수 등록
+			item.addEventListener("mouseover", function(e){
+				//애니메이션 클래스를 추가해서 애니메이션이 동작하도록한다.
+				e.target.classList.add("animate__swing");
+			});
+			//item 은 a 의 참조값이다 모든 a 요소에 animationend 이벤트가 발생했을때 실행할 함수 등록
+			item.addEventListener("animationend", function(e){
+				//애니메이션 클래스를 제거해서 다음번에 추가 되면 다시 애니매이션이 동작 되도록한다.
+				e.target.classList.remove("animate__swing");
+			});
+		});
+		$(document).ready(function(){
+			
+			$(".faq_question").click(function(e){
+				e.preventDefault();
+				$(this).closest(".dropbox").find(".detail_content").toggle();
+			});
+			// 처음에는 숨겨두기
+			$(".detail_content").hide();
+		});
+	</script>
+	</div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>
 

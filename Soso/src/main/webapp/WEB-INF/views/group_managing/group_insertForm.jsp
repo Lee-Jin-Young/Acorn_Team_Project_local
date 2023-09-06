@@ -17,25 +17,23 @@
     <div class="container">
 		<div id="insert_title">소모임 개설 신청</div>
 		<div id="insert_subtitle">소모임장이 되어 원하는 소모임을 개설해보세요.</div>
-		
 		<div class="image_container" style="display:flex; flex-direction:column; align-items:center">
 			<img id="image_preview" src="${pageContext.request.contextPath}/resources/images/main/001.jpg" 
-				style="width:150px; height:150px; border-radius:50%; border: 1px solid rgb(222, 226, 230)" alt="소모임 이미지"/>
+				style="width:150px; height:150px; border-radius:50%; border: 1px solid rgb(222, 226, 230)"/>
 			<div style="margin-top:20px; margin-bottom:20px; font-size: 15px;">소모임 이미지</div>
 		</div>
-		
 		<form action="${pageContext.request.contextPath}/group/insert" method="post" id="myForm" enctype="multipart/form-data">
 			<div class="form_header">
-                <div class="form_label">
+                <div class="form_label" style="text-align:end">*는 필수 입력 사항입니다.
                 </div>
-                <input class="form_input" type="text" name="name" id="groupName" autocomplete="off" placeholder="소모임 제목을 입력해주세요"/>
+                <input class="form_input" type="text" name="name" id="groupName" autocomplete="off" placeholder="소모임 제목을 입력해주세요*"/>
             </div>
             <div class="form_header">
             	<input class="form_input" type="text" name="manager_comment" id="manager_comment" autocomplete="off" placeholder="이 소모임을 한마디로 표현해주세요!" />
 			</div>
 			<div class="grid_wrapper">
                     <select name="genre" id="genre" class="select_box">
-                         <option selected>장르</option>
+                         <option selected>장르*</option>
                          <option value = 1>자기계발</option>
                          <option value = 2>인문/역사/예술</option>
                          <option value = 3>경영/경제</option>
@@ -43,7 +41,7 @@
                          <option value = 0>기타</option>
                     </select>
                     <select name="max_people" id="max_people" class="select_box">
-                         <option selected>모임 정원</option>
+                         <option selected>모임 정원*</option>
                          <option value = 2>2명</option>
                          <option value = 3>3명</option>
                          <option value = 4>4명</option>
@@ -54,7 +52,7 @@
                          <option value = 9>9명</option>
                     </select>
                     <select name="on_off" id="on_off" class="select_box">
-                              <option selected>온/오프라인 선택</option>
+                              <option selected>온/오프라인 선택*</option>
                               <option value = 0>온라인</option>
                               <option value = 1>오프라인</option>
                     </select>
@@ -91,21 +89,21 @@
 				</script>
                <div class="loc_time">
 				<div>
-					<input class="form_input" id="meeting_loc" type="text" name="meeting_loc" autocomplete="off" placeholder="모임 장소"/>
+					<input class="form_input" id="meeting_loc" type="text" name="meeting_loc" autocomplete="off" placeholder="모임 장소*"/>
 				</div>
 				<div>
-					<input id="meeting_time" class="form_input" type="text" name="meeting_time" autocomplete="off" placeholder="모임 시간"/>
+					<input id="meeting_time" class="form_input" type="text" name="meeting_time" autocomplete="off" placeholder="모임 시간*"/>
 				</div>
 			</div>
 			<div class="date_pickers">
 				<div>
-					<input id="start_dt" class="form_input" type="text" name="start_dt" autocomplete="off" placeholder="모임 시작일"/>
+					<input id="start_dt" class="form_input" type="text" name="start_dt" autocomplete="off" placeholder="모임 시작일*"/>
 				</div>
 				<div>
-					<input id="ended_dt" class="form_input" type="text" name="ended_dt" autocomplete="off" placeholder="모임 종료일"/>
+					<input id="ended_dt" class="form_input" type="text" name="ended_dt" autocomplete="off" placeholder="모임 종료일*"/>
 				</div>
 				<div>
-					<input id="deadline_dt" class="form_input" type="text" name="deadline_dt" autocomplete="off" placeholder="모임 모집 마감일"/>
+					<input id="deadline_dt" class="form_input" type="text" name="deadline_dt" autocomplete="off" placeholder="모임 모집 마감일*"/>
 				</div>
 			</div>
 			<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
@@ -143,7 +141,7 @@
            		<p>등록된 책이 없습니다 </p>
 			</div>
 			<div>
-				<textarea name="caption" id="caption" rows="2" autocomplete="off" placeholder="이곳에 소모임 규칙 또는 자세한 설명을 적어주세요!"></textarea>
+				<textarea name="caption" id="caption" rows="2" autocomplete="off" placeholder="이곳에 소모임에 대한 소개와 지켜야하는 규칙을 적어주세요!"></textarea>
 				<div style = "display:flex; justify-content:end">
 					<div id="currentTextLength">0 / 200</div> 
 				</div>

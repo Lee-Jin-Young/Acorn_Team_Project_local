@@ -46,13 +46,11 @@ public class FaqServiceImpl implements FaqService {
 			-검색 키워드가 파라미터로 넘어올수도 있고 안넘어 올수도 있다.		
 		*/
 		String keyword=request.getParameter("keyword");
-		String condition=request.getParameter("condition");
 		//만일 키워드가 넘어오지 않는다면 
 		if(keyword==null){
 			//키워드와 검색 조건에 빈 문자열을 넣어준다. 
 			//클라이언트 웹브라우저에 출력할때 "null" 을 출력되지 않게 하기 위해서  
 			keyword="";
-			condition=""; 
 		}
 
 		//특수기호를 인코딩한 키워드를 미리 준비한다. 
@@ -65,13 +63,8 @@ public class FaqServiceImpl implements FaqService {
 		//만일 검색 키워드가 넘어온다면 
 		if(!keyword.equals("")){
 			//검색 조건이 무엇이냐에 따라 분기 하기
-			if(condition.equals("category_question")){//분류 + 질문 검색인 경우
-				//검색 키워드를 CafeDto 에 담아서 전달한다.
-				dto.setCategory(keyword);
-				dto.setQuestion(keyword);
-			}else if(condition.equals("category")){ //분류 검색인 경우
-				dto.setCategory(keyword);
-			}// 다른 검색 조건을 추가 하고 싶다면 아래에 else if() 를 계속 추가 하면 된다.
+			//검색 키워드를 CafeDto 에 담아서 전달한다.
+			dto.setQuestion(keyword);
 		}
 		//FAQ 목록 얻어오기 
 		List<FaqDto> list=faqDao.getList(dto);
@@ -99,7 +92,6 @@ public class FaqServiceImpl implements FaqService {
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("endPageNum", endPageNum);
-		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("encodedK", encodedK);
 		model.addAttribute("totalPageCount", totalPageCount);

@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.acorn.soso.support.dao.InquireDao;
+import com.acorn.soso.support.dto.InquireDto;
 import com.acorn.soso.users_info.dao.UsersInfoDao;
 import com.acorn.soso.users_info.dto.UsersInfoDto;
 
@@ -17,6 +19,8 @@ import com.acorn.soso.users_info.dto.UsersInfoDto;
 public class UsersInfoServiceImpl implements UsersInfoService {
 	@Autowired
 	private UsersInfoDao infoDao;
+	@Autowired
+	private InquireDao supportDao;
 
 	@Override
 	public void getWritingList(Model model) {
@@ -126,7 +130,7 @@ public class UsersInfoServiceImpl implements UsersInfoService {
 		dto.setEndRowNum(endRowNum);
 		dto.setWriter(id);
 		
-		List<UsersInfoDto> list = infoDao.getSupportList(dto);
+		List<InquireDto> list = supportDao.getList(id);
 		
 		int totalRow = infoDao.getSCount(dto);
         int startPageNum = 1 + ((pageNum - 1) / PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;

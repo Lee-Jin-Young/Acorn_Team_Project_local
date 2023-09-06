@@ -16,6 +16,26 @@
 			</when>
 		</choose>
 	</sql>
+		<!-- 검색 기능을 위한2(genre 검색 위한) -->
+	<sql id="searchConditionGenre">
+		<choose>
+			<when test="name != null and caption != null">
+				AND name LIKE '%'||#{name}||'%' OR caption LIKE '%'||#{caption}||'%'
+			</when>
+			<when test="name != null">
+				AND name LIKE '%'||#{name}||'%'
+			</when>
+			<when test="manager_id != null">
+				AND manager_id LIKE '%'||#{manager_id}||'%'
+			</when>
+		</choose>
+	</sql>
+	<!-- 장르별 조회수 정렬 -->
+	<sql id="isGenre">
+		<if test="genre != -1">
+			WHERE genre = #{genre}
+		</if>
+	</sql>
 
 	<!-- 리스트  -->
 	<select id="getList" parameterType="groupDto" resultType="groupDto">
@@ -45,7 +65,7 @@
 			manager_id, max_people, now_people, avrg_rate, meeting_loc, meeting_time,
 			genre, on_off, manager_comment, viewcount
             FROM group_tb
-            <include refid="searchCondition"/>
+            <include refid="isGenre"/>
             ORDER BY viewcount DESC) result1)
       <!-- 에러 방지 영역 , 기호 사용 가능하다  -->
       <![CDATA[ 
@@ -54,7 +74,7 @@
    </select>
    
 	<!-- 소모임 genre 별로 검색 조건을 포함한 리스트 가져오기 -->
-	<select id="getGroupsByGenreAndSearch" parameterType="map" resultType="groupDto">
+	<select id="getGroupsByGenreAndSearch" parameterType="groupDto" resultType="groupDto">
 	    SELECT *
 	    FROM
 	        (SELECT result1.*, ROWNUM AS rnum
@@ -64,11 +84,11 @@
 	            genre, on_off, manager_comment, viewcount
 	            FROM group_tb
 	            WHERE genre = #{genre}
-	            <include refid="searchCondition"/>
+	            <include refid="searchConditionGenre"/>
 	            ORDER BY num DESC) result1)
 	    <!-- 에러 방지 영역 , 기호 사용 가능하다  -->
 	    <![CDATA[ 
-	    WHERE rnum >= #{dto.startRowNum} AND rnum <= #{dto.endRowNum}
+	    WHERE rnum >= #{startRowNum} AND rnum <= #{endRowNum}
 	    ]]>
 	</select>
 

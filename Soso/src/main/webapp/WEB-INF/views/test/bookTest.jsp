@@ -9,28 +9,33 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>book::list</title>
+		<link rel="stylesheet" href="${path }/resources/css/common.css" type="text/css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	</head>
 	<body>
+		<div class="container">
 		<h3>네이버 오픈 API를 활용한 도서 목록</h3>		
-		<table border="1">
+		<table class="table table-hover">
 			<c:forEach var="tmp" items="${books }">
 				<tr>
-					<td>${tmp.isbn }</td>
-					<td><img src="${tmp.image }" alt="${tmp.title }" width="100" /></td>
-					<td><a href="${tmp.link }">${tmp.title }</a></td>
-					<td>
+					<td scope="col">${tmp.isbn }</td>
+					<td scope="col"><img src="${tmp.image }" alt="${tmp.title }" width="100" /></td>
+					<td scope="col"><a href="${tmp.link }">${tmp.title }</a></td>
+					<td scope="col">
 	                     <form class="addForm" action="${pageContext.request.contextPath}/test/addList">
 			                <input type="text" name="title" value="${tmp.title}" hidden />
 			                <input type="text" name="link" value="${tmp.link}" hidden />
 			                <input type="text" name="image" value="${tmp.image}" hidden />
 			                <input type="text" name="isbn" value="${tmp.isbn}" hidden />
 			                <input type="text" name="description" value="${tmp.description}" hidden />
-			                <button class="addBtn">추가</button>
+			                <button class="addBtn btn btn-outline-success">추가</button>
 			            </form>
 	                </td>
 				</tr>
 			</c:forEach>
 		</table>
+		</div>
 	</body>
 	<script>
 	    

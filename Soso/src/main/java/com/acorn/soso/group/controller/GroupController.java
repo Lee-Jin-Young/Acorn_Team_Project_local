@@ -349,7 +349,7 @@ public class GroupController {
 
         if (genre == -1) {//가져온 값이 -1이면 전체 배열을 출력
             service.getList(request, model);
-        } else {//아니면 가져온 숫자만큼의 배열을 출
+        } else {//아니면 가져온 숫자만큼의 배열을 출력
         	service.getGroupsByGenre(request, model);
         }
         return "group/list";
@@ -381,8 +381,8 @@ public class GroupController {
 	//소모임 조회수 리스트 이동
 	@GetMapping("/group/viewList")
 	public String viewList(HttpServletRequest request, Model model) {
-
-        	service.getViewList(request, model);
+		
+    	service.getViewList(request, model);
 	
 		return "group/viewList";
 	}
