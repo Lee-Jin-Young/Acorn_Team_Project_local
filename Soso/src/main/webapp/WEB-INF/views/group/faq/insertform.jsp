@@ -20,7 +20,7 @@
 			      <input type="text" class="form-control" id="q_title" name="q_title" placeholder="문의글 제목을 입력해주세요" >
 			<div>
 				<label for="q_content"></label>
-				<textarea name="q_content" id="q_content" rows="10"></textarea>
+				<textarea name="q_content" id="q_content" rows="10" placeholder="문의글 내용을 입력해주세요"></textarea>
 			</div>	
 			<button type="submit" onclick="submitContents(this)" id="submitBtn">등록</button>
 		</c:if>
@@ -44,6 +44,7 @@
 	        success : function(Parse_data){
 	            $("#Parse_Area").html(Parse_data); //div에 받아온 값을 넣는다.
 	            console.log("통신 데이터 값 : " + Parse_data);
-	    });
+	        }
+	        });
 	});
 	</script>

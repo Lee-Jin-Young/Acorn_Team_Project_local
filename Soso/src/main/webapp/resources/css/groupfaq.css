@@ -38,11 +38,15 @@ textarea#q_content {
     padding: 1%;
 }
 
-input#q_title {
+input#q_title, pre#q_content {
     background-color: #eee;
     padding: 1%;
 }
-
+textarea#a_answer {
+    margin: 2% 0;
+    background-color: #f7f7f7;
+    padding: 3%;
+}
 button#submitBtn, button#resetBtn {
     border: 1px solid #d4cab5;
     padding: 1% 2%;

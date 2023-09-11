@@ -6,11 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>소모임 문의사항</title>
-<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/groupfaq.css" />
 </head>
 <body>
-	<div class="container">
+<div class="inner-wrap">
+	<div class="faq_form">
 		<h2>답변하기</h2>
 		<form action="${pageContext.request.contextPath}/group/answer/insert" method="post">
 			<div class="col-12">
@@ -22,12 +21,13 @@
 			<div>
 				<!-- 답변 내용 -->
 				<label for="a_content"></label>
-				<textarea name="a_answer" id="a_answer" rows="10"></textarea>
+				<textarea name="a_answer" id="a_answer" rows="10" placeholder="문의글 답변을 입력해주세요" ></textarea>
 			</div>	
-			<button type="submit" onclick="submitContents(this)" style="margin-left: 106.2ex;" id="submitBtn">등록</button>
+			<button type="submit" onclick="submitContents(this)" id="submitBtn">등록</button>
 			<button type="reset" id="resetBtn">리셋</button>
 		</form>
 	</div>
+</div>
 	<script>
 	//여기서부터 ajax faq
 	//취소버튼 누르면 돌아가기

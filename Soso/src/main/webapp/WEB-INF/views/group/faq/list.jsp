@@ -54,7 +54,7 @@
 										<div class="qna_question">
 											<span class="qna_q">Q</span>
 									    	<pre name="content" id="content" readonly>${tmp.q_content}</pre>
-								        	<c:if test="${sessionScope.id == tmp.q_writer || sessionScope.id == tmp.a_writer || empty sessionScope.id}">
+								        	<c:if test="${ empty tmp.a_answer && sessionScope.id == tmp.q_writer}">
 									        	<a href="${pageContext.request.contextPath}/group/faq/updateform?num=${tmp.num}" id="update">수정</a>
 									        	<a href="${pageContext.request.contextPath}/group/faq/delete?num=${tmp.num}&group_num=${tmp.group_num}" id="delete">삭제</a>
 								        	</c:if>
@@ -190,7 +190,7 @@
 			
 			//답변
 			  $(document).ready(function() {
-			        $("#answer").click(function(event) {
+			        $("#insertAnswer").click(function(event) {
 			            event.preventDefault(); // 앵커의 기본 동작을 막습니다.
 
 			            var href = $(this).attr("href"); // 앵커의 href 속성을 가져옵니다.
@@ -210,7 +210,7 @@
 			            });
 			        });
 			    });
-			/* //답변 수정
+
 			  $(document).ready(function() {
 			        $("#updateAnswer").click(function(event) {
 			            event.preventDefault(); // 앵커의 기본 동작을 막습니다.
@@ -231,7 +231,7 @@
 			                }
 			            });
 			        });
-			    }); */
+			    }); 
 		</script>
 </body>
 </html>

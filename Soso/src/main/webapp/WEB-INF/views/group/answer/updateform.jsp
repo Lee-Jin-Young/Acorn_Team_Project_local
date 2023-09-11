@@ -12,7 +12,7 @@
 <body>
 <div class="inner-wrap">
 	<div class="faq_form">
-		<h2>수정하기</h2>
+		<h4 class="title">답변 수정하기</h2>
 		<form action="${pageContext.request.contextPath}/group/answer/insert" method="post">
 			<div class="col-12">
 				<!-- faq의 글 번호를 알아온다. -->
@@ -25,7 +25,7 @@
 				<label for="a_content"></label>
 				<textarea name="a_answer" id="a_answer" rows="10">${dto.a_answer }</textarea>
 			</div>	
-			<button type="submit" onclick="submitContents(this)" style="margin-left: 106.2ex;" id="submitBtn">등록</button>
+			<button type="submit" onclick="submitContents(this)" id="submitBtn">등록</button>
 			<button type="reset" id="resetBtn">리셋</button>
 		</form>
 	</div>
