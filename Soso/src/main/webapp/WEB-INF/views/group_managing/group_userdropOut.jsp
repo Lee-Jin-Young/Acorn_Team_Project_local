@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>소모임 탈퇴하기</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 </head>
 <body>
 	<div class="container">

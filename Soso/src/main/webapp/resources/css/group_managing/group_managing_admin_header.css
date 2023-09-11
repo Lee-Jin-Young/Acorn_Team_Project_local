@@ -16,6 +16,9 @@ a{
 /* 상단 메뉴바 위 '내 소모임 관리하기', '개설하기' 를 포함하는 박스 */
 #admin_header{
     border-bottom: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #admin_header .title{
@@ -23,6 +26,11 @@ a{
     margin-left: 15px;
     margin-bottom: 20px;
     font-weight: 700;
+}
+
+#admin_header .group_name{
+    font-size: 20px;
+    font-weight: 600;
 }
 
 #admin_header .linkBox {
@@ -51,7 +59,7 @@ a{
     font-size: 20px;
 }
 
-#menus div:nth-child(1) a{
+#menus .active{
     font-size: 20px;
     font-weight: 600;
     color: rgb(65, 75, 178);

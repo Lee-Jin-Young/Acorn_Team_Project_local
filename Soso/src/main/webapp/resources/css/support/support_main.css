@@ -1,11 +1,20 @@
 @charset "UTF-8";
 /* title */
 h3.title{ margin-bottom: 3%; font-family: 'Montserrat', 'Noto Sans KR', sans-serif; font-size: 2.6rem; font-weight: 600;  }
-h2.title{ margin-top: 2%; margin-bottom: 2%; font-family: 'Montserrat', 'Noto Sans KR', sans-serif; font-size: 2.0rem; font-weight: 600;  }
+h2.title{ margin-top: 2%; font-family: 'Montserrat', 'Noto Sans KR', sans-serif; font-size: 2.0rem; font-weight: 600; display: inline-block; }
 p.title{ margin-bottom: 3%; font-family: 'Montserrat', 'Noto Sans KR', sans-serif; font-size: 1.6rem; font-weight: 500;  }
 h3.white{ color: #fff; }
 h2.black, h3.black{ color: #333; }
+
+/*전체 폭 레이아웃 */
+	.main_content{
+		margin: 100px auto 40px;
+		box-sizing: border-box;
+		width: 100%;
+		max-width:1280px;
+	}
 /*메인 메뉴바 */
+
 	.menu_bar{
 		width:100%;
 		height:80px;
@@ -39,6 +48,12 @@ h2.black, h3.black{ color: #333; }
 		margin-top:20px;
 		margin-bottom:20px;
 	}
+	h2.faq_title{
+		font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
+	    font-size: 2.0rem;
+	    font-weight: 600;
+	    display: inline-block;
+	}
 	.area_faq ul{
 		padding: 37px 40px 13px;
 		box-sizing: border-box;
@@ -50,54 +65,63 @@ h2.black, h3.black{ color: #333; }
 		box-sizing: border-box;
 		display: inline-block;
 		width: 49%;
-		font-size: 14px;
 	}
-	.area_faq ul li .title_area{
+	.faq_category{
 		margin-right: 40px;
 		width: 100px;
-		color: #666;
+		color: rgb(157 128 63);
 		display: inline-block;
+		font-weight: 500;
+		font-size: 20px;
+	}
+	.faq_question:hover, .notice_title:hover{
+		text-decoration:underline;
 	}
 	.area_faq ul li p{
 		width: 440px;
 		display: inline-block;
+		font-size: 19px;
 	}
 	.area_faq .faq_more{
 		float: right;
-		margin-right: 50px;
-		display: inline-block;
-		font-size: 14px;
+		line-height: 4rem;
 	}
-	.faq{
-		display: inline-block;
-		color: black;
-		font-size:20px;
+	.area_faq .faq_more:hover, .view_more:hover{
+		color: rgb(157 128 63);
+		font-weight: 600;
+		text-decoration:underline;
 	}
 	/* 공지사항 */
-	.notice{
+	.area_notice{
 		width:630px;
 		height:290px;
 		display: inline-block;
 	}
 	.view_more{
 		float: right;
-		margin-right: 50px;
+		margin-right: 65px;
 		display: inline-block;
-		font-size: 14px;
-		vertical-align: top;
+		line-height: 4rem;
 	}
-	.notice h3.title{
-		padding-bottom: 16px;
-		display: inline-block;
-		font-size: 20px;
+	.area_notice li{
+		margin: 20px 0;
+		font-size: 19px;
 	}
 	/* 운영시간 */
 	.area_contact{
-
+		width: 630px;
 		height: 290px;
 		padding: 51px;
 		float: right;
 		display: inline-block;
 		box-sizing: border-box;
-		border: 1px solid gray;
+		border: 1px solid #d8d8d8;
+	}
+	.area_contact dl{
+		margin-top: 30px;
+	}
+	.area_contact dl dt {
+	    display: block;
+	    font-weight: bold;
+	    font-size: 18px;
 	}

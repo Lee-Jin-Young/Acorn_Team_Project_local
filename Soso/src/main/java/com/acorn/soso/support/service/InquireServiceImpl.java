@@ -28,6 +28,12 @@ public class InquireServiceImpl implements InquireService{
 		List<InquireDto> list = dao.getList(id);
 		model.addAttribute("list", list);
 	}
+	@Override
+	public void getList2(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("id");
+		List<InquireDto> list = dao.getList2(id);
+		model.addAttribute("list2", list);
+	}
 
 	@Override
 	public InquireDto getData(int cs_num, Model model) {

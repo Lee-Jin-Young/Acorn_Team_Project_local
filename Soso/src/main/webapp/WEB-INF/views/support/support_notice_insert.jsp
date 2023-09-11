@@ -6,12 +6,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/support/support_notice_insert.jsp</title>
+<title>공지사항 등록</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 <body>
 	<script>
-		alert("공지사항이 등록 되었습니다.");
-		location.href="${pageContext.request.contextPath}/support/support_notice";
+	Swal.fire({
+  		title: "공지가 등록 되었습니다.",
+  		text: "",
+  		icon: 'success',
+  		confirmButtonColor: 'rgb(13, 110, 253)',
+  		cancelButtonColor: 'rgb(248, 162, 146)',
+  		confirmButtonText: '확인',
+  		cancelButtonText: '취소',
+		}).then((result) => {
+      	if (result.isConfirmed) {
+      		location.href="${pageContext.request.contextPath}/support/support_notice";
+      	}
+    })
 	</script>
 </body>
 </html>

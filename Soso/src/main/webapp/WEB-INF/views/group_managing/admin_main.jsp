@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>북메이트 관리</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 	<link rel="shortcut icon" type="image/x-icon" href="https://genfavicon.com/tmp/icon_7cacead7cd8483ca41a810db418dc8ab.ico">
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/group_managing_user_main.css" />
@@ -51,7 +53,7 @@
             <div class="user_content_theme">
                 <ul>
                 	<li><a href="${pageContext.request.contextPath}/group_managing/admin_main_all">전체</a></li>
-                    <li><a href="${pageContext.request.contextPath}/group_managing/admin_main">진행중</a></li>
+                    <li><a class="theme_active" href="${pageContext.request.contextPath}/group_managing/admin_main">진행중</a></li>
                     <li><a href="${pageContext.request.contextPath}/group_managing/admin_main_finished">종료</a></li>
                 </ul>
             </div>
@@ -63,8 +65,9 @@
                     	<div id="likedNumber">
 							<div>❤ ${tmp.like_num }</div>
 							<div>
-								<a href="${pageContext.request.contextPath}/group_managing/memberList?group_num=${tmp.num}">${tmp.now_people} / ${tmp.max_people}
-							</a>
+								<div tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="여길 누르면 소모임 멤버관리를 할 수 있어요!!~" data-bs-placement="top">
+									 <a href="${pageContext.request.contextPath}/group_managing/memberList?group_num=${tmp.num}">${tmp.now_people} / ${tmp.max_people}</a>
+								</div>
 							</div>
 						</div>
 
@@ -93,31 +96,15 @@
 	        </c:forEach>
     	</div>
     	
-    	<div class="inner-wrap">
-    	<!-- 페이지 이동을 위한  --> 
-	    <nav>
-	       <ul class="">
-	          <c:choose>
-	             <c:when test="${dto.prevNum ne 0 }">
-	                <li class="">
-	                     <a class="" href="${pageContext.request.contextPath}">&larr; Prev</a>
-	                </li>
-	             </c:when>
-	         </c:choose>
-	         <c:choose>
-	            <c:when test="${dto.nextNum ne 0 }">
-	               <li class="">
-	                   <a class="" href="${pageContext.request.contextPath}">Next &rarr;</a>
-	               </li>
-	            </c:when>
-	         </c:choose>         
-	       </ul>
-	    </nav>
-    	</div>
     </section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
 		AOS.init();
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<script>
+		const memberlinks = document.querySelectorAll('[data-bs-toggle=popover]');
+        [...memberlinks].map(item => new bootstrap.Popover(item));
 	</script>
 </body>
 </html>

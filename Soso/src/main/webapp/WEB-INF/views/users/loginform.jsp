@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
+    <link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" type="text/css">
@@ -18,54 +19,54 @@
     <jsp:include page="/WEB-INF/views/include/navbar_c.jsp">
         <jsp:param value="login" name="current"/>
     </jsp:include>
-    
-    <div class="container">
-        <form class="form-signin" action="${pageContext.request.contextPath}/users/login" method="post">
-            <p class="title">로그인</p>
-            
-            <c:choose>
-                <%-- 홈 화면에서 로그인 할 경우 파라미터 값으로 url이 주어지지 않음 --%>
-                <c:when test="${ empty param.url }">
-                    <input type="hidden" name="url" value="${pageContext.request.contextPath}/" />
-                </c:when>
-                <%-- 그외는 loginInterceptor를 거치기 때문에 url이 주어짐 --%>
-                <c:otherwise>
-                    <input type="hidden" name="url" value="${param.url }" />
-                </c:otherwise>
-            </c:choose>
-            
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" name="id" id="id" placeholder="아이디" required autofocus>
-                <label for="id">아이디</label>
-                <small class="form-text text-muted">예) hello123</small>
-            </div>
-            
-            <div class="input-group">
-                <div class="form-floating">
-                   <input type="password" name="pwd" id="pwd" class="form-control" placeholder="비밀번호" required>
-                   <label for="pwd">비밀번호</label>
-                </div>
-                <button class="btn btn-outline-gray bi-eye-slash" type="button" id="openpwd"></button>
-            </div>
-            <small class="form-text text-muted">예) hello123@</small>
-            
-            <div class="d-grid gap-2 mt-2">
-                <button class="btn btn-join" type="submit">로그인</button>
-            </div>
-        </form>
-        
-        <div class="row">
-	        <div class="checkbox mt-3 mb-2 col">
-	            <label><input type="checkbox" id="rememberId"> 아이디 기억하기</label>
-	            <label><input type="checkbox" id="autoLogin"> 자동 로그인</label>
+    	<div class="container">
+	        <form class="form-signin" action="${pageContext.request.contextPath}/users/login" method="post">
+	            <div class="title">로그인</div>
+	            
+	            <c:choose>
+	                <%-- 홈 화면에서 로그인 할 경우 파라미터 값으로 url이 주어지지 않음 --%>
+	                <c:when test="${ empty param.url }">
+	                    <input type="hidden" name="url" value="${pageContext.request.contextPath}/" />
+	                </c:when>
+	                <%-- 그외는 loginInterceptor를 거치기 때문에 url이 주어짐 --%>
+	                <c:otherwise>
+	                    <input type="hidden" name="url" value="${param.url }" />
+	                </c:otherwise>
+	            </c:choose>
+	            
+	            <div class="form-floating mb-4">
+	                <input type="text" class="form-control" name="id" id="id" placeholder="아이디" required autofocus>
+	                <label for="id">아이디</label>
+	                <small class="form-text text-muted">예) hello123</small>
+	            </div>
+	            <div class="mb-4">
+	            	<div class="input-group">
+		                <div class="form-floating">
+		                   <input type="password" name="pwd" id="pwd" class="form-control" placeholder="비밀번호" required>
+		                   <label for="pwd">비밀번호</label>
+		                </div>
+		                <button class="btn btn-outline-gray bi-eye-slash" type="button" id="openpwd"></button>
+		            </div>
+		            <small class="form-text text-muted">예) hello123@</small>
+		            <div class="d-grid gap-2 mt-4">
+		                <button class="btn btn-join" type="submit" style="background-color: rgb(65, 75, 178)">로그인</button>
+		            </div>
+	            </div>
+	            
+	        </form>
+	        <div class="row">
+	        	<div class="checkbox mt-3 mb-3 d-flex justify-content-center">
+		            <label><input type="checkbox" id="rememberId">아이디 기억하기</label>
+		        </div>
 	        </div>
-	        <div class="col-3 float-right">
-		        <a class="btn float-right" href="${pageContext.request.contextPath}/users/id_findform">아이디 찾기</a>
-		        <a class="btn float-right" href="${pageContext.request.contextPath}/users/pwd_findform">비밀번호 찾기</a>
-	        </div>
-        </div>
-    </div>
-    
+	        <div class="row">
+		        <div class="mt-1 d-flex justify-content-center">
+			        <a class="btn float-right" href="${pageContext.request.contextPath}/users/id_findform">아이디 찾기</a>
+			        <a class="btn float-right" href="${pageContext.request.contextPath}/users/pwd_findform">비밀번호 찾기</a>
+			        <a class="btn float-right" href="${pageContext.request.contextPath}/users/signup_form">회원가입</a>
+		    	</div>
+	        </div>  
+	    </div>
     <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>

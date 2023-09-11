@@ -105,10 +105,10 @@ body{
      width: 100%;
      border: 2px solid rgb(222, 226, 230);
      border-radius: 5px;
-     height: 300px;
-     padding-top: 15px;
-     padding-left: 10px;
+     height: 150px;
+     padding: 10px;
      font-size: 15px;
+     margin-bottom:2%;
 }
 
 #form_button{
@@ -139,4 +139,29 @@ body{
      border: none;
      border-radius: 5px;
 }
+.addBook_btn{
+	display:flex;
+	align-items: center;
+	padding-bottom:2%;
+}
+
+#addBook{
+	border:1px solid #ccc;
+	border-radius: 10px;
+	padding:1%;
+}
+
+#addBook:hover{
+	border:1px solid rgb(195, 181, 157);
+	background-color: rgb(195, 181, 157);
+	color:#fff;
+}
+#addBook:hover .bi-search{
+	color:#fff;
+}
+.bookList{display:flex; overflow:auto; padding: 2%; box-sizing: border-box;height: 0;min-height: 400px;border: 1px solid #ccc;border-radius: 10px;margin-bottom: 4%;background-color: #eee;}
+.bookContainer { position:relative; background-color:#fff; margin-right: 3%; border-radius: 15px; min-height: 210px; height: 0; width:0; min-width:190px;}
+.bookContainer img{object-fit: contain; min-height: 100%; max-width: 100%; border-radius: 15px; }
+.bookContainer button{ font-weight:600;}
+.bookContainer button:hover{text-decoration:underline; color: rgb(195, 181, 157); }
 

@@ -6,20 +6,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/support_faq_insertform</title>
+<title>자주하는 질문 등록</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 <style>
-	.faqBtn{
-	width: 240px;
-    height: 60px;
-    margin: 0 auto;
-    display: block;
-    border: 1px solid gray;
-    border-radius: 30px;
-    background-color: gray;
-    color: white;
-    font-size: 18px;
-    text-align: center;
-}
+	.admin_button{
+		width: 130px;
+	    height: 48px;
+	    display: inline-block;
+	    border-radius: 0;
+	    border: 1px solid #d8d8d8;
+	    background-color: #f7f7f7;
+	    text-align: center;
+	    line-height: 48px;
+	    font-size: 14px;
+	    color: #333;
+	}
+	.admin_button:hover{
+		color: rgb(157 128 63);
+		font-weight: 600;
+	}
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -91,7 +96,7 @@
 					<p class="info_message">
 						이 사이트는 reCAPTCHA에 의해 보호되며 Google 개인 정보 취급 방침 및 서비스 약관이 적용됩니다.
 					</p>
-					<button type="submit" class="faqBtn">질문 등록</button>
+					<button type="submit" class="admin_button">질문 등록</button>
 				</form>
 			</div>
 		</div>

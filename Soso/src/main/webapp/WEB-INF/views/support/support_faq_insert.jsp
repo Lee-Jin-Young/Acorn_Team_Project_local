@@ -5,12 +5,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/support/support_faq_insert.jsp</title>
+<title>자주하는 질문 등록</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 <body>
 	<script>
-		alert("질문이 등록 되었습니다.");
-		location.href="${pageContext.request.contextPath}/support/support_faq";
+		Swal.fire({
+	  		title: "질문이 등록 되었습니다.",
+	  		text: "",
+	  		icon: 'success',
+	  		confirmButtonColor: 'rgb(13, 110, 253)',
+	  		cancelButtonColor: 'rgb(248, 162, 146)',
+	  		confirmButtonText: '확인',
+	  		cancelButtonText: '취소',
+			}).then((result) => {
+	      	if (result.isConfirmed) {
+	      		location.href="${pageContext.request.contextPath}/support/support_faq";
+	      	}
+	    })
 	</script>
 </body>
 </html>

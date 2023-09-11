@@ -9,6 +9,8 @@ import com.acorn.soso.support.dto.NoticeDto;
 public interface NoticeService {
 	//공지 목록 얻어오기
 	public void getList(HttpServletRequest request, Model model);
+	//공지 목록2 얻어오기(고객센터 메인페이지에 쓰일)
+	public void getList2(HttpServletRequest request, Model model);
 	//공지 수정하기 위한 정보 불러오기
 	public NoticeDto getData(int notice_num, Model model);
 	//공지 등록

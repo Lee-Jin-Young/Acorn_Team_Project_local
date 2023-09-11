@@ -2,26 +2,12 @@
 
 /* 메인 페이지 전체 레이아웃 */
 	.main_content{
-		margin: 100px auto 40px;
+		margin: 100px auto 0;
 		box-sizing: border-box;
 		width: 100%;
-		max-width:1300px;
+		max-width:1280px;
 	}
-	/* 상단 배너 */
-	.head{
-		background-image:url("https://static.onoffmix.com/images/pc/default/faq_bg.png");
-		height:360px;
-		background-size:cover;
-		overflow:hidden;
-	}
-	.head h2{
-		text-align:center;
-		margin:116px auto 20px;
-	}
-	.head p{
-		text-align:center;
-		font-size:20px;
-	}
+
 /*메인 메뉴바 */
 	.menu_bar{
 		width:100%;
@@ -99,29 +85,33 @@
 		box-sizing: border-box;
 		border-top:1px solid gray;
 		border-left: 1px solid gray;
-		font-size: 16px;
 		display: flex;
 	    justify-content: center;
 	    align-items: center;
+	    font-size: 19px;
+	}
+	.tab_menu li.active{
+		color: rgb(157 128 63);
+		font-weight: 600;
+	}
+	.tab_menu li:hover{
+		text-decoration: underline;
 	}
 	/* FAQ 메인 컨첸츠 레이아웃 */
 	.faq{
 		display: inline-block;
-	}
-	#tab_menu{
-		margin: 60px 0 80px;
+		font-size: 18px;
 	}
 	.tab_content{
 		margin-top:14px;
-		margin-bottom:20px;
 		font-size:16px;
 		border-top: 2px solid black;
 	}
 	.tab_content ul{
-		margin: 20px 0 20px;
+		margin: 20px 0 0;
 	}
 	.tab_content ul li{
-		border-bottom: 1px solid gray;
+		border-bottom: 1px solid #d8d8d8;
 	}
 	.dropbox{
 		box-sizing: border-box;
@@ -144,7 +134,9 @@
 		text-align: center;
 		vertical-align: middle;
 		font-size:20px;
+		color : rgb(157 128 63);
 	}
+	
 	.dropbox .title_area .detail{
 		width: 800px;
 		font-weight: normal;
@@ -153,4 +145,101 @@
 		text-overflow: ellipsis;
 		overflow: hidden;
 		display: inline-block;
+		font-size:19px;
+	}
+	.detail .faq_question:hover{
+		text-decoration:underline;
+	}
+
+	/*페이지 네이션*/
+	.pagination_wrap{
+		margin: 20px 0 40px;
+		text-align: center;
+		width: 100%;
+	}
+	.pagination{
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.pagination_ul li{
+		float: left;
+	}
+	.pagination_ul li a{
+		width: 28px;
+		margin: 0 11px;
+	}
+	
+	/* 답변 토글 버튼 레이아웃 */
+	.btn_more{
+		background-image: url("https://static.onoffmix.com/images/pc/svg/arrow_up_bl.svg");
+		width:100%;
+		height: 64px;
+		top: 0;
+		left: 0;
+		background: transparent url("https://static.onoffmix.com/images/pc/svg/arrow_down.svg") no-repeat 98.5% center;
+		text-align: left;
+		cursor: pointer;
+		overflow: hidden;
+		text-indent: -9999em;
+		position: absolute;
+		box-sizing: border-box;
+		display: block;
+		border: 1px solid transparent;
+	}
+	/* 답변 내용 레이아웃 */
+	.dropbox .detail_content{
+		position: relative;
+		padding: 40px 50px 90px;
+		box-sizing: border-box;
+		width: 100%;
+		font-size: 18px;
+		background-color: #fafafa;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+	/* 페이징 번호에 hover 효과 추가 */
+	 .pagination_ul li.page-item a:hover {
+	    text-decoration: underline;
+	  }
+
+  	/* 클릭된 페이지 번호에 색깔 입히기 */
+	.pagination_ul li.page-item.active a {
+	   color: rgb(157 128 63);
+	   font-weight: 400; 
+	}
+	/*페이징 번호 크기*/
+	.page-item{
+		font-size: 25px;
+	}
+	/* 관리자 버튼 (admin계정으로 로그인했을때만 보임 ) */
+	.admin_menu{
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		}
+	.admin_button{
+		width: 130px;
+	    height: 48px;
+	    display: inline-block;
+	    border-radius: 0;
+	    border: 1px solid #d8d8d8;
+	    background-color: #f7f7f7;
+	    text-align: center;
+	    line-height: 48px;
+	    font-size: 14px;
+	    color: #333;
+	}
+	.admin_delbutton{
+	    display: inline-block;
+	    border-radius: 0;
+	    background-color: #f7f7f7;
+	    text-align: center;
+	    line-height: 48px;
+	    font-size: 16px;
+	    color: #333;
+	    margin-top: 20px;
+	}
+	.admin_button:hover, .admin_delbutton:hover{
+		color: rgb(157 128 63);
+		font-weight: 600;
 	}

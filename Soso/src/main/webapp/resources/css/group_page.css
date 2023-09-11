@@ -6,6 +6,7 @@ html { scroll-behavior: smooth; }
 
 
 /* title */
+h4.title{ margin-bottom: 3%; font-family: 'Montserrat', 'Noto Sans KR', sans-serif; font-size: 1.3rem; font-weight: 600;  }
 h3.title{ margin-bottom: 3%; font-family: 'Montserrat', 'Noto Sans KR', sans-serif; font-size: 2.6rem; font-weight: 600;  }
 h2.title{ margin-bottom: 3%; font-family: 'Montserrat', 'Noto Sans KR', sans-serif; font-size: 2.0rem; font-weight: 600;  }
 p.title{ margin-bottom: 3%; font-family: 'Montserrat', 'Noto Sans KR', sans-serif; font-size: 1.6rem; font-weight: 500;  }
@@ -44,6 +45,9 @@ h2.black, h3.black{ color: #333; }
 .reviewList .card-body{padding-bottom:1%;}
 #reviewInsert{padding-top:2%;}
 #reviewInsert:hover{text-decoration:underline; cursor:pointer; font-weight: 600;}
+
+/* 문의하기 영역 설정 */
+#Parse_Area > .inner-wrap{   justify-content: flex-end;}
 
 /* 가입하기 문의하기 버튼 배너 */
 .banner-inner-wrap{width: 80%; margin: 0 auto; display: flex; flex-wrap: wrap; box-sizing: border-box; position: relative; justify-content: center;}

@@ -14,12 +14,13 @@ h3.black{ color: #333; }
 .user_content .inner-wrap {display: flex;  flex-wrap: wrap; box-sizing: border-box; position: relative; justify-content: space-between;}
 .user_content .inner-wrapper{display: flex;  flex-wrap: wrap; box-sizing: border-box; position: relative; }
 .user_content .inner-wrap .content_insert{float:right; font-size:20px; font-weight:600; padding-top: 3%; padding-right: 3%;}
-.user_content .inner-wrap .content_insert a:hover{ color: rgb(198 164 134)}
+.user_content .inner-wrap .content_insert a:hover{ color: rgb(198 164 134);}
 .user_content .user_content_theme {  display: flex;padding:2% 0;}
+.user_content .user_content_theme .theme_active{color: rgb(198 164 134); }
 .user_content .user_content_theme ul { display: flex;}
 .user_content .user_content_theme ul li { box-sizing: border-box; margin: 0 1%; position: relative; }
 .user_content .user_content_theme ul .content_insert{float:right;}
-.user_content .user_content_theme ul li a{ font-size:20px; font-weight:600; width: 90px; padding: 5% 4%;  }
+.user_content .user_content_theme ul li a{ font-size:20px; font-weight:600; width: 70px; padding: 5% 4%;  }
 .user_content .user_content_theme ul li a:hover{ color: rgb(198 164 134)}
 .user_content .user_content_list{ display: flex; box-sizing: border-box; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); background: #fff; border-radius: 20px; margin: 2% 2% 2% 0; flex-direction: column; width: 0; position: relative; min-width:23%; }
 .user_content .user_content_list .user_contents { padding:8%;}
@@ -29,8 +30,9 @@ h3.black{ color: #333; }
 .user_content .user_content_list .user_content_text {text-align:center; padding-top: 9%; }
 .user_content .user_content_list .user_content_text .title{font-size:20px; font-weight:600; margin-bottom:4%;}
 .user_content .user_content_list .user_content_text .user_content_btn { display: flex; padding-top: 5%; justify-content: space-between;}
-.user_content_delete, .user_content_info, .user_content_join, .user_content_community{ justify-content: center; align-items: center; width:45%; height:40px; border-radius: 15px;}
-.user_content .user_content_list .user_content_text .user_content_btn .user_content_community a, .user_content .user_content_list .user_content_text .user_content_btn .user_content_delete a, .user_content .user_content_list .user_content_text .user_content_btn .user_content_info a, .user_content .user_content_list .user_content_text .user_content_btn .user_content_join a {line-height:40px; font-size:15px; font-weight:400; color:#fff;}
-.user_content .user_content_list .user_content_text .user_content_btn .user_content_community, .user_content .user_content_list .user_content_text .user_content_btn .user_content_info{ background-color:rgb(191, 191, 191); text-align:center;}
+.user_content_delete, .user_content_info, .user_content_join, .user_content_community, .user_content_end{ justify-content: center; align-items: center; width:45%; height:40px; border-radius: 15px;}
+.user_content .user_content_list .user_content_text .user_content_btn .user_content_end a, .user_content .user_content_list .user_content_text .user_content_btn .user_content_community a, .user_content .user_content_list .user_content_text .user_content_btn .user_content_delete a, .user_content .user_content_list .user_content_text .user_content_btn .user_content_info a, .user_content .user_content_list .user_content_text .user_content_btn .user_content_join a {line-height:40px; font-size:15px; font-weight:400; color:#fff;}
+.user_content .user_content_list .user_content_text .user_content_btn .user_content_community, .user_content .user_content_list .user_content_text .user_content_btn .user_content_info{ background-color:rgb(164 216 179); text-align:center;}
 .user_content .user_content_list .user_content_text .user_content_btn .user_content_join{ background-color: rgb(158 165 194 / 97%); text-align:center;}
 .user_content .user_content_list .user_content_text .user_content_btn .user_content_delete{background-color: rgb(241 146 146 / 97%); text-align:center;}
+.user_content .user_content_list .user_content_text .user_content_btn .user_content_end{background-color: rgb(208 206 206 / 97%); text-align:center;}

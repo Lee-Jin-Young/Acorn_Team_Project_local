@@ -11,7 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 //admin 계정으로 로그인 했을때 support 페이지 기능 활성화 할 인터셉터
 @Component
 public class SupportInterceptor implements HandlerInterceptor {
-	//Controller 메소드 수행직전에 로그인된 사용자 인지 검증을 해서
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) 
 	throws Exception{

@@ -12,8 +12,11 @@ body {
 }
 
 .container {
-	margin-top : 130px;
-	width: 768px;
+	margin: 200px auto;
+	width: 600px;
+	height: 25%;
+	border: 1px solid rgb(230, 230, 230);
+	padding: 8% 4%;
 }
 
 /* 이미지 업로드 폼을 숨긴다 */
@@ -23,8 +26,8 @@ body {
 
 .title {
 	color: black;
-	font-size: 2.5rem;
-	margin-bottom: 20px;
+	font-size: 2rem;
+	margin-bottom: 50px;
 	font-weight: 600;
 	text-align: center;
 }
@@ -54,4 +57,14 @@ body {
 .btn-outline-gray {
     color: rgb(191, 191, 191);
     border-color: rgb(191, 191, 191);
+}
+
+
+.signup_checkbox{
+	width: 20px;
+	height: 20px;
+	
+.profileImg {
+	text-align: -webkit-center;
+	margin-bottom: 1rem;
 }

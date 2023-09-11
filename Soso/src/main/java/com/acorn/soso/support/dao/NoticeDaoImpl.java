@@ -19,6 +19,12 @@ public class NoticeDaoImpl implements NoticeDao {
 		
 		return session.selectList("notice.getList",dto);
 	}
+	//고객센터 메인페이지에 쓰일 목록
+	@Override
+	public List<NoticeDto> getList2(NoticeDto dto) {
+		
+		return session.selectList("notice.getList2",dto);
+	}
 
 	@Override
 	public void insert(NoticeDto dto) {

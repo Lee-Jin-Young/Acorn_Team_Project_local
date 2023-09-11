@@ -17,7 +17,7 @@ public class CafeDto {
 	private String writer;
 	private String title;
 	private String content;
-	private String tag;
+	private String header;
 	private int viewCount;
 	private String regdate;
 	private int group_num;

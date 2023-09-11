@@ -30,7 +30,8 @@
 	
 	<!--찜의 목록을 불러오기 위한 sql문.-->
 	<select id="getList" parameterType="string" resultType="groupDto">
-	    SELECT num, manager_id, name, caption, img_Path, regdate
+	    SELECT num, manager_id, name, caption, img_Path, regdate, now_people, max_people,
+	    	ended_dt, deadline_dt, start_dt
 	    FROM GROUP_TB
 	    INNER JOIN USER_BOOKMARK_TB ON group_tb.num = USER_BOOKMARK_TB.group_Num
 	    WHERE USER_BOOKMARK_TB.user_id = #{user_Id}

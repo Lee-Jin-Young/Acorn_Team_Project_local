@@ -7,6 +7,8 @@ import com.acorn.soso.support.dto.NoticeDto;
 public interface NoticeDao {
 	//공지 목록
 	public List<NoticeDto>getList(NoticeDto dto);
+	//공지목록2 (고객센터 메인 페이지에 쓰일)
+	public List<NoticeDto>getList2(NoticeDto dto);
 	//공지 추가
 	public void insert(NoticeDto dto);
 	//공지 정보 얻어오기

@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/cafe/update.jsp</title>
+<title>소모임 커뮤니티 글 수정하기</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 </head>
 <body>
 	<script>

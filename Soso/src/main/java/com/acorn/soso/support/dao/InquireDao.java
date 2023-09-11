@@ -9,6 +9,8 @@ public interface InquireDao {
 	public void insert(InquireDto dto);
 	//등록한 문의글 불러오기
 	public List<InquireDto> getList(String id);
+	//등록한 문의글 불러오기(관리자가 볼 문의 내역리스트 )
+	public List<InquireDto> getList2(String id);
 	//등록한 문의글 상세 페이지 불러오기
 	public InquireDto getData(int cs_num);
 	//등록한 문의글 수정하기

@@ -18,7 +18,7 @@
 	<insert id="insert" parameterType="usersDto">
 		INSERT INTO users
 		(id, pwd, email, regdate, name, SVC_USE_PCY_AGMT_YN, PS_INFO_PROC_AGMT_YN, MKT_INFO_RECV_AGMT_YN)
-		VALUES(#{id}, #{pwd}, #{email}, SYSDATE, #{name}, 0, 0, 0)
+		VALUES(#{id}, #{pwd}, #{email}, TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'), #{name}, 0, 0, 0)
 	</insert>
 	
 	<select id="getData" parameterType="string" resultType="usersDto">

@@ -30,7 +30,7 @@
 	<insert id="insert" parameterType="cafeCommentDto">
 		INSERT INTO comu_comment_tb
 		(comment_num, writer, content, target_id, comu_num, comment_group, regdate)
-		VALUES(#{comment_num}, #{writer}, #{content}, #{target_id}, #{comu_num},#{comment_group}, SYSDATE)
+		VALUES(#{comment_num}, #{writer}, #{content}, #{target_id}, #{comu_num},#{comment_group}, TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'))
 	</insert>
 	<!-- 저장 예정인 댓글의 글번호를 미리 얻어내기  -->
 	<select id="getSequence" resultType="int">

@@ -23,6 +23,10 @@ public class InquireDaoImpl implements InquireDao{
 	public List<InquireDto> getList(String id) {
 		return session.selectList("inquire.getList", id);
 	}
+	@Override
+	public List<InquireDto> getList2(String id) {
+		return session.selectList("inquire.getList2", id);
+	}
 
 	@Override
 	public InquireDto getData(int cs_num) {

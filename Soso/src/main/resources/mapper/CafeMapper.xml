@@ -22,7 +22,7 @@
 		FROM
 			(SELECT result1.*, ROWNUM AS rcomu_num
 			FROM
-				(SELECT comu_num, writer, title, content, viewCount, regdate
+				(SELECT comu_num, writer, title, header, content, viewCount, regdate
 				FROM community_board_tb
 				WHERE group_num = #{group_num}
 				<include refid="searchCondition"/>
@@ -41,9 +41,9 @@
 
 	<insert id="insert" parameterType="cafeDto">
 		INSERT INTO community_board_tb
-		(comu_num,writer,title,content,viewCount,regdate,group_num)
-		VALUES(comu_seq.NEXTVAL, #{writer}, #{title},
-			#{content}, #{viewCount}, SYSDATE, #{group_num})
+		(comu_num,writer,title, header, content, viewCount, regdate, group_num)
+		VALUES(comu_seq.NEXTVAL, #{writer}, #{title}, #{header},
+			#{content}, #{viewCount}, TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'), #{group_num})
 	</insert>
 	
 	<select id="getData" parameterType="cafeDto" resultType="cafeDto">

@@ -9,33 +9,35 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>book::list</title>
+		<link rel="stylesheet" href="${path }/resources/css/common.css" type="text/css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	</head>
 	<body>
+		<div class="container">
 		<h3>네이버 오픈 API를 활용한 도서 목록</h3>		
-		<table border="1">
+		<table class="table table-hover">
 			<c:forEach var="tmp" items="${books }">
 				<tr>
-					<td>${tmp.isbn }</td>
-					<td><img src="${tmp.image }" alt="${tmp.title }" width="100" /></td>
-					<td><a href="${tmp.link }">${tmp.title }</a></td>
-					<td>
+					<td scope="col">${tmp.isbn }</td>
+					<td scope="col"><img src="${tmp.image }" alt="${tmp.title }" width="100" /></td>
+					<td scope="col"><a href="${tmp.link }">${tmp.title }</a></td>
+					<td scope="col">
 	                     <form class="addForm" action="${pageContext.request.contextPath}/test/addList">
 			                <input type="text" name="title" value="${tmp.title}" hidden />
 			                <input type="text" name="link" value="${tmp.link}" hidden />
 			                <input type="text" name="image" value="${tmp.image}" hidden />
 			                <input type="text" name="isbn" value="${tmp.isbn}" hidden />
 			                <input type="text" name="description" value="${tmp.description}" hidden />
-			                <button class="addBtn">추가</button>
+			                <button class="addBtn btn btn-outline-success">추가</button>
 			            </form>
 	                </td>
 				</tr>
 			</c:forEach>
 		</table>
-		<!-- 배열을 제출하는 버튼 -->
-		<button id="saveList">저장</button>
+		</div>
 	</body>
 	<script>
-	    const booklist = [];
 	    
 		const urlParams = new URLSearchParams(window.location.search);
 		const num = urlParams.get('num');
@@ -65,29 +67,13 @@
 	                isbn: isbn,
 	                description: description
 	            };
-				/* 
-					ajax형식으로 제출한다.
-					addList는 @requestbody를 써서 반환값을 json으로 돌려준다.
-					따라서 dataType도 json으로 해야함.
-				*/
-	            $.ajax({
-	                url: "${pageContext.request.contextPath}/test/addList",
-	                type: "POST",
-	                data: bookInfo,
-	                dataType: "json",
-	                error: function(data) {
-	                    console.log("오류입니다.");
-	                },
-	                success: function(data) {
-	                    booklist.push(data);
-	                    console.log(booklist);
-	                }
-	            });
+	            // 원래 페이지로 데이터를 전송
+	            window.opener.postMessage(bookInfo, "*");
 
 	        });
 	    });
 	    
-	    //저장 버튼을 눌렀을 때 ajax로 저장되는 구조(정식으로 넣을 때는 이 코드는 삭제될 예정.)
+	   /*  //저장 버튼을 눌렀을 때 ajax로 저장되는 구조(정식으로 넣을 때는 이 코드는 삭제될 예정.)
 	    $("#saveList").on("click", function(){
 	        $.ajax({
 	            url: "${pageContext.request.contextPath}/test/saveBook",
@@ -101,7 +87,7 @@
 	                console.log("저장 성공!");
 	            }
 	        });
-	    });
+	    }); */
 	</script>
 
 </html>

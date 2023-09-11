@@ -21,11 +21,6 @@ public class GroupDaoImpl implements GroupDao{
 	public List<GroupDto> getList(GroupDto dto) {
 		return session.selectList("group.getList", dto);
 	}
-	//랭킹 리스트
-	@Override
-	public List<GroupDto> getRanking(GroupDto dto) {
-		return session.selectList("group.getRanking", dto);
-	}
 
 	//소모임 개설하기
 	@Override
@@ -70,11 +65,8 @@ public class GroupDaoImpl implements GroupDao{
     }
 
 	@Override
-    public List<GroupDto> getGroupsByGenreAndSearch(int genre, GroupDto dto) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("genre", genre);
-        params.put("dto", dto);
-        return session.selectList("group.getGroupsByGenreAndSearch", params);
+    public List<GroupDto> getGroupsByGenreAndSearch(GroupDto dto) {
+        return session.selectList("group.getGroupsByGenreAndSearch", dto);
     }
 	
 	//group_num의 시퀀스 얻어내

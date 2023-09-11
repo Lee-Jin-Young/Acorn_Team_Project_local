@@ -1,6 +1,8 @@
 package com.acorn.soso.group_managing.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +63,11 @@ public class GroupManagingDaoImpl implements GroupManagingDao{
 	}
 	
 	@Override
+	public GroupManagingDto getMemberData(int num) {
+		return session.selectOne("groupManaging.getMemberData", num);
+	}
+	
+	@Override
 	public List<GroupManagingDto> getKickedMemberList(int group_num) {
 		return session.selectList("groupManaging.getKickedMemberList", group_num);
 	}
@@ -115,6 +122,22 @@ public class GroupManagingDaoImpl implements GroupManagingDao{
 		return session.selectList("groupManaging.getMateList", num);
 	}
 
-	
-	
+	@Override
+	public int isUserMemberOfGroup(String user_id, int group_num) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("user_id", user_id);
+        paramMap.put("group_num", group_num);
+        return session.selectOne("groupManaging.isUserMemberOfGroup", paramMap);
+	}
+
+	@Override
+	public int isGroupValid(int group_num) {
+	    // MyBatis를 사용하여 데이터베이스에서 그룹 번호의 유효성을 확인하는 SQL 쿼리를 실행
+	    int result = session.selectOne("groupManaging.isGroupValid", group_num);
+
+	    // SQL 쿼리 결과에 따라 유효하면 1을 반환, 그렇지 않으면 0을 반환
+	    return result;
+	}
+
+
 }

@@ -23,4 +23,9 @@ public class BookDaoImpl implements BookDao{
 	public List<BookDto> bookList(int group_num) {
 		return session.selectList("book.bookList", group_num);
 	}
+
+	@Override
+	public void deleteBook(BookDto dto) {
+		session.delete("book.bookDelete", dto);
+	}
 }

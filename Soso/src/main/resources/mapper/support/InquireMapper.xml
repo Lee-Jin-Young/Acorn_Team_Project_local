@@ -4,9 +4,18 @@
 <mapper namespace="inquire">
 	<select id="getList" parameterType="String" resultType="inquireDto">
 		SELECT *
-		FROM CS_TB
-		WHERE writer = #{id}
-		ORDER BY cs_num DESC
+		FROM
+			(SELECT cs_num, writer, answer, category, title, content, user_email, To_CHAR(regdate, 'YY.MM.DD') as regdate
+			FROM CS_TB
+			ORDER BY cs_num desc)
+		where writer = #{id}
+	</select>
+	<select id="getList2" parameterType="String" resultType="inquireDto">
+		SELECT *
+		FROM
+			(SELECT cs_num, writer, answer, category, title, content, user_email, To_CHAR(regdate, 'YY.MM.DD') as regdate
+			FROM CS_TB
+			ORDER BY cs_num desc)
 	</select>
 	
 	<select id="getCount" parameterType="inquireDto" resultType="int">
@@ -16,8 +25,8 @@
 
 	<insert id="insert" parameterType="inquireDto">
 		INSERT INTO CS_TB
-		(cs_num, writer, category, title, content, confirm, regdate)
-		VALUES(cs_seq.NEXTVAL, #{writer}, #{category}, #{title}, #{content}, #{confirm}, SYSDATE)
+		(cs_num, writer, category, title, content, confirm, user_email, answer, regdate)
+		VALUES(cs_seq.NEXTVAL, #{writer}, #{category}, #{title}, #{content}, #{confirm}, #{user_email}, #{answer}, TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'))
 	</insert>
 	
 	<select id="getData" parameterType="int" resultType="inquireDto">
@@ -31,7 +40,7 @@
 	</delete>
 	<update id="update" parameterType="inquireDto">
 		UPDATE CS_TB
-		SET category = #{category}, title = #{title}, content = #{content}
+		SET answer = #{answer}
 		WHERE cs_num = #{cs_num}
 	</update>	
 </mapper>

@@ -8,8 +8,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/groupfaq.css" />
 </head>
 <body>
-	<div class="cafe_table">
+	<div class="inner-wrap">
 		<a id="faqInsert">문의하기</a>
+	</div>
+	<div class="inner-wrap">
+		<div class="cafe_table">
 			<c:choose>
 				<c:when test="${empty list }">
 					<div id="emptyBox" name="emptyBox">문의사항이 없습니다.</div>
@@ -20,6 +23,13 @@
 				        <tbody>
 				            <c:forEach var="tmp" items="${list}">
 				                <tr>
+				                <colgroup>
+				                	<col style="width:20%">
+				                	<col style="width:35%">
+				                	<col style="width:20%">
+				                	<col style="width:20%">
+				                	<col style="width:5%">
+				                </colgroup>
 				                	<td class="q-answer">
 				                		<c:if test="${not empty tmp.a_answer }">
 								        	<div class="answer_end">답변 완료</div>
@@ -44,15 +54,19 @@
 										<div class="qna_question">
 											<span class="qna_q">Q</span>
 									    	<pre name="content" id="content" readonly>${tmp.q_content}</pre>
-									        <c:if test="${empty tmp.a_answer }">
+								        	<c:if test="${ empty tmp.a_answer && sessionScope.id == tmp.q_writer}">
 									        	<a href="${pageContext.request.contextPath}/group/faq/updateform?num=${tmp.num}" id="update">수정</a>
 									        	<a href="${pageContext.request.contextPath}/group/faq/delete?num=${tmp.num}&group_num=${tmp.group_num}" id="delete">삭제</a>
-									        </c:if>
+								        	</c:if>
 										</div>
 										<div class="qna_answer">
-											<span class="qna_a">A</span>
 											<c:if test="${not empty tmp.a_answer }">
+											<span class="qna_a">A</span>
 								        	<pre name="answer" id="answer" readonly>${tmp.a_answer }</pre>
+								        	</c:if>
+								        	<c:if test="${empty tmp.a_answer }">
+								        	<span class="qna_a" style="opacity:0">A</span>
+								        	<pre name="answer" id="answer" readonly>아직 등록된 답변이 없습니다.</pre>
 								        	</c:if>
 								        	<c:if test="${empty tmp.a_answer && dto.manager_id == sessionScope.id}">
 								        	<a href="${pageContext.request.contextPath}/group/answer/insertform?num=${tmp.num}" id="insertAnswer">답변 하기</a>
@@ -89,6 +103,8 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+	</div>
+
 	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script>
 			
@@ -174,7 +190,7 @@
 			
 			//답변
 			  $(document).ready(function() {
-			        $("#answer").click(function(event) {
+			        $("#insertAnswer").click(function(event) {
 			            event.preventDefault(); // 앵커의 기본 동작을 막습니다.
 
 			            var href = $(this).attr("href"); // 앵커의 href 속성을 가져옵니다.
@@ -194,7 +210,7 @@
 			            });
 			        });
 			    });
-			/* //답변 수정
+
 			  $(document).ready(function() {
 			        $("#updateAnswer").click(function(event) {
 			            event.preventDefault(); // 앵커의 기본 동작을 막습니다.
@@ -215,7 +231,7 @@
 			                }
 			            });
 			        });
-			    }); */
+			    }); 
 		</script>
 </body>
 </html>

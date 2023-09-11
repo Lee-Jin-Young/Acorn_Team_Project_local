@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>북메이트 관리</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/group_managing/group_managing_admin_header.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/group_managing/group_managing_admin_applicant_card.css" />
 <style>
@@ -19,10 +20,11 @@
 		<div class="admin_container">
 		<div id="admin_header">
 			<div class="title">Rejected Applicant</div>
+			<div class="group_name">${dto.name}</div>
 		</div>
 		<div id="menus">
 			<div><a href="${pageContext.request.contextPath}/group_managing/applicantList?group_num=${group_num}">신청 중</a></div>
-			<div><a href="${pageContext.request.contextPath}/group_managing/rejectedApplicantList?group_num=${group_num}">거절</a></div>
+			<div><a class="active" href="${pageContext.request.contextPath}/group_managing/rejectedApplicantList?group_num=${group_num}">거절</a></div>
 		</div>
 		<div class="wrapper">
 			<c:forEach var="tmp" items="${list}">

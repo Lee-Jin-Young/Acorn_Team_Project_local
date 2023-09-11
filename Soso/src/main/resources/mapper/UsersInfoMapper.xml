@@ -4,16 +4,19 @@
 <mapper namespace="info">
 
 	<select id="getWritingList" parameterType="usersInfoDto" resultType="usersInfoDto">
-		SELECT comu_num AS num, writer, title, regdate, group_num
-		FROM
-			(SELECT result1.*, ROWNUM AS rnum
-			FROM
-				(SELECT comu_num, writer, title, regdate, group_num
-				FROM community_board_tb
-				WHERE writer = #{writer}
-				ORDER BY comu_num DESC) result1)
+		SELECT cb.comu_num AS num, cb.writer, cb.title, cb.regdate, cb.group_num, gt.name AS group_name
+		FROM (
+		    SELECT result1.*, ROWNUM AS rnum
+		    FROM (
+		        SELECT comu_num, writer, title, regdate, group_num
+		        FROM community_board_tb
+		        WHERE writer = #{writer}
+		        ORDER BY comu_num DESC
+		    ) result1
+		) cb
+		LEFT JOIN group_tb gt ON cb.group_num = gt.num
 		<![CDATA[ 
-		WHERE rnum >= #{startRowNum} AND rnum <= #{endRowNum}
+		WHERE cb.rnum >= #{startRowNum} AND cb.rnum <= #{endRowNum}
 		]]>
 	</select>
 	

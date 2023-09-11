@@ -7,7 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${dto.name }</title>
+	<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -70,27 +71,21 @@
 					</div>
 				  </c:forEach>
 				</div>
-<%-- 				<c:forEach var="books" items="${booklist }">
-				<ul>
-					<li class="group_content_book_text">
-						📖 &nbsp;&nbsp; 
-					</li>
-				</ul>
-				 </c:forEach> --%>
+
             </div>
             </div>
 		</div>
 		<!-- 참석후기 -->
 		<div class="group_review" >
 			<div class="inner-wrap">
-				<h2 class="title black">참여 후기</h2>
+				<h2 class="title black">기대평</h2>
 				<div class="reviewList" style="width:80%;">
 				<!-- forEach를 사용해서 댓글 출력(나중에는 분기 써서 댓글이 없을 때는 다른 페이지 표시) -->
 					<c:choose>
 						<c:when test="${empty commentList}">
 							<div class="card">
 								<div class="card-body">
-									<p class="card-text">아직 후기가 없어요</p>
+									<p class="card-text">아직 기대평이 없어요</p>
 								</div>
 							</div>
 						</c:when>
@@ -119,34 +114,38 @@
 											        <span class="card-rate">Invalid Rating</span>
 											    </c:otherwise>
 											</c:choose>
-										<span class="card-writer">${tmp.writer }</span>
+										<span class="card-writer" style="font-weight: bold; font-style: italic;">${tmp.writer }</span>
 										<span class="card-regdate">${tmp.regdate }</span>
 									</div>
 									<div>
-										<textarea name="content" id="content" readonly>${tmp.content}</textarea>
+										<textarea name="content" id="content" style="resize : none;" readonly>${tmp.content}</textarea>
 									</div>
+									<c:if test="${sessionScope.id == tmp.writer || sessionScope.id == manager_id}">
+										<a class="review_delete" href="${pageContext.request.contextPath}/group/review_delete?num=${tmp.review_num }&group_num=${tmp.group_num}">삭제</a>
+									</c:if>
 								</div>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-					<%-- <c:forEach var="item" items="${list}"> --%>
-							<!-- 일단 누구나 후기 쓸 수 있도록 수정 -->
-							<%-- <c:when test="${item.user_id eq sessionScope.id}"> --%>
-							<%--<c:if test="${dto.deadline_dt lt nowDate}"> --%>
-								<a href="${pageContext.request.contextPath}/group/comment/comment_insert_form?num=${dto.num}" id="reviewInsert">후기 작성하기</a>
-								<div id="commentArea"></div>
-					<%-- </c:forEach> --%>
+					<c:forEach var="item" items="${list}">
+						<c:if test="${item.user_id eq sessionScope.id}">
+							<a href="${pageContext.request.contextPath}/group/comment/comment_insert_form?num=${dto.num}" id="reviewInsert">후기 작성하기</a>
+							<div id="commentArea"></div>
+						</c:if>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
 		<div class="inner-wrap">
 			<div id="faq">
 				<h2 class="title black">문의하기</h2>
-			</div>
-			<div style="width : 100%;">
-			<div id="Parse_Area"gt;lt;></div>
-		</div>		
+			</div>		
 		</div>
+
+			<div id="Parse_Area"gt;lt;>
+			<!-- 문의하기 목록 -->
+			</div>
+
 		<!-- 플로팅 하단 고정 -->
 		<div class="banner-inner-wrap">
 			<div class="group_banner">
@@ -163,14 +162,21 @@
 							</c:when>
 							<c:otherwise>
 								<c:choose>
-									<c:when test="${knowJoin == -1 || empty knowJoin}">
+									<c:when test="${knowJoin == -1}">
 										<button type="button" class="join">
-											<a href="${pageContext.request.contextPath}/group/group_in?num=${dto.num }">가입하기</a>
+											<a href="${pageContext.request.contextPath}/group/group_joinform?num=${dto.num }">가입하기</a>
 										</button>
 									</c:when>
-									<c:otherwise>
+									<c:when test="${knowJoin == 1 }">
 										<button type="button" class="cancle" id="cancleBtn" name="cancleBtn">신청 취소</button>
-									</c:otherwise>
+									</c:when>
+									<c:when test="${knowJoin == 2 }">
+										<button type="button">가입 거부</button>
+									</c:when>
+									<c:when test="${knowJoin == 3 }">
+									</c:when>
+									<c:when test="${knowJoin == 4 }">
+									</c:when>
 								</c:choose>
 							</c:otherwise>
 						</c:choose>
@@ -192,7 +198,7 @@
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
 										  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
 										</svg>
-										<div id="jjimCount">${jjimCount }</div>
+										<%-- <div id="jjimCount">${jjimCount }</div> --%>
 									</div>	
 								</c:when>
 								<c:otherwise>
@@ -200,7 +206,7 @@
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
 										  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 										</svg>
-										<div id="jjimCount">${jjimCount }</div>
+										<%-- <div id="jjimCount">${jjimCount }</div> --%>
 									</div>
 								</c:otherwise>
 							</c:choose>
@@ -236,9 +242,7 @@
 			  // 서버에서 반환된 응답 데이터를 이용하여 원하는 처리를 한다.
 			  // data 여부에 따라 클라이언트에게 표시해준다.
 			  if (data.isSuccess == true) {	
-			    	// 찜 추가되었습니다.
-					alert(jjimNum+"찜 추가되었습니다.");
-					
+			    	
 			    	// div의 클래스를 'emptyHeart'에서 'heart'로 변경
 					$(".heart").removeClass("emptyHeart").addClass("heart");
 					
@@ -250,8 +254,6 @@
 					`);
 					} else {
 					
-						// 찜 취소하셨습니다.
-					alert(jjimNum+"찜 취소하셨습니다.");
 					
 					// 하트의 모양을 비워지게 변경
 					$(".heart").html(`

@@ -6,19 +6,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/support_faq_insertform</title>
+<title>공지사항 등록</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 <style>
-	.noticeBtn{
-	width: 240px;
-    height: 60px;
-    margin: 0 auto;
-    display: block;
-    border: 1px solid gray;
-    border-radius: 30px;
-    background-color: gray;
-    color: white;
-    font-size: 18px;
-    text-align: center;
+	.notice_btn{
+		width: 130px;
+	    height: 48px;
+	    border-radius: 0;
+	    border: 1px solid #d8d8d8;
+	    background-color: #f7f7f7;
+	    text-align: center;
+	    line-height: 48px;
+	    font-size: 14px;
+	    color: #333;
+	}
+	.notice_btn:hover{
+		color: rgb(157 128 63);
+		font-weight: 600;
+	}
+	.admin_menu{
+		width: 100%;
+		display: flex;
+		justify-content: center;
 	}
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
@@ -52,13 +61,13 @@
 	<div class="main_area">
 	<ul class="menu_bar">
 		<li class="menu_home">
-			<a class="nav-link active" href="${pageContext.request.contextPath }/support/support_main">고객센터</a>
+			<a class="nav-link" href="${pageContext.request.contextPath }/support/support_main">고객센터</a>
 		</li>
 		<li class="menu_faq">
 			<a class="nav-link" href="${pageContext.request.contextPath }/support/support_faq">자주하는 질문</a>
 		</li>
 		<li class="menu_notice">
-			<a class="nav-link" href="${pageContext.request.contextPath }/support/support_notice">공지사항</a>
+			<a class="nav-link active" href="${pageContext.request.contextPath }/support/support_notice">공지사항</a>
 		</li>
 		<li class="menu_inquire">
 			<a class="nav-link" href="${pageContext.request.contextPath }/support/support_inquire">문의하기</a>
@@ -84,14 +93,16 @@
 					<div class="row-wrap">
 						<div class="input_text">
 							<h4 class="label">내용 *</h4>
-							<textarea name="content" id="content" placeholder="내용을 입력 해 주세요."></textarea>
+							<textarea name="content" id="content" cols="30" rows="20" placeholder="내용을 입력 해 주세요."></textarea>
 						</div>
 					</div>
 					
 					<p class="info_message">
 						이 사이트는 reCAPTCHA에 의해 보호되며 Google 개인 정보 취급 방침 및 서비스 약관이 적용됩니다.
 					</p>
-					<button type="submit" class="noticeBtn">공지사항 등록</button>
+					<div class="admin_menu">
+						<button type="submit" class="notice_btn">공지사항 등록</button>
+					</div>
 				</form>
 			</div>
 		</div>

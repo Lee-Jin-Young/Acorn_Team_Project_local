@@ -16,6 +16,26 @@
 			</when>
 		</choose>
 	</sql>
+		<!-- 검색 기능을 위한2(genre 검색 위한) -->
+	<sql id="searchConditionGenre">
+		<choose>
+			<when test="name != null and caption != null">
+				AND name LIKE '%'||#{name}||'%' OR caption LIKE '%'||#{caption}||'%'
+			</when>
+			<when test="name != null">
+				AND name LIKE '%'||#{name}||'%'
+			</when>
+			<when test="manager_id != null">
+				AND manager_id LIKE '%'||#{manager_id}||'%'
+			</when>
+		</choose>
+	</sql>
+	<!-- 장르별 조회수 정렬 -->
+	<sql id="isGenre">
+		<if test="genre != -1">
+			WHERE genre = #{genre}
+		</if>
+	</sql>
 
 	<!-- 리스트  -->
 	<select id="getList" parameterType="groupDto" resultType="groupDto">
@@ -45,7 +65,7 @@
 			manager_id, max_people, now_people, avrg_rate, meeting_loc, meeting_time,
 			genre, on_off, manager_comment, viewcount
             FROM group_tb
-            <include refid="searchCondition"/>
+            <include refid="isGenre"/>
             ORDER BY viewcount DESC) result1)
       <!-- 에러 방지 영역 , 기호 사용 가능하다  -->
       <![CDATA[ 
@@ -54,7 +74,7 @@
    </select>
    
 	<!-- 소모임 genre 별로 검색 조건을 포함한 리스트 가져오기 -->
-	<select id="getGroupsByGenreAndSearch" parameterType="map" resultType="groupDto">
+	<select id="getGroupsByGenreAndSearch" parameterType="groupDto" resultType="groupDto">
 	    SELECT *
 	    FROM
 	        (SELECT result1.*, ROWNUM AS rnum
@@ -64,31 +84,33 @@
 	            genre, on_off, manager_comment, viewcount
 	            FROM group_tb
 	            WHERE genre = #{genre}
-	            <include refid="searchCondition"/>
+	            <include refid="searchConditionGenre"/>
 	            ORDER BY num DESC) result1)
 	    <!-- 에러 방지 영역 , 기호 사용 가능하다  -->
 	    <![CDATA[ 
-	    WHERE rnum >= #{dto.startRowNum} AND rnum <= #{dto.endRowNum}
+	    WHERE rnum >= #{startRowNum} AND rnum <= #{endRowNum}
 	    ]]>
 	</select>
-   
+
+   <!-- 추후 별점순 정렬에 사용 할 수 있을 듯하여 주석처리
    <select id="getRanking" parameterType="groupDto" resultType="groupDto">
         SELECT result.*, r.rate
         FROM (
             SELECT result1.*, ROWNUM AS rnum
             FROM (
-                SELECT num, writer, title, caption, img_path, regdate
+                SELECT num, name, manager_id, img_path, regdate
                 FROM group_tb
                 ORDER BY num DESC
             ) result1
         ) result
         INNER JOIN (
-            SELECT title, ROUND(AVG(rate), 2) AS rate
-            FROM board_review
-            GROUP BY title
-        ) r ON result.title = r.title
+            SELECT group_num, ROUND(AVG(rate), 2) AS rate
+            FROM group_review_tb
+            GROUP BY group_num
+        ) r ON result.num = r.group_num
         ORDER BY r.rate DESC
    </select>
+    -->
    
    <select id="getCount" parameterType="groupDto" resultType="int">
       SELECT NVL(MAX(ROWNUM), 0)
@@ -98,13 +120,14 @@
    
    <!-- 그룹넘을 따로 넣어서 바인딩 -->
    <insert id="insert" parameterType="groupDto">
-      INSERT INTO group_tb
-      (num, name, caption, img_path, avrg_rate, regdate, ended_dt, deadline_dt, start_dt, 
-      manager_id, max_people, meeting_loc, meeting_time, genre, on_off, manager_comment)
-      VALUES(#{num}, 
-      #{name}, #{caption}, #{img_path}, 0, SYSDATE, #{ended_dt}, #{deadline_dt}, #{start_dt},
-      #{manager_id}, #{max_people}, #{meeting_loc}, #{meeting_time}, #{genre}, #{on_off},
-      #{manager_comment})
+		INSERT INTO group_tb (
+		num, name, caption, img_path, avrg_rate, 
+		regdate, ended_dt, deadline_dt, start_dt, 
+		manager_id, max_people, meeting_loc, meeting_time, genre, on_off, manager_comment)
+		VALUES (
+		#{num}, #{name}, #{caption}, #{img_path}, 0, 
+		TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'), TO_DATE(#{ended_dt}, 'RR/MM/DD'), TO_DATE(#{deadline_dt}, 'RR/MM/DD'), TO_DATE(#{start_dt}, 'RR/MM/DD'),
+		#{manager_id}, #{max_people}, #{meeting_loc}, #{meeting_time}, #{genre}, #{on_off}, #{manager_comment})
    </insert>
    
    <!-- 저장 예정인 그룹의 글번호를 미리 얻어내기  -->
@@ -116,7 +139,8 @@
    <select id="getData" parameterType="int" resultType="groupDto">
 		SELECT result1.*
 		FROM
-		   (SELECT num, writer, title, caption, img_path, viewcount, regdate,
+		   (SELECT num, name, caption, avrg_rate, regdate, ended_dt, deadline_dt, start_dt, 
+			manager_id, max_people, meeting_loc, meeting_time, genre, on_off, manager_comment,
 		      LAG(num, 1, 0) OVER (ORDER BY num DESC) AS prevNum,
 		      LEAD(num, 1, 0) OVER (ORDER BY num DESC) AS nextNum
 		   FROM group_tb) result1

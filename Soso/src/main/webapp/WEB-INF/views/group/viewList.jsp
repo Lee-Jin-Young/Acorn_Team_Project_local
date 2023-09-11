@@ -7,7 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>북메이트 찾기</title>
+	<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 	<link rel="shortcut icon" type="image/x-icon" href="https://genfavicon.com/tmp/icon_7cacead7cd8483ca41a810db418dc8ab.ico">
 	<link rel="stylesheet" href="${path }/resources/css/common.css" type="text/css">
     <link rel="stylesheet" href="${path }/resources/css/group_list.css" type="text/css">
@@ -48,6 +49,7 @@
             data-aos-easing="ease-in-sine">소모임 찾기</h3>
             <div class="theme_search">
             	<form action="list" method="get">
+            	<input type="hidden" name="genre" value="${param.genre}">
             	<input type="text" placeholder="type.." value="${keyword}" name="keyword" />
             		<select name="condition" id="condition">
             			<option value="name_caption" ${condition eq 'name_caption' ? 'selected' : '' }>모임명 +내용</option>
@@ -71,8 +73,8 @@
             </div>
             <div class="mate_content_theme">
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/group/viewList">인기순</a></li>
-                    <li><a href="${pageContext.request.contextPath}/group/list?genre=-1">최신순</a></li>
+                    <li><a href="${pageContext.request.contextPath}/group/viewList?genre=${param.genre}">인기순</a></li>
+                    <li><a href="${pageContext.request.contextPath}/group/list?genre=${param.genre}">최신순</a></li>
                 </ul>
             </div>
         </div>

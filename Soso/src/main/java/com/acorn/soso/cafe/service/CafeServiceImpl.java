@@ -27,7 +27,7 @@ public class CafeServiceImpl implements CafeService{
 	
 	@Override
 	public void getList(HttpServletRequest request, Model model, int num){
-		final int PAGE_ROW_COUNT=10;
+		final int PAGE_ROW_COUNT=5;
 		
 		final int PAGE_DISPLAY_COUNT=5;
 		
@@ -144,7 +144,7 @@ public class CafeServiceImpl implements CafeService{
 		String encodedK=URLEncoder.encode(keyword);
 		
 		//한 페이지에 몇개씩 표시할 것인지
-		final int PAGE_ROW_COUNT=10;
+		final int PAGE_ROW_COUNT=20;
 		//detail.jsp 페이지에서는 항상 1페이지의 댓글 내용만 출력한다. 
 		int pageNum=1;
 		//보여줄 페이지의 시작 ROWNUM

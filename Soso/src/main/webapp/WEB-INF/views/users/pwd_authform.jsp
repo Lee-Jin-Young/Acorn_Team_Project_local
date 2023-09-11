@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사용자 확인</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
@@ -36,8 +37,10 @@
                 </div>
                 <button class="btn btn-outline-secondary bi-eye-slash" type="button" id="openpwd"></button>
             </div>
-            <button class="btn btn-join" type="submit">확인</button>
-            <button class="btn btn-cancle" type="reset">리셋</button>
+            <div class="d-flex justify-content-center mt-4">
+            	<button class="btn btn-join me-2" type="submit">확인</button>
+            	<button class="btn btn-cancle" type="reset">리셋</button>
+            </div>
         </form>
     </div>
     

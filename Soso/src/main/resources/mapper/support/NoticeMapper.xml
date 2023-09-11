@@ -8,9 +8,21 @@
 		FROM
 			(SELECT result1.*, ROWNUM AS rnum
 			FROM
-				(SELECT notice_num, category,title,content,regdate
+				(SELECT notice_num, category,title,content,To_CHAR(regdate, 'YY.MM.DD') as regdate
 				FROM NOTICE_TB
-				ORDER BY notice_num asc) result1)
+				ORDER BY notice_num desc) result1)
+		<![CDATA[ 
+		WHERE rnum >= #{startRowNum} AND rnum <= #{endRowNum}
+		]]>
+	</select>
+	<select id="getList2" parameterType="noticeDto" resultType="noticeDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM AS rnum
+			FROM
+				(SELECT notice_num, category,title,content,To_CHAR(regdate, 'YY.MM.DD') as regdate
+				FROM NOTICE_TB
+				ORDER BY notice_num desc) result1)
 		<![CDATA[ 
 		WHERE rnum >= #{startRowNum} AND rnum <= #{endRowNum}
 		]]>
@@ -25,7 +37,7 @@
 		INSERT INTO NOTICE_TB
 		(notice_num,category,title,content,regdate)
 		VALUES(NOTICE_SEQ.NEXTVAL,#{category}, #{title},#{content},
-			SYSDATE)
+			TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'))
 	</insert>
 	
 	<select id="getData" parameterType="int" resultType="noticeDto">

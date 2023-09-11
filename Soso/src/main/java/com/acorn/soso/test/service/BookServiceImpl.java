@@ -106,4 +106,13 @@ public class BookServiceImpl implements BookService{
 		model.addAttribute("booklist", booklist);
 		
 	}
+
+	@Override
+	public void bookDelete(String isbn, int group_num) {
+		BookDto dto = new BookDto();
+		dto.setIsbn(isbn);
+		dto.setGroup_num(group_num);
+		
+		bookDao.deleteBook(dto);		
+	}
 }

@@ -6,38 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>소모임 문의사항 수정하기</title>
-<style>
-	/* 확인, 취소 버튼 */
-	#submitBtn, #resetBtn{
-		border : 2px solid black;
-		border-radius : 10px;
-		display : inline-block; /* 필요한 만큼만 감싸기 */
-		justify-content : flex-end;
-	    padding: 5px 10px; /* 원하는 패딩 값 설정 */
-	}
-	/* 제목 */
-	#q_title{
-		margin : 1rem;
-		font-size : larger;
-	}
-	/* 문의내용 */
-	#q_content{
-		resize : none;
-		border : 1px solid black;
-		border-radius : 10px;
-		outling : none;
-		background-color : #0000000b;
-		width : 80%;
-		margin-left: 2rem;
-		margin-top : 1rem;
-		margin-bottom: 1rem;
-		padding : 1rem;
-	
-	}
-</style>
+
 </head>
 <body>
-	<div class="container">
+<div class="inner-wrap">
+	<div class="faq_form">
 		<form action="${pageContext.request.contextPath}/group/faq/update?num=${dto.num }" method="post">
 			<div class="col-12">
 			      <input type="text" class="form-control" id="q_title" name="q_title" placeholder="제 목" value="${dto.q_title }" >
@@ -46,10 +19,11 @@
 				<label for="q_content"></label>
 				<textarea name="q_content" id="q_content" rows="10">${dto.q_content }</textarea>
 			</div>	
-			<button type="submit" onclick="submitContents(this)" style="margin-left: 106.2ex;" id="submitBtn">등록</button>
+			<button type="submit" onclick="submitContents(this)" id="submitBtn">등록</button>
 			<button type="reset" id="resetBtn">리셋</button>
 		</form>
 	</div>
+</div>
 	<script>
 	//여기서부터 ajax faq
 	//취소버튼 누르면 돌아가기

@@ -2,25 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<script src="${path }/resources/js/jquery-1.12.0.min.js"></script>
-<script src="${path }/resources/js/jquery.easing.1.3.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>그룹에 넣고 싶은 책을 찾아봅시다.</title>
+<script src="${path }/resources/js/jquery-1.12.0.min.js"></script>
+<script src="${path }/resources/js/jquery.easing.1.3.js"></script>
+<link rel="stylesheet" href="${path }/resources/css/common.css" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<title>북메이트 책 등록하기</title>
+<style>
+	#Parse_Area{
+		margin-top: 12%;
+	}
+
+</style>
 </head>
 <body>
 	<div class="container">
 		<!-- method를 get으로 하면 주소창을 통해 text를 보낼 수 있다. -->
 		<form action="${pageContext.request.contextPath}/test/bookTest" method="get">
-			<label for="search">찾기</label>
-			<input type="text" id="search" name="search" value=""/>
-			<button type="button" id="searchBook">찾기</button>
+			<label for="search" class="col-form-label">북메이트 책 찾기</label>
+			<input type="text" id="search" name="search" value="" class="form-control col-2"/>
+			<button type="button" id="searchBook" class="btn btn-outline-secondary" style="float: right;
+    margin: 3% 0;">검색</button>
 		</form>
 	</div>
 	<!-- 여기에 목록을 출력한다. -->
-    <div id="Parse_Area"gt;lt;></div>
+	<div class="container">
+		<div id="Parse_Area"gt;lt;></div>
+	</div>
+    
 
 	<script>
 	

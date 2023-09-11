@@ -9,8 +9,12 @@ h3.title{ margin-bottom: 3%; font-family: 'Montserrat', 'Noto Sans KR', sans-ser
 h3.white{ color: #fff; }
 h3.black{ color: #333; }
 
-
-
+/* 고정 버튼 */
+.fab-container{z-index:999; position:fixed; bottom:50px; right:50px; cursor:pointer;display: flex;flex-direction: row-reverse;align-items: center;}
+.iconbutton{display:flex; color:#fff; font-size:2.3rem;width:60px; height:60px; border-radius: 100%; background: rgb(171 130 92 / 58%); align-items: center;justify-content: center;}
+.iconbutton:hover{box-shadow: 1px 1px 3px #aaaaaa;}
+.fab-text{display:none; }
+.iconbutton:hover + .fab-text{display:block; color:#333; font-family: 'Montserrat', 'Noto Sans KR', sans-serif; font-size: 1.1rem; font-weight: 600; margin-right: 15px;;}
 
 
 

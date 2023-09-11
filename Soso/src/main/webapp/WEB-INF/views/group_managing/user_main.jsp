@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>나의 북메이트</title>
+	<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<link rel="shortcut icon" type="image/x-icon" href="https://genfavicon.com/tmp/icon_7cacead7cd8483ca41a810db418dc8ab.ico">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/group_managing_user_main.css" />
@@ -50,7 +51,7 @@
             <div class="user_content_theme">
                 <ul>
                 	<li><a href="${pageContext.request.contextPath}/group_managing/user_main_all">전체</a></li>
-                    <li><a href="${pageContext.request.contextPath}/group_managing/user_main">진행중</a></li>
+                    <li><a class="theme_active" href="${pageContext.request.contextPath}/group_managing/user_main">진행중</a></li>
                     <li><a href="${pageContext.request.contextPath}/group_managing/user_main_finished">종료</a></li>
                 </ul>
             </div>
@@ -100,27 +101,6 @@
                     </div>
                 </div>
 	        </c:forEach>
-    	</div>
-    	<div class="inner-wrap">
-    	<!-- 페이지 이동을 위한  --> 
-	    <nav>
-	       <ul class="">
-	          <c:choose>
-	             <c:when test="${dto.prevNum ne 0 }">
-	                <li class="">
-	                     <a class="" href="${pageContext.request.contextPath}">&larr; Prev</a>
-	                </li>
-	             </c:when>
-	         </c:choose>
-	         <c:choose>
-	            <c:when test="${dto.nextNum ne 0 }">
-	               <li class="">
-	                   <a class="" href="${pageContext.request.contextPath}">Next &rarr;</a>
-	               </li>
-	            </c:when>
-	         </c:choose>         
-	       </ul>
-	    </nav>
     	</div>
     </section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

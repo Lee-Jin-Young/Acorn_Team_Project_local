@@ -44,45 +44,19 @@ $(gnb).hover(function(){
     $(gnb).css('border-bottom','0');
 });
 
-
-$(main).first().focus(function(){ 
-    $(sub + ',' + bg).stop().slideDown(speed);
-    $(this).addClass('active');
+//panel
+$(".btn").click(function(){
+	  $('.panel').toggleClass("active");
 });
 
-$(main).focus(function(){
-    $(main).removeClass('active'); 
-    $(this).addClass('active'); 
 });
 
-$(main).first().keydown(function(e){
-    if(e.keyCode == 9){
-        if(e.shiftKey){ 
-            $(sub + ', ' + bg).stop().slideUp(speed);
-            $(this).removeClass('active');
-        }
-    }
-});
+let c1 = document.querySelector('.btn');
+let c2 = document.querySelector('.panel');
 
-$(sub).last().find('li:last a').keydown(function(e){
-   if(e.keyCode == 9){ //tab키를 눌렀을 때
-       if(!e.shiftKey){ //shift키는 누르지 않았을 때
-           $(sub + ',' + bg).stop().slideUp(speed);
-           $(main).removeClass('active');
-       }
-   }
-});
 
-$(sub).find('li:last a').focus(function(){
-    $(main).removeClass('active');
-    $(this).parents(sub).prev().addClass('acitve');
-});
-
-$('header').mouseleave(function(){
-    $(main).removeClass('active');
-    $(sub).stop().slideUp(speed);
-});
-
+c1.addEventListener('click', function() {
+c2.classList.toggle('active');
 });
 
 

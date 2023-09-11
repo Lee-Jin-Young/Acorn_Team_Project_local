@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.acorn.soso.exception.DontEqualException;
@@ -161,6 +160,8 @@ public class GroupServiceImpl implements GroupService{
         GroupDto dto = new GroupDto();
         dto.setStartRowNum((pageNum - 1) * PAGE_ROW_COUNT + 1);
         dto.setEndRowNum(pageNum * PAGE_ROW_COUNT);
+        //임시로 수정
+        dto.setGenre(genre);
 
         if (!keyword.equals("")) {
             if (condition.equals("name_caption")) {
@@ -173,7 +174,7 @@ public class GroupServiceImpl implements GroupService{
             }
         }
 
-        List<GroupDto> list = dao.getGroupsByGenreAndSearch(genre, dto);
+        List<GroupDto> list = dao.getGroupsByGenreAndSearch(dto);
 
         int totalRow = dao.getCount(dto);
 
@@ -263,7 +264,7 @@ public class GroupServiceImpl implements GroupService{
 	
 	//소모임 개설	
 	@Override
-	public void insert(GroupDto dto, HttpServletRequest request, HttpSession session) {
+	public void insert(GroupDto dto, HttpSession session, List<BookDto> bookList) {
 		//업로드된 파일의 정보를 가지고 있는 MultipartFile 객체의 참조값을 얻어오기
 		MultipartFile image = dto.getImage();
 		//원본 파일명 -> 저장할 파일 이름 만들기위해서 사용됨
@@ -299,12 +300,18 @@ public class GroupServiceImpl implements GroupService{
 		dto.setManager_id(manager_id);
 		
 		//group_num의 시퀀스 값을 얻어낸다.
-		int num = dao.groupNumSeq();
+		int group_num = dao.groupNumSeq();
 		//dto에 넣어줌
-		dto.setNum(num);
+		dto.setNum(group_num);
+		
+		//반복문 돌면서 bookList에 group_num 값을 넣어주고 DB에 넣는다.
+		for (BookDto book : bookList) {
+	        book.setGroup_num(group_num);
+	        bookdao.saveBook(book);
+	    }
 		
 		dao.insert(dto);
-
+		joindao.managerJoin(dto);
 	}
 
 	@Override
@@ -393,11 +400,17 @@ public class GroupServiceImpl implements GroupService{
 		GroupReviewDto dto = reviewdao.getData(num);
 		String id = (String)request.getSession().getAttribute("id");
 		
-		//관리자 삭제를 위해 일단 주석처리
-//		if(!dto.getWriter().equals(id)) {
-//			throw new NotDeleteException("타인의 리뷰는 삭제할 수 없습니다.");
-//		}
-		reviewdao.delete(num);
+		//관리자 삭제를 위해 dto 얻어내기
+		GroupDto groupDto = dao.getData(dto.getGroup_num());
+		//관리자 ID를 얻어낸다.
+		String manager = groupDto.getManager_id();
+		//만약 관리자거나 작성자라면
+		if(dto.getWriter().equals(id) || manager.equals(id)) {
+			//리뷰 삭제
+			reviewdao.delete(num);
+		}else {
+		throw new NotDeleteException("타인의 리뷰는 삭제할 수 없습니다.");
+		}
 	}
 
 	@Override
@@ -451,19 +464,6 @@ public class GroupServiceImpl implements GroupService{
 		
 	}
 
-	@Override
-	public void getRanking(HttpServletRequest request , Model model) {
-
-	      GroupDto dto = new GroupDto();
-	      
-	      //movieDao 객체를 이용해서 회원 목록을 얻어온다.
-	      //ranking version
-	      List<GroupDto> list = dao.getRanking(dto);
-      
-	      //request 영역에 담아주기
-	      request.setAttribute("list", list);   //movie list
-		
-	}
 	//num을 가져와서 리뷰 리스트를 불러온 다음에 model에 담아서 돌려주기
 	@Override
 	public void reviewList(HttpServletRequest request, Model model) {
@@ -473,6 +473,12 @@ public class GroupServiceImpl implements GroupService{
 		List<GroupReviewDto> list = reviewdao.reviewList(num);
 		//request에 담아주기
 		model.addAttribute("commentList", list);
+		
+		//소모임 정보를 얻어오기
+		GroupDto dto = dao.getData(num);
+		String manager_id = dto.getManager_id();
+		//model에 매니저 아이디도 같이 넣어준다.
+		model.addAttribute("manager_id", manager_id);		
 	}
 	
 	//소모임 가입을 위한 join
@@ -489,9 +495,12 @@ public class GroupServiceImpl implements GroupService{
 		dto.setUser_Id(id);
 		dto.setIntro(intro);
 		
-		//num을 이용해서 가입시키기
-		joindao.insert(dto);
-		
+		if(joindao.getIsJoin(dto) >= 0) {
+			throw new DontEqualException("이미 가입한 이력이 있는 소모임 가입을 다시 신청할 수 없습니다!");
+		} else {
+			//num을 이용해서 가입시키기
+			joindao.insert(dto);
+		}
 	}
 
 	//getData로 찜여부 확인하
@@ -552,7 +561,7 @@ public class GroupServiceImpl implements GroupService{
 		List<GroupDto> list = jjimdao.jjimList(memId);
         //request 영역에 담아주기
         request.setAttribute("list", list);
-	
+        
 	}
 
 	@Override
@@ -568,6 +577,9 @@ public class GroupServiceImpl implements GroupService{
 		//만들어낸 dto를 가지고 getData작업을 시행하고 resultDto에 담는다.
 		//int joinNum의 초기값 설정
 		int joinNum = joindao.getIsJoin(dto);
+		System.out.println(joinNum);
+		System.out.println(num);
+		System.out.println(id);
 		if(joinNum == 1 || joinNum == 2 || joinNum == 3) {
 			//request영역에 jjim이라는 이름으로 resultDto를 담는다.
 			request.setAttribute("knowJoin", joinNum);
@@ -600,9 +612,19 @@ public class GroupServiceImpl implements GroupService{
 	}
 	
 	@Override
-	public void groupFAQInsert(GroupFAQDto dto) {		
-		//dao를 통해 db에 값 집어넣기
-		groupfaqdao.insert(dto);
+	public void groupFAQInsert(GroupFAQDto dto) {
+		//A_writer도 같이 넣어주자
+		//dto의 그룹 넘으로 groupDto를 얻어와
+		GroupDto groupDto = dao.getData(dto.getGroup_num());
+		//매니저 아이디 넣어주자.
+		dto.setA_writer(groupDto.getManager_id());
+		
+		if(dto.getQ_content() == "" || dto.getQ_title() == "") {
+			throw new DontEqualException("제목과 내용을 입력해주세요");
+		}else {
+			//dao를 통해 db에 값 집어넣기
+			groupfaqdao.insert(dto);	
+		}		
 	}
 	
 	//소모임 FAQ의 getList
@@ -684,6 +706,10 @@ public class GroupServiceImpl implements GroupService{
 
 	@Override
 	public void updateGroupFAQ(HttpServletRequest request, GroupFAQDto dto) {
+		//만약 수정시에 값을 전부 공백으로 하면 exception
+		if(dto.getQ_title() == "" || dto.getQ_content() == "") {
+			throw new DontEqualException("제목과 내용을 입력해주세요");
+		}
 		//수정할 글 번호를 읽어온다.
 		int num=Integer.parseInt(request.getParameter("num"));
 		//번호를 넣어준다. 
@@ -692,8 +718,13 @@ public class GroupServiceImpl implements GroupService{
 		GroupFAQDto resultDto=groupfaqdao.getData(num);
 		//id를 가져온다.
 		String id =(String)request.getSession().getAttribute("id");
-		//가져온 값을 토대로 id검증을 한다.
-		if(resultDto.getQ_writer().equals(id)) {
+		
+		//관리자 id를 얻어와서 관리자 삭제&수정 기능을 추가할 준비
+		GroupDto groupDto = dao.getData(resultDto.getGroup_num());
+		String manager = groupDto.getManager_id();
+		
+		//가져온 값을 토대로 id검증을 한다. 작성자거나, 소모임의 관리자면 삭제.
+		if(resultDto.getQ_writer().equals(id) || manager.equals(id)) {
 			groupfaqdao.update(dto);
 		}else {
 			throw new DontEqualException("다른 사람의 글은 수정할 수 없습니다.");
@@ -707,15 +738,26 @@ public class GroupServiceImpl implements GroupService{
 		//id를 가져온다.
 		String id =(String)request.getSession().getAttribute("id");
 		//가져온 값을 토대로 id검증을 한다.(일단 관리자 삭제 위해 주석처리)
-//		if(dto.getQ_writer().equals(id)) {
-//			throw new DontEqualException("다른 사람의 글은 삭제할 수 없습니다.");
-//		}
-		groupfaqdao.delete(num);
+		
+		//관리자 id를 얻어와서 관리자 삭제&수정 기능을 추가할 준비
+		GroupDto groupDto = dao.getData(dto.getGroup_num());
+		String manager = groupDto.getManager_id();
+		
+		if(dto.getQ_writer().equals(id)|| manager.equals(id)) {
+			groupfaqdao.delete(num);
+		}else {
+			throw new DontEqualException("다른 사람의 글은 삭제할 수 없습니다.");
+		}
 	}
 	
 	//소모임 문의 답변하기
 	@Override
 	public void groupAnswerInsert(GroupFAQDto dto) {
+		//만약 답변내용이 없으면exception
+		if(dto.getA_answer()==null) {
+			throw new DontEqualException("답변을 입력해주세요.");
+		}
+		
 		int group_num = dto.getGroup_num();
 		//dto.getGroup_num으로 소모임의 번호를 알아낸다.
 		GroupDto groupDto = managingdao.getGroupData(group_num);
@@ -733,6 +775,11 @@ public class GroupServiceImpl implements GroupService{
 	//소모임 문의 답변 수정하기
 	@Override
 	public void groupAnswerUpdate(HttpServletRequest request, GroupFAQDto dto) {
+		//만약 답변이 비어있으면
+		if(dto.getA_answer() == "") {
+			throw new DontEqualException("답변을 입력해주세요");
+		}
+		
 		//수정할 글 번호를 읽어온다.
 		int num=Integer.parseInt(request.getParameter("num"));
 		//번호를 넣어준다. 
@@ -799,51 +846,61 @@ public class GroupServiceImpl implements GroupService{
 		GroupDto dto = new GroupDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
-			      
-			      
-
-				if(!keyword.equals("")) {
-					if(condition.equals("name_caption")) {
-				    	dto.setName(keyword);
-				    	dto.setCaption(keyword);
-				    	}else if(condition.equals("name")) {
-				    		dto.setName(keyword);
-				    	}else if(condition.equals("writer")) {
-				    		dto.setManager_id(keyword);
-				    	}
-				    }
-			      
-
-			      List<GroupDto> viewList = dao.getViewList(dto);
-			      	//전체글의 갯수
-					int totalRow=dao.getCount(dto);
-					
-					//하단 시작 페이지 번호 
-					int startPageNum = 1 + ((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
-					//하단 끝 페이지 번호
-					int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
-					
-
-					//전체 페이지의 갯수
-					int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
-					//끝 페이지 번호가 전체 페이지 갯수보다 크다면 잘못된 값이다.
-					if(endPageNum > totalPageCount){
-						endPageNum=totalPageCount; //보정해 준다.
-					}
-
-			      	      
-			      //request 영역에 담아주기
-			      model.addAttribute("viewList", viewList);   //소모임 조회수  list
-			      model.addAttribute("keyword", keyword);
-			      model.addAttribute("encodedK", encodedK);
-			      model.addAttribute("condition", condition);
-			      model.addAttribute("pageNum", pageNum);
-			      model.addAttribute("startPageNum", startPageNum);
-			      model.addAttribute("endPageNum", endPageNum);
-			      model.addAttribute("totalPageCount", totalPageCount);
-			      model.addAttribute("totalRow", totalRow);
-
 		
-	}
+		//Genre를 얻어와서 -1이 아니면 DTO에 넣어준다.
+		String genreParam = request.getParameter("genre");
+		int genre = -1;
+		if (genreParam != null && !genreParam.isEmpty()) {
+		    try {
+		        genre = Integer.parseInt(genreParam);
+		        
+		    } catch (NumberFormatException e) {
+		        // 숫자로 변환할 수 없는 경우에 대한 처리
+		        e.printStackTrace(); // 또는 로깅
+		    }
+		}
+		
+        dto.setGenre(genre);
 
+		if(!keyword.equals("")) {
+			if(condition.equals("name_caption")) {
+		    	dto.setName(keyword);
+		    	dto.setCaption(keyword);
+		    	}else if(condition.equals("name")) {
+		    		dto.setName(keyword);
+		    	}else if(condition.equals("writer")) {
+		    		dto.setManager_id(keyword);
+		    	}
+		    }
+		List<GroupDto> viewList = dao.getViewList(dto);
+		
+		
+		
+	    //전체글의 갯수
+		int totalRow=dao.getCount(dto);
+			
+		//하단 시작 페이지 번호 
+		int startPageNum = 1 + ((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
+		//하단 끝 페이지 번호
+		int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
+		
+
+		//전체 페이지의 갯수
+		int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+		//끝 페이지 번호가 전체 페이지 갯수보다 크다면 잘못된 값이다.
+		if(endPageNum > totalPageCount){
+			endPageNum=totalPageCount; //보정해 준다.
+		}
+
+	      //request 영역에 담아주기
+	      model.addAttribute("viewList", viewList);   //소모임 조회수  list
+	      model.addAttribute("keyword", keyword);
+	      model.addAttribute("encodedK", encodedK);
+	      model.addAttribute("condition", condition);
+	      model.addAttribute("pageNum", pageNum);
+	      model.addAttribute("startPageNum", startPageNum);
+	      model.addAttribute("endPageNum", endPageNum);
+	      model.addAttribute("totalPageCount", totalPageCount);
+	      model.addAttribute("totalRow", totalRow);
+	}
 }

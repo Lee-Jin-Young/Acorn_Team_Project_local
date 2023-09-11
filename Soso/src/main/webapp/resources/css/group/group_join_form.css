@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+body{
+	background-color:#f5f6f7;
+}
+.container{
+     margin: 0 auto;
+     width: 768px;
+}
+
+#join_title{
+	margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 28px;
+    cursor: default;
+}
+
+#group_name{
+	margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    cursor: default;
+}
+
+#join_caption{
+	font-size: 17px;
+	padding-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	height: 150px;
+	background-color:#f5f6f7;
+	cursor: default;
+}
+
+#myForm{
+     width: 100%;
+}
+
+.form_header{
+     width: 100%;
+}
+
+.form_label{
+     font-weight: 600;
+     font-size: 20px;
+     margin-bottom: 10px;
+}
+
+#join_intro{
+     width: 100%;
+     height: 200px;
+     border: 2px solid rgb(222, 226, 230);
+     border-radius: 5px;
+     margin-bottom: 5px;
+     margin-top: 15px;
+     padding: 5px;
+     padding-left: 10px;
+     font-size: 15px;
+}
+
+#join_intro::placeholder {
+	font-size: 15px;
+}
+
+#group_title{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     margin-bottom: 20px;
+}
+
+#group_title img{
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+}
+
+#caption, #content{
+     width: 100%;
+     border: 2px solid rgb(222, 226, 230);
+     border-radius: 5px;
+     height: 300px;
+     padding-top: 15px;
+     padding-left: 10px;
+     font-size: 15px;
+}
+
+#join_button{
+     margin-top: 50px;
+     display: flex;
+     justify-content: center;
+}
+
+#join_button button{
+     width: 110px;
+     height: 50px;
+     font-size: 17px;
+     color: white;
+     background-color: rgb(195, 181, 157);
+     border: none;
+     border-radius: 5px;
+}
+
+#form_button a{
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+     width: 110px;
+     height: 50px;
+     font-size: 17px;
+     color: white;
+     border: none;
+     border-radius: 5px;
+}
+

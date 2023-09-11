@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
@@ -18,29 +19,34 @@
 	</jsp:include>
 	<div class="container">
 		<p class="title">회원정보 수정</p>
-		<a id="profileLink" href="javascript:">
-			<c:choose>
-				<c:when test="${ empty dto.profile }">
-					<i class="bi bi-person-circle" style="font-size:100px" id="profileImage"></i>
-				</c:when>
-				<c:otherwise>
-					<img id="profileImage" src="${pageContext.request.contextPath}${dto.profile}">
-				</c:otherwise>
-			</c:choose>
-		</a>
+		<div class="profileImg d-flex justify-content-center">
+			<a id="profileLink" href="javascript:">
+				<c:choose>
+					<c:when test="${ empty dto.profile }">
+						<i class="bi bi-person-circle" style="font-size:130px" id="profileImage"></i>
+					</c:when>
+					<c:otherwise>
+						<img style="height: 120px; width: 120px" id="profileImage" src="${pageContext.request.contextPath}${dto.profile}">
+					</c:otherwise>
+				</c:choose>
+			</a>
+		</div>
+		<div class="text-center mt-3 mb-3">
+			<label for="profileLink">이미지 클릭 시 프로필 사진 변경이 가능합니다.</label>
+		</div>
 		<form action="${pageContext.request.contextPath}/users/update" method="post">		
 			<input type="hidden" name="profile" 
 				value="${ empty dto.profile ? 'empty' : dto.profile }"/>		
-			<div>
+			<div class="mb-3">
 				<label class="form-label" for="id">아이디</label>
 				<input class="form-control" type="text" id="id" value="${dto.id }" disabled/>
 			</div>
-			<div>
+			<div class="mb-3">
 				<label class="form-label" for="email">이메일</label>
 				<input class="form-control" type="text" id="email" name="email" value="${dto.email }"/>
 			</div>
-			<div class="mt-2">
-				<button class="btn btn-join" type="submit">수정확인</button>
+			<div class="d-flex justify-content-center">
+				<button class="btn btn-join me-2" type="submit">수정확인</button>
 				<button class="btn btn-cancle" type="reset">리셋</button>
 			</div>
 		</form>	

@@ -145,11 +145,17 @@ footer br { display: none; }
 /*=========================== tablet ==============================*/
 @media screen and (max-width: 1025px){
     *{ font-size: 14px; }
-    
+    header .inner-wrap {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
     /* header */
     header{ height: 80px; padding: 20px 30px; box-sizing: border-box; }
     header h1 > a {height: 100%; bottom: 0px;}
-    /* header .gnb{ display: none; } */
+    header .gnb{ display: none; }
     header .subBg{ opacity: 0; }
 /*     header h1, .{ width: 50%; } */
 	.sns .iconWrap img{ height: auto; }
@@ -159,11 +165,11 @@ footer br { display: none; }
     .panel{ 
         display: block; 
         position: fixed; top: 80px; right: -100%; z-index: 6100;
-        width: 100%; height: 100%; overflow-y: auto; 
-        background-color: rgba(0, 89, 81, 0.9);
+        width: 100%; overflow-y: auto; 
+        background-color: rgba(209, 199, 177, 0.945);
         transition: 0.6s ease-in-out; 
     }
-    .panel.active{ right: 0; }
+    .active{ right: 0; }
     
     /* panel - pGnb */
     .pGnb{ width: 100%; padding: 60px; box-sizing: border-box; }
@@ -176,14 +182,14 @@ footer br { display: none; }
     
     /* sns - btn */
     .sns .btn{ position: relative; width: 25px; transform: rotateZ(180deg); }
-    .sns .btn.active{ transform: rotateZ(0deg); transition: all 0.4s 0.2s; }
-    .sns .btn.active .circle01{ 
+    .sns .btn.close{ transform: rotateZ(0deg); transition: all 0.4s 0.2s; }
+    .sns .btn.close .circle01{ 
         position: absolute; left:0; top:50%; 
         transform: rotate(45deg);
         width: 100%; height: 1px; 
     }
-    .sns .btn.active .circle02{ transform: scaleX(0); }
-    .sns .btn.active .circle03{ 
+    .sns .btn.close .circle02{ transform: scaleX(0); }
+    .sns .btn.close .circle03{ 
         position: absolute; left: 0; top: 50%;
         transform: rotate(-45deg); 
         width: 100%; height: 1px; 
@@ -201,7 +207,7 @@ footer br { display: none; }
 
 
 /*=========================== mobile ==============================*/
-@media screen and (max-width: 767px){
+@media screen and (max-width: 768px){
     *{ font-size: 16px; }
     header{ padding: 20px 10px; }
     
@@ -210,6 +216,7 @@ footer br { display: none; }
     .pGnb li{ margin-bottom: 30px; }
     .pGnb .subNav{ padding: 0 30px; }
     .pGnb .subNav li{line-height: 60px; width: 100%; }
+
 
 
     footer .inner-wrap { display: flex; flex-direction: column; align-items: center; }

@@ -5,32 +5,14 @@
 #content{
 	min-width: 1280px;
 }
-/*상단 배너*/
-.head{
-	background-image: url("https://static.onoffmix.com/images/pc/default/inquire_bg.png");
-	height:360px;
-	background-size: cover;
-	overflow: hidden;
-	display: block;
-}
-h2.main_title{
-	margin: 116px auto 20px;
-	text-align: center;
-	font-size: 46px;
-	padding:7px 0;
-}
-p.sub_text{
-	text-align: center;
-	font-size: 20px;
-}
+
 /*메인 메뉴바 */
-.menu_bar{
-	width:100%;
-	height:80px;
-	box-sizing: border-box;
-	background-color: #333;
-	text-align: center;
-}
+	.menu_bar{
+		width:100%;
+		height:80px;
+		box-sizing: border-box;
+		text-align: center;
+	}
 /*메인 메뉴바 */
 	.menu_bar{
 		width:100%;
@@ -60,20 +42,19 @@ p.sub_text{
 		font-weight: 600;
 		border-bottom: 3px solid rgb(157 128 63);
 	}
-/* 바디 폭 조정 */
-.body_area{
-	position: relative;
-	box-sizing: border-box;
-	width: 1280px;
-	margin: 0 auto;
-}
-/* 메인 컨텐츠 */
-.main_content{
-	margin: 100px auto 90px;
-	box-sizing: border-box;
-	width: 100%;
-	min-height: 260px;
-}
+/* 나의 문의내역 전체 레이아웃 */
+	.body_area{
+		position: relative;
+		box-sizing: border-box;
+		width: 1280px;
+		margin: 0 auto;
+	}
+	.main_content{
+		margin: 100px auto 90px;
+		box-sizing: border-box;
+		width: 100%;
+		min-height: 260px;
+	}
 /* 문의사항 네비바*/
 .inquire_navi{
 	width: 100%;
@@ -89,17 +70,189 @@ p.sub_text{
 	display: inline-block;
 	box-sizing: border-box;
 }
+.inquire_navi .active{
+	color: rgb(157 128 63);
+	font-weight: 400;
+}
+.inquire_navi li a:hover{
+	text-decoration:underline;
+}
 .inquire_navi li a{
 	width: 100%;
 	height: 100%;
-	padding-top: 16px;
 	box-sizing: border-box;
-	font-size: 16px;
+	font-size: 20px;
 	display: block;
-	border: 1px solid gray;
+	border: 1px solid #d8d8d8;
 	border-right: none;
-	color:black;
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .inquire_navi li a.my_inquire{
-	border-right: 1px solid gray;
+	border-right: 1px solid #d8d8d8;
 }
+.inquire_navi li a.cs_inquire{
+	border-right: 1px solid #d8d8d8;
+}
+/* 나의 문의 내역 전체 레이아웃 */
+	h3.title{
+		font-size: 22px;
+		font-weight:500;
+	}
+	table {
+		width: 100%;
+	    border-collapse: collapse;
+	    table-layout: fixed;
+	}
+	table.table-data{
+		margin-top: 16px;
+	    margin-bottom: 50px;
+	    border-top: 2px solid #333;
+	}
+/* 나의 문의 내역 테이블 헤드 */
+	table thead {
+    	border-bottom: 1px solid #d8d8d8;
+	}
+	table th {
+	    padding: 22px 0;
+	    font-size: 19px;
+	    font-weight: 500;
+	    background-color: #f7f7f7;
+	}
+	th.num{
+		display:none;
+	}
+	th.date{
+		width: 140px;
+	}
+	th.title{
+		width: 960px;
+	}
+	th.status{
+		width: 180px;
+	}
+	table td {
+	    box-sizing: border-box;
+	    padding-top: 0;
+	    padding-bottom: 0;
+	    text-align: center;
+	}
+	
+	/* 나의 질문 내역 레이아웃*/
+	.main-data{
+		position: relative;
+		border-bottom : none;
+	}
+	.main-data .summary-data td {
+    	padding: 25px 0;
+    	font-size: 19px;
+	}
+	.main-data .summary-data .title .inquire_title:hover{
+		text-decoration:underline;
+	}
+	.status p{
+		color: rgb(157 128 63);
+	}
+	.main-data td.num{
+		display:none;
+	}
+	.main-data td.date {
+	    width: 140px;
+	}
+	.main-data td.title{
+		width:960px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	table td.title{
+		text-align: left;
+	}
+	.main-data td.status{
+		width: 180px;
+	}
+	.main-data td {
+	    font-size: 16px;
+	}
+	table table td {
+	    text-align: inherit;
+	}
+	table tbody tr:first-child {
+    	border-top: none;
+	}
+	/* 답변 내용 레이아웃 */
+	.inquire_question,.inquire_answer{
+		display: flex;
+	}
+	.inquire_q,.inquire_a{
+	    font-size: 3rem;
+	    font-weight: 100;
+	}
+	.inquire_q{
+		color: #c1c4c3;
+	}
+	.inquire_a{
+		color: rgb(166 223 170 / 89%);
+		padding-top: 2%;
+	}
+	#content,#answer{
+	    padding-bottom: 2%;
+	    line-height: 2rem;
+	    margin-left: 6%;
+	    width: 0%;
+	    min-width: 75%;
+	    font-size:19px;
+	}
+	#answer{
+		padding-top: 2%;
+	}
+	.detail-td{
+		padding: 37px 50px;
+    	box-sizing: border-box;
+    	width: 100%;
+	}
+	.description{
+		width: 1180px;
+		text-align: left;
+		padding: 0 85px;
+	    line-height: 19px;
+	    word-break: break-all;
+	}
+	/* 삭제 버튼 및 관리자 답변 버튼 레이아웃 */
+	.main-data .detail-data .inquiry-content .delete-btn {
+	    position: absolute;
+	    right: 3px;
+	    border: none;
+	    background-color: transparent;
+	    font-size: 19px;
+	    color: #666;
+	    margin-right:70px;
+	}
+	
+	.main-data .detail-data .inquiry-content .delete-btn:hover,.main-data .detail-data .inquiry-content .answer-btn:hover  {
+	   color: rgb(157 128 63);
+	}
+	.main-data .detail-data .inquiry-content .answer-btn {
+	    position: absolute;
+	    right: 40px;
+	    border: none;
+	    background-color: transparent;
+	    font-size: 14px;
+	    color: #666;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -8,12 +8,12 @@
          (SELECT result1.*, ROWNUM AS rnum
          FROM
             (SELECT reivew, title, writer, review, ref_group, rate,
-                board_review.regdate, profile
-            FROM board_review
+                group_review_tb.regdate, profile
+            FROM group_review_tb
             INNER JOIN users
-            ON board_review.writer=users.id
+            ON group_review_tb.writer=users.id
             WHERE ref_group=#{ref_group}
-            ORDER BY board_review.regdate desc, num ASC) result1)
+            ORDER BY group_review_tb.regdate desc, num ASC) result1)
       WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}   
    </select>
    <!-- 디테일 페이지에 보여주기 위한 댓글 -->
@@ -25,36 +25,36 @@
    </select>
    <select id="getCount" parameterType="int" resultType="int">
       SELECT NVL(MAX(ROWNUM), 0)
-      FROM board_review
+      FROM group_review_tb
       WHERE ref_group=#{ref_group}
    </select>
    <select id="getData" parameterType="int" resultType="reviewDto">
-      SELECT num,title, writer, review, ref_group, rate, regdate
-      FROM board_review
-      WHERE num=#{num}
+      SELECT review_num, group_num, writer, content, rate, regdate
+      FROM group_review_tb
+      WHERE review_num=#{num}
    </select>
    <delete id="delete" parameterType="int">
-   	  DELETE FROM board_review
-   	  WHERE num=#{num}
+   	  DELETE FROM group_review_tb
+   	  WHERE review_num=#{num}
    </delete>
    <insert id="insert" parameterType="reviewDto">
    	  INSERT INTO GROUP_REVIEW_TB
    	  (review_num, writer, content, group_num, rate, regdate)
-   	  VALUES(#{review_num}, #{writer}, #{content}, #{group_num}, #{rate}, SYSDATE)
+   	  VALUES(#{review_num}, #{writer}, #{content}, #{group_num}, #{rate}, TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'))
    </insert>
    <select id="getSequence" resultType="int">
       SELECT review_seq.NEXTVAL
       FROM DUAL
    </select>
    <update id="update" parameterType="reviewDto">
-      UPDATE board_review
+      UPDATE group_review_tb
       SET review=#{review}, rate=#{rate}
-      WHERE num=#{num}
+      WHERE review_num=#{num}
    </update>
 	<select id="getAvg" parameterType="string" resultType="double">
 	    <![CDATA[
 	        SELECT ROUND(AVG(rate), 2) AS average_rate
-	        FROM board_review
+	        FROM group_review_tb
 	        WHERE title=#{title}
 	    ]]>
 	</select>

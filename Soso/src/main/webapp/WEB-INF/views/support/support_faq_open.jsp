@@ -6,37 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/support_faq_open</title>
-<style>
-.btn_more{
-	background-image: url("https://static.onoffmix.com/images/pc/svg/arrow_up_bl.svg");
-	width:100%;
-	height: 64px;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	background: transparent url("https://static.onoffmix.com/images/pc/svg/arrow_down.svg") no-repeat 98.5% center;
-	text-decoration: none;
-	text-align: left;
-	cursor: pointer;
-	overflow: hidden;
-	text-indent: -9999em;
-	position: absolute;
-	box-sizing: border-box;
-	display: block;
-	border: 1px solid transparent;
-	}
-	.dropbox .detail_content{
-	position: relative;
-	padding: 40px 50px 90px;
-	box-sizing: border-box;
-	width: 100%;
-	font-size: 14px;
-	background-color: #fafafa;
-	overflow-x: hidden;
-	overflow-y: auto;
-	}
-</style>
+<title>자주하는 질문 - 모임개설</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/support/support_faq.css" />
@@ -45,6 +16,7 @@
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp">
 		<jsp:param value="home" name="current"/>
 	</jsp:include>
+	<!-- 상단배너 레이아웃 -->
     <main id="main-banner" class="main-banner-06">
         <div class="inner-wrap">
             <div class="title">
@@ -90,7 +62,7 @@
 		<div class="main_content">
 			<div class="tab_section">
 			<ul class="tab_menu">
-				<li class="active">
+				<li class="">
 					<a href="${pageContext.request.contextPath }/support/support_faq?">전체(${categoryAllRow })</a>
 				</li>
 				<li class="">
@@ -99,7 +71,7 @@
 				<li class="">
 					<a href="${pageContext.request.contextPath }/support/support_faq_request?category=2">모임신청(${categoryTwoRow })</a>
 				</li>
-				<li class="">
+				<li class="active">
 					<a href="${pageContext.request.contextPath }/support/support_faq_open?category=3">모임개설(${categoryThreeRow })</a>
 				</li>
 				<li class="">
@@ -115,45 +87,66 @@
 					<li class="dropbox">
 					<button type="button" class="btn_more">답변</button>
 						<div class="title_area">
-							<c:choose>
-								<c:when test="${tmp.category == 1}">회원</c:when>
-								<c:when test="${tmp.category == 2}">모임신청</c:when>
-								<c:when test="${tmp.category == 3}">모임개설</c:when>
-								<c:when test="${tmp.category == 0}">기타</c:when>
-							</c:choose>
-							<h5 class="detail">${tmp.question }</h5>
+							<div class="category">
+								<c:choose>
+									<c:when test="${tmp.category == 1}">회원</c:when>
+									<c:when test="${tmp.category == 2}">모임신청</c:when>
+									<c:when test="${tmp.category == 3}">모임개설</c:when>
+									<c:when test="${tmp.category == 0}">기타</c:when>
+								</c:choose>
+							</div>
+							<h5 class="detail">
+								<a class="faq_question" href="">${tmp.question}</a>
+							</h5>
 						</div>
 						<div class="detail_content" style="display: block;">
 							<span style="line-height: 24px;">
 								<pre>${tmp.answer }</pre>
 							</span>
+							<c:if test="${isAdmin }">
+								<button type="submit" data-num="${tmp.faq_num}" class="admin_delbutton" id="delete-btn">삭제</button>
+							</c:if>
 						</div>
 					</li>
 					</c:if>
 				</c:forEach>
 			</ul>
 			</div>
+			<!-- admin 관리 메뉴 -->
+			<div class="admin_menu">
+				<c:choose>
+				    <c:when test="${isAdmin}">
+				        <a href="${pageContext.request.contextPath }/support/support_faq_insertform" class="admin_button">FAQ 등록</a>
+				    </c:when>
+				    <c:otherwise>
+				        <!-- 해당 부분은 admin이 아닐 때의 처리 -->
+				    </c:otherwise>
+				</c:choose>
+			</div>
 		</div>
 	<div>
-		<nav style="display:flex; justify-content:center; margin-bottom:30px;">
-			<ul class="pagination" style="display:flex; justify-content:space-around; width:30%">
-				<c:if test="${startPageNum ne 1 }">
-					<li class="page-item">
-						<a class="page-link animate__animated" href="support_faq?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedK}">Prev</a>
-					</li>
-				</c:if>
-				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
-					<li class="page-item ${pageNum eq i ? 'active' : '' }">
-						<a class="page-link animate__animated" href="support_faq?pageNum=${i }&condition=${condition}&keyword=${encodedK}">${i }</a>
-					</li>
-				</c:forEach>
-				<c:if test="${endPageNum lt totalPageCount }">
-					<li class="page-item">
-						<a class="page-link animate__animated" href="support_faq?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedK}">Next</a>
-					</li>
-				</c:if>				
-			</ul>
-		</nav>
+		<div class="pagination_wrap">
+			<nav class="pagination">
+				<ul class="pagination_ul">
+					<c:if test="${startPageNum ne 1 }">
+						<li class="page-item">
+							<a href="support_faq?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedK}">Prev</a>
+						</li>
+					</c:if>
+					<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+						<li class="page-item ${pageNum eq i ? 'active' : '' }">
+							<a href="support_faq?pageNum=${i }&condition=${condition}&keyword=${encodedK}">${i }</a>
+						</li>
+					</c:forEach>
+					<c:if test="${endPageNum lt totalPageCount }">
+						<li class="page-item">
+							<a href="support_faq?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedK}">Next</a>
+						</li>
+					</c:if>				
+				</ul>
+			</nav>
+		</div>
+		<!-- 스크립트 답변 토글 및 관리자 기능 -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script>
 			document.querySelectorAll(".pagination a").forEach(function(item){
@@ -170,7 +163,7 @@
 			});
 			$(document).ready(function(){
 				
-				$(".btn_more").click(function(e){
+				$(".faq_question").click(function(e){
 					e.preventDefault();
 					$(this).closest(".dropbox").find(".detail_content").toggle();
 				});

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/cafe/insert.jsp</title>
+<title>소모임 커뮤니티 글쓰기</title>
 </head>
 <body>
 	<script>

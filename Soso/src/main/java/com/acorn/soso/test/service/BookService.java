@@ -19,4 +19,7 @@ public interface BookService {
 	
 	//책 리스트 불러오기
 	public void bookList(int group_num, Model model);
+	
+	//책 삭제하기
+	public void bookDelete(String isbn, int group_num);
 }

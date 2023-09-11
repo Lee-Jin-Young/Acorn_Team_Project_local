@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>소모임 정보 수정</title>
+<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/group_managing/group_managing_group_insert.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.datetimepicker.min.css" />
 </head>
@@ -149,10 +150,9 @@
 			</script>
 			<div id="form_button">
 				<button type="submit">수정</button>
-				<a style="background-color: black; color:white" class="btn mt-3" 
-					href="${pageContext.request.contextPath}/group_managing/group_delete?num=${dto.num}">해산하기</a>
+				<a style="background-color: black; color:white" class="deleteBtn">해산하기</a>
 				<a style="background-color: black; color:white; margin-left:1rem;" class="btn mt-3" 
-					href="${pageContext.request.contextPath}/test/booksearch?num=${dto.num}">책 등록하기</a>
+					href="${pageContext.request.contextPath}/test/bookUpdateForm?group_num=${dto.num}" id="bookUpdateLink" name="bookUpdateLink">책 수정&삭제</a>
 			</div>
 			<!-- db에 저장하기 위한 이미지 경로 값 -->
 			<input type="hidden" name="img_path" value="${ dto.img_path }"/>
@@ -162,6 +162,36 @@
                     		accept=".jpg, .png, .gif, .JPG, .JPEG, .jpeg"/>
 			<button type="submit"></button>
 		</form>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+		
+		<script>
+			$("#bookUpdateLink").click(function (event) {
+				event.preventDefault();
+			    // 새 창을 열기 위한 URL
+			    var newWindowUrl = "${pageContext.request.contextPath}/test/bookUpdateForm?group_num=${dto.num}";
+			
+			    // 새 창 열기
+			    window.open(newWindowUrl, "bookUpdateForm", "width=600,height=400");
+			});
+		
+			$(".deleteBtn").css("cursor", "pointer").click(()=>{
+				Swal.fire({
+		      		title: `정말로 소모임을 해산하겠습니까?`,
+		      		text: "소모임을 해산하면 다시 복구할 수 없습니다",
+		      		icon: 'warning',
+		      		confirmButtonColor: 'rgb(13, 110, 253)',
+		      		cancelButtonColor: 'rgb(248, 162, 146)',
+		      		confirmButtonText: '확인',
+		      		cancelButtonText: '취소',
+		      		showCancelButton: true,
+		   		}).then((result) => {
+			      	if (result.isConfirmed) {
+			      		location.href="${pageContext.request.contextPath}/group_managing/group_delete?num=${dto.num}";
+			      	}
+			    })
+			})
+		</script>
 		<script src="${pageContext.request.contextPath }/resources/js/gura_util.js"></script>
 		<script>
 			//file 버튼을 클릭하면 input type="file" 을 강제 클릭

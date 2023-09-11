@@ -24,6 +24,7 @@ public interface GroupManagingService {
 	public void updateGroupData(GroupDto dto, HttpServletRequest request);
 	public void deleteGroupData(int num);
 	public void getMemberList(int group_num, HttpServletRequest request);
+	public void getMemberData(int num, HttpServletRequest request);
 	public void getKickedMemberList(int group_num, HttpServletRequest request);
 	public void getApplicantList(int group_num, HttpServletRequest request);
 	public void getRejectedApplicantList(int group_num, HttpServletRequest request);
@@ -34,4 +35,5 @@ public interface GroupManagingService {
 	public void getDetail(ModelAndView mView, int num);
 	public void dropOut(GroupManagingDto dto);
 	public List<GroupManagingDto> getMateList(int num);
+	
 }
