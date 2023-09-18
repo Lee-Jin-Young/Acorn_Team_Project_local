@@ -227,7 +227,7 @@
 	    background-color: transparent;
 	    font-size: 19px;
 	    color: #666;
-	    margin-right:70px;
+	    margin-right:50px;
 	}
 	
 	.main-data .detail-data .inquiry-content .delete-btn:hover,.main-data .detail-data .inquiry-content .answer-btn:hover  {
@@ -238,8 +238,9 @@
 	    right: 40px;
 	    border: none;
 	    background-color: transparent;
-	    font-size: 14px;
+	    font-size: 19px;
 	    color: #666;
+	    margin-right:70px;
 	}
 
 

@@ -19,10 +19,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.acorn.soso.naverLogin.NaverService;
 import com.acorn.soso.users.dto.UsersDto;
 import com.acorn.soso.users.service.UsersService;
 
@@ -31,6 +33,9 @@ public class UsersController {
 	
 	@Autowired
 	private UsersService service;
+	
+	@Autowired
+	private NaverService naverservice;
 	
 	@Value("${file.location}")
 	private String fileLocation;
@@ -62,9 +67,31 @@ public class UsersController {
 	}
 	
 	//로그인 폼 요청처리
+	//네이버 로그인 위한 메소드 추가
 	@GetMapping("/users/loginform")
-	public String loginForm() {
+	public String loginForm(Model model, HttpSession session) {
+		
+		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+		String naverAuthUrl = naverservice.getAuthorizationUrl(session);
+		
+		//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
+		//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+		
+		//네이버 
+		model.addAttribute("url", naverAuthUrl);
+		
 		return "users/loginform";
+	}
+	
+	@GetMapping("/users/socialaccess")
+	public String socialAccess(HttpServletRequest request, HttpSession session) {
+		//파라미터를 얻어와서
+		String id = (String)request.getParameter("id");
+		//소셜로그인 여부를 업데이트 해주고
+		service.updateSocial(id);
+		//세션 영역에 id를 넣어준다.
+		session.setAttribute("id", id);
+		return "main";
 	}
 	
 	@PostMapping("/users/login")
@@ -127,7 +154,7 @@ public class UsersController {
 		//서비스를 이용해서 이미지를 upload 폴더에 저장하고 리턴되는 Map을 리턴해서 json 문자열 응답하기
 		return service.saveProfileImage(request, image);
 	};
-	
+
 	@GetMapping(
 		value = "/users/images/{imageName}",
 		produces = {MediaType.IMAGE_GIF_VALUE,  MediaType.IMAGE_PNG_VALUE, 

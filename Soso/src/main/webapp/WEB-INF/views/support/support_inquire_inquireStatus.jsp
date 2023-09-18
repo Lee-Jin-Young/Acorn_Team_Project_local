@@ -82,19 +82,16 @@
 												<td class="num">${tmp.cs_num }</td>
 												<td class="date">${tmp.regdate }</td>
 												<td class="title">
-													<a href="">${tmp.title }</a>
+													<a class="inquire_title"href="">${tmp.title }</a>
 												</td>
 												<td class="status">
 													 <c:if test="${empty tmp.answer}">
 													        답변대기
 													 </c:if>
 													 <c:if test="${not empty tmp.answer}">
-													        답변완료
+													 	<p>답변완료</p>
 													 </c:if>
 												</td>
-											</tr>
-											<tr class="btn-area">
-												<td><button type="button" class="btn_more">답변보기</button></td>
 											</tr>
 											<tr class="detail-data">
 												<td class="detail-td">
@@ -134,7 +131,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script>
 				$(document).ready(function(){
-					$(".btn_more").click(function(e){
+					$(".inquire_title").click(function(e){
 						e.preventDefault();
 						$(this).closest(".main-data").find(".detail-td").toggle();
 					});
