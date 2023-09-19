@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
     <link rel="stylesheet" href="${path }/resources/css/common.css" type="text/css">
     <link rel="stylesheet" href="${path }/resources/css/reset.css" type="text/css">
-    <script src="${path }/resources/js/jquery.easing.1.3.js"></script>
+
     <script src="${path }/resources/js/common.js"></script>
 <!-- mobile -->
     <div class="panel">  	
@@ -91,7 +91,7 @@
 			 </nav>
 			 <div class="sns">
                 <div class="iconWrap">
-                    <a href="#" class="btn">
+                    <a href="#" class="btn" onclick="return false;">
                         <span class="circle01"></span>
                         <span class="circle02"></span>
                         <span class="circle03"></span>
