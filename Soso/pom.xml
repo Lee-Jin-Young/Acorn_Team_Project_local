@@ -10,10 +10,10 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>Soso</artifactId>
-	<version>0.1.4</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>Bookmate</name>
-	<description>Acorn project for Spring Boot</description>
+	<description>Acorn project with Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
