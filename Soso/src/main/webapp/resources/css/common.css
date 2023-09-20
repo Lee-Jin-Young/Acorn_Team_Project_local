@@ -16,13 +16,13 @@ input{outline: none;background-color: #fff;}
 button { cursor: pointer; }
 
 /* Top Btn */
-#scroll-btn {opacity: 0;width: 80px;height: 80px;color: #fff;background-color: rgb(171 130 92 / 58%);position: fixed; bottom: 10%;right: 5%;    border: 2px solid #ffffff00;border-radius: 50%; font: bold 25px;       transition: opacity 0.5s, transform 0.5s;}
+#scroll-btn {z-index:9999;opacity: 0;width: 80px;height: 80px;color: #fff;background-color: rgb(171 130 92 / 58%);position: fixed; bottom: 10%;right: 5%;    border: 2px solid #ffffff00;border-radius: 50%; font: bold 25px;       transition: opacity 0.5s, transform 0.5s;}
 #scroll-btn.show {opacity: 1;transition: opacity 1s, transform 1s;}
 
 .inner-wrap, .inner-wrapper{width: 80%; margin: 0 auto; }
 
 /* padding, margin */
-section{ width: 100%; padding: 130px 0; background-position: center; background-repeat: no-repeat; }
+section{ width: 100%; padding: 132px 0; background-position: center; background-repeat: no-repeat; }
 
 
 /* header */
@@ -40,7 +40,7 @@ header .gnb ul .nav_cs{margin-right:95px;}
 
 
 
-.sns{ float: right; width: 15%; height: 100%;  }
+.sns{ float: right; }
 .sns .iconWrap{ float: right; height: 100%;  }
 .sns .iconWrap a{ float: left; height: 100%; margin-right: 1.875rem; }
 .sns .iconWrap img{ height: 100%; }
@@ -130,23 +130,8 @@ footer br { display: none; }
 @media screen and (max-width: 1180px) {
     *{font-size: 16px;}
 	header h1 .logo{width:150px;}
-}
-
-
-
-
-
-
-
-
-
-
-
-/*=========================== tablet ==============================*/
-@media screen and (max-width: 1025px){
-    *{ font-size: 14px; }
-    header .inner-wrap {
-    width: 95%;
+	header .inner-wrap {
+    width: 90%;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -174,7 +159,7 @@ footer br { display: none; }
     /* panel - pGnb */
     .pGnb{ width: 100%; padding: 60px; box-sizing: border-box; }
     .pGnb li{ width: 50%;  margin-bottom: 20px; }
-    .pGnb .mainNav{ position: relative; font-size: 1.75rem; margin-bottom: 40px; }
+    .pGnb .mainNav{ position: relative; font-size: 1.4rem; margin-bottom: 40px; }
 
     .pGnb .subNav{ display: none; width: 100%; padding: 0 0 30px 30px; overflow: hidden; }
     .pGnb > ul > li:nth-child(3) .subNav li{ width: 100%; }
@@ -196,6 +181,22 @@ footer br { display: none; }
     }
     
     .sns .iconWrap a:last-child{ display: block; padding: 12px 0; box-sizing: border-box; }
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+/*=========================== tablet ==============================*/
+@media screen and (max-width: 1024px){
+    *{ font-size: 14px; }
 
     footer { padding: 30px 15px; }
 }
@@ -224,7 +225,7 @@ footer br { display: none; }
     footer .logo img { width: 100%; }
     footer .logo:after { display: none; }
     footer ul { padding: 0; }
-    footer ul > * { text-align: center; }
+    footer ul > * { text-align: center; line-height: 1.5rem; }
     footer br { display: block; }
 }
 
@@ -234,7 +235,7 @@ footer br { display: none; }
 /*=========================== ~414 ==================================*/
 @media screen and (max-width: 414px) {
     *{font-size: 14px;}
-
+	
     footer { padding: 30px 10px; } 
 
 }
@@ -246,7 +247,7 @@ footer br { display: none; }
 @media screen and (max-width: 375px){
     *{ font-size: 12px; }
     header h1 { display: flex; vertical-align: middle; }
-    header h1 img { width: 100px; }
+    header h1 img { width: 135px; }
     .sns .iconWrap img { width: 22px; }
     .home a img {width: 16px; }
 

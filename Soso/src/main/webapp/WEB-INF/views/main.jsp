@@ -9,15 +9,15 @@
 	<meta property="og:title" content="북메이트" /> 
 	<meta property="og:image" content="${path }/resources/images/main/bookmate_or_image.jpg" /> 
 	<meta property="og:description" content="함께하는 독서모임 , 북메이트" /> 
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
  	<link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
     <link rel="stylesheet" href="${path }/resources/css/swiper-bundle.min.css" type="text/css">
     <link rel="stylesheet" href="${path }/resources/css/main.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" >
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="${path }/resources/js/swiper-bundle.min.js"></script>
     <script src="${path }/resources/js/main.js"></script>
     <title>북메이트</title>
 </head>
@@ -37,10 +37,10 @@
             <div id="box">
                 <span class="text"></span><span class="blink">|</span>
             </div>
-			<div class="slide-btn">
+<!-- 			<div class="slide-btn">
                <div class="swiper-button-prev"></div>
                <div class="swiper-button-next"></div>
-            </div>
+            </div> -->
         </div>
     </main>
     <section class="popular">
@@ -94,7 +94,7 @@
                 data-aos-offset="300"
                 data-aos-easing="ease-in-sine" class="serif">
 			                    공동체 독서모임 연결 함께하는 독서 모임, <br>
-			                    배우고 성장하는 북클럽
+			                    배우고 성장하는 북메이트
                 </p>
                 <ul data-aos="fade-up"
                 data-aos-offset="100"
@@ -107,7 +107,7 @@
                 data-aos-offset="100"
                 data-aos-easing="ease-in-sine" class="serif">
                 공동체 독서모임 연결 함께하는 독서 모임, <br>
-                배우고 성장하는 북클럽
+                배우고 성장하는 북메이트
                 </p>
             </div>
             <div data-aos="fade-up"
@@ -156,47 +156,54 @@
                 </div>
             </div>
             <div class="business-content pcol06 tcol06 mcol12">
-                <ul>
-                    <div data-aos="flip-right" data-aos-offset="100"
-                    data-aos-once="false"
-                    data-aos-easing="ease-in-sine">
-                        <li>
-                            <p>soso1</p>
-                            <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
-                        </li>
-                    </div>
-                    <div data-aos="flip-left" data-aos-offset="100"
-                    data-aos-once="false"
-                    data-aos-easing="ease-in-sine">
-                        <li>
-                            <p>soso1</p>
-                            <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
-                        </li>
-                    </div>
-                    <div data-aos="flip-right" data-aos-offset="100"
-                    data-aos-once="false"
-                    data-aos-easing="ease-in-sine">
-                        <li>
-                            <p>soso1</p>
-                            <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
-                        </li>
-                    </div>
-                    <div data-aos="flip-left" data-aos-offset="100"
-                    data-aos-once="false"
-                    data-aos-easing="ease-in-sine">
-                        <li>
-                            <p>soso1</p>
-                            <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
-                        </li>
-                    </div>
-                    
+	            <ul>
+	            	<li data-aos="flip-right" data-aos-offset="100"
+			                data-aos-once="true"
+			                data-aos-easing="ease-in-sine">
+			              <span></span>
+			              <p><b style="font-size:1.7rem;">CONTACT</b></p>
+			              <span></span>
+	                  </li>
+	                  <li data-aos="flip-right" data-aos-offset="100"
+			                data-aos-once="true"
+			                data-aos-easing="ease-in-sine">
+			              <p>정세영</p>
+			              <span><a href="https://github.com/ar2723"><i class="bi bi-github"></i></a></span>
+	                      <p>고현준</p>
+	                      <span><a href="https://github.com/HyeonJunKOH"><i class="bi bi-github"></i></a></span>
+	                  </li>
+	                  <li data-aos="flip-right" data-aos-offset="100"
+			                data-aos-once="true"
+			                data-aos-easing="ease-in-sine">
+			              <p>김형규</p>
+			              <span><a href="https://github.com/kariyarn"><i class="bi bi-github"></i></a></span>
+	                      <p>박종현</p>
+	                      <span><a href="https://github.com/PakrJongHyeon"><i class="bi bi-github"></i></a></span>
+	                  </li>
+	                  <li data-aos="flip-right" data-aos-offset="100"
+			                data-aos-once="true"
+			                data-aos-easing="ease-in-sine">
+			              <p>송한나</p>
+			              <span><a href="https://github.com/songhannaa"><i class="bi bi-github"></i></a></span>
+	                      <p>이영주</p>
+	                      <span><a href="https://github.com/2youngjoo"><i class="bi bi-github"></i></a></span>
+	                  </li>
+	                  <li data-aos="flip-right" data-aos-offset="100"
+			                data-aos-once="true"
+			                data-aos-easing="ease-in-sine">
+			              <p>이진영</p>
+			              <span><a href="https://github.com/Lee-Jin-Young"><i class="bi bi-github" ></i></a></span>
+	                      <p>임효열</p>
+	                      <span><a href="https://github.com/Wideds"><i class="bi bi-github"></i></a></span>
+	                  </li>
+                  
                 </ul>
             </div>
         </div>
     </section>
 
     <section class="fixed02"></section>
-
+<%-- 
     <section class="process">
         <div class="inner-wrap">
             <h3 class="title white">독서 소모임</h3>
@@ -251,20 +258,23 @@
         </div>
     </section>
     
-    <section class="fixed01"></section>
+    <section class="fixed03"></section> --%>
 
     <section class="map">
         <h3 class="title black">북메이트 오시는 길</h3>
         <div class="inner-wrap">
-            <div class="map-one">
+            <div class="map-one pcol12 tcol12 mcol12" data-aos="fade-up"
+            data-aos-offset="300"
+            data-aos-once="true"
+            data-aos-easing="ease-in-sine">
                 <div class="first_map">
-                <div id="daumRoughmapContainer1692434262801" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+                <div id="daumRoughmapContainer1692434262801" class="root_daum_roughmap root_daum_roughmap_landing" style="width: 100%;"></div>
                 </div>
             </div>
-            <div class="map-content pcol06 tcol06 mcol12">
+<%--             <div class="map-content pcol06 mcol12">
                 <ul>
                     <div data-aos="flip-right" data-aos-offset="400"
-                    data-aos-once="false"
+                    data-aos-once="true"
                     data-aos-easing="ease-in-sine">
                         <li>
                             <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
@@ -272,7 +282,7 @@
                         </li>
                     </div>
                     <div data-aos="flip-left" data-aos-offset="400"
-                    data-aos-once="false"
+                    data-aos-once="true"
                     data-aos-easing="ease-in-sine">
                         <li>
                             <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
@@ -280,7 +290,7 @@
                         </li>
                     </div>
                     <div data-aos="flip-left" data-aos-offset="400"
-                    data-aos-once="false"
+                    data-aos-once="true"
                     data-aos-easing="ease-in-sine">
                         <li>
                             <span><img src="${path }/resources/images/main/3_icon_check.svg" alt="체크 아이콘"></span>
@@ -288,7 +298,7 @@
                         </li>
                     </div>
                 </ul>
-            </div>
+            </div> --%>
         </div>
     </section>
     <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
@@ -298,8 +308,8 @@
 		new daum.roughmap.Lander({
 			"timestamp" : "1692434262801",
 			"key" : "2fw26",
-			"mapWidth" : "640",
-			"mapHeight" : "450"
+			"mapWidth" : "100%",
+			"mapHeight" : "400"
 		}).render();
 	</script>
     <script>

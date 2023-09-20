@@ -38,6 +38,10 @@ public class UsersDaoImpl implements UsersDao{
 		// 여기서 최종적으로 리턴되는 값은 users.getData() 메소드를 호출한 뒤에 반환되는 resultType 데이터이다.
 		return session.selectOne("users.getData", id);
 	}
+	@Override
+	public UsersDto getNaver(String email) {
+		return session.selectOne("users.getNaver", email);
+	}
 	
 	@Override
 	public void updatePwd(UsersDto dto) {
@@ -57,5 +61,11 @@ public class UsersDaoImpl implements UsersDao{
 	@Override
 	public UsersDto getId(String userName) {
 		return session.selectOne("users.getId", userName);
+	}
+
+	@Override
+	public void UpdateSocail(String id) {
+		session.update("users.updateSocial", id);
+		
 	}
 }

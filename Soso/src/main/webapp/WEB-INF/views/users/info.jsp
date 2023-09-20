@@ -52,9 +52,11 @@
 						</div>
 					</div>
 					<div class="buttons">
-						<div class="button" style="background-color: rgb(191, 191, 191)">
-							<div><a href="${pageContext.request.contextPath}/users/pwd_updateform">비밀번호 변경</a></div>
-						</div>
+						<c:if test="${dto.social != 2 }">
+							<div class="button" style="background-color: rgb(191, 191, 191)">
+								<div><a href="${pageContext.request.contextPath}/users/pwd_updateform">비밀번호 변경</a></div>
+							</div>
+						</c:if>
 						<div class="button" style="background-color: rgb(158 165 194 / 97%)">
 							<div><a href="${pageContext.request.contextPath}/users/updateform">개인정보 수정</a></div>
 						</div>

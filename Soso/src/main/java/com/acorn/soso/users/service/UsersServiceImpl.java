@@ -29,16 +29,27 @@ public class UsersServiceImpl implements UsersService{
 	@Value("${file.location}")
 	private String fileLocation;
 	
+	//회원가입
 	@Override
 	public void addUser(UsersDto dto) {
-		//비밀번호를 암호화해줄 객체를 생성
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		//암호화된 비밀번호 얻어내서
-		String encodedPwd = encoder.encode(dto.getPwd());
-		//UsersDto 객체에 담고
-		dto.setPwd(encodedPwd);
-		//UsersDao 객체를 이용해서 DB에 저장하기
-		dao.insert(dto);
+		
+		//만약 소셜로그인(social=2)이면 dto.getPwd==null이다.
+		if(dto.getPwd() == null) {
+			dto.setPwd("");
+			dto.setSocial(2);
+			dao.insert(dto);
+		}else {//일반회원가입
+			//비밀번호를 암호화해줄 객체를 생성
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			//암호화된 비밀번호 얻어내서
+			String encodedPwd = encoder.encode(dto.getPwd());
+			//UsersDto 객체에 담고
+			dto.setPwd(encodedPwd);
+			//소셜은 0으로 설정해준다.
+			dto.setSocial(0);
+			//UsersDao 객체를 이용해서 DB에 저장하기
+			dao.insert(dto);
+		}
 	}
 	
 	//아이디 중복체크
@@ -68,6 +79,7 @@ public class UsersServiceImpl implements UsersService{
 		return isValid;
 	}
 
+	//로그인 처리
 	@Override
 	public void loginprocess(UsersDto dto, HttpSession session) {
 		String id = dto.getId();
@@ -81,6 +93,7 @@ public class UsersServiceImpl implements UsersService{
 		}
 	}
 
+	//회원정보 조회
 	@Override
 	public void getInfo(HttpSession session, Model model) {
 		//로그인 된 아이디를 읽어온다.
@@ -89,7 +102,16 @@ public class UsersServiceImpl implements UsersService{
 		//view 페이지에서 필요한 정보를 서비스 페이지에서 dto로 담아준다.
 		model.addAttribute("dto", dto);
 	}
+	
+	@Override
+	public UsersDto getNaver(String email) {
+		//로그인 된 아이디를 읽어온다.
+		UsersDto dto = dao.getNaver(email);
+		//view 페이지에서 필요한 정보를 서비스 페이지에서 dto로 담아준다.
+		return dto;
+	}
 
+	//비밀번호 수정
 	@Override
 	public void updateUserPwd(HttpSession session, UsersDto dto, Model model) {
 		//세션 영역에서 로그인된 아이디 읽어오기
@@ -113,6 +135,7 @@ public class UsersServiceImpl implements UsersService{
 		model.addAttribute("id", id);
 	}
 
+	//회원 프로필 이미지 수정
 	@Override
 	public Map<String, Object> saveProfileImage(HttpServletRequest request, MultipartFile mFile) {
 		//업로드된 파일에 대한 정보를 MultipartFile 객체를 이용해서 얻어낼수 있다.   
@@ -145,6 +168,7 @@ public class UsersServiceImpl implements UsersService{
 	      return map;
 	}
 
+	//회원정보 수정
 	@Override
 	public void updateUser(UsersDto dto, HttpSession session) {
 		//로그인된 아이디 얻어오기
@@ -155,6 +179,7 @@ public class UsersServiceImpl implements UsersService{
 		dao.update(dto);
 	}
 
+	//회원 탈퇴
 	@Override
 	public void deleteUser(HttpSession session, Model model) {
 		//로그인된 아이디 얻어와서
@@ -167,6 +192,7 @@ public class UsersServiceImpl implements UsersService{
 		model.addAttribute("id", id);
 	}
 
+	//비밀번호 인증
 	@Override
 	public void pwdAuth(UsersDto dto, HttpSession session, Model model) {
 		//세션 영역에서 로그인된 아이디 읽어오기
@@ -185,13 +211,15 @@ public class UsersServiceImpl implements UsersService{
 		UsersDto resultDto = dao.getData(id);
 		
 		boolean isValid = false;
+		boolean isSocial = resultDto.getSocial() > 1;
 		
 		//입력한 아이디가 존재하는 아이디일때
 		if(resultDto != null) {
 			//입력한 이메일과 회원가입 시 입력한 이메일이 같을경우 유효한 이메일 
-			isValid = dto.getEmail().equals(resultDto.getEmail());
+			//북메이트에서 가입 한 회원은 dto.getSocial()이 0,1
+			isValid = dto.getEmail().equals(resultDto.getEmail()) && !isSocial;
 		}
-		
+				
 		if(isValid) {
 			/*
 			 * String type은 수정 할 때마다 새로운 객체를 생성하므로 메모리 낭비가 심하다.
@@ -249,9 +277,11 @@ public class UsersServiceImpl implements UsersService{
 		}
 		
 		model.addAttribute("isSuccess", isValid);
+		model.addAttribute("isSocial",isSocial);
 		model.addAttribute("id",id);
 	}
 	
+	//아이디 찾기
 	@Override
 	public void findUserId(UsersDto dto, Model model) {
 		//입력받은 email의 정보를 resultDto에 담는다
@@ -259,18 +289,27 @@ public class UsersServiceImpl implements UsersService{
 		UsersDto resultDto = dao.getId(userName);
 		
 		boolean isValid = false;
+		boolean isSocial = resultDto.getSocial() > 1;
 		
 		//입력한 이름이 존재하는 이름일때
 		if(resultDto != null) {
-			//입력한 이메일과 회원가입 시 입력한 이메일이 같을경우 유효함
-			isValid = dto.getEmail().equals(resultDto.getEmail());
+			//입력한 이메일과 회원가입 시 입력한 이메일이 같을경우 유효한 이메일 
+			//북메이트에서 가입 한 회원은 dto.getSocial()이 0,1
+			isValid = dto.getEmail().equals(resultDto.getEmail()) && !isSocial;
 		}
+		
 		String id = "";
 		if(isValid) {
 			id = resultDto.getId();
 		}
 		model.addAttribute("name", dto.getName());
 		model.addAttribute("isSuccess", isValid);
+		model.addAttribute("isSocial",isSocial);
 		model.addAttribute("id", id);
+	}
+
+	@Override
+	public void updateSocial(String id) {
+		dao.UpdateSocail(id);		
 	}
 }

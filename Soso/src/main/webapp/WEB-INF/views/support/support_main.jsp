@@ -20,24 +20,24 @@
 		<jsp:param value="home" name="current"/>
 	</jsp:include>
 	<!-- 상단 레이아웃 -->
-	    <main id="main-banner" class="main-banner-06">
-	        <div class="inner-wrap">
-	            <div class="title">
-	                <h2>고객센터</h2>
-	                <p>
-				                    서비스 이용 중 불편 했던 점이나 궁금한 점을 <br />
-				                    빠르고 친절하게 안내해 드리겠습니다.
-	                </p>
-	            </div>
-	            <div class="indicator">
-	                <div class="home circle">
-	                    <a href="#" title="메인페이지가기"><img src="${path }/resources/images/sub/icon_home.svg" alt="홈버튼이미지"></a>
-	                </div>
-	                <div class="main-menu circle">BOOKMATE</div>
-	
-	            </div>
-	        </div>
-	    </main>	
+		<main id="main-banner" class="main-banner-06">
+			<div class="inner-wrap">
+				<div class="title">
+					<h2>고객센터</h2>
+					<p>
+									서비스 이용 중 불편 했던 점이나 궁금한 점을 <br />
+									빠르고 친절하게 안내해 드리겠습니다.
+					</p>
+				</div>
+				<div class="indicator">
+					<div class="home circle">
+						<a href="#" title="메인페이지가기"><img src="${path }/resources/images/sub/icon_home.svg" alt="홈버튼이미지"></a>
+					</div>
+					<div class="main-menu circle">BOOKMATE</div>
+
+				</div>
+			</div>
+		</main>	
 		<!-- 메인 메뉴바 -->
 		<ul class="menu_bar">
 			<li class="menu_home">
@@ -57,10 +57,10 @@
 					</li>
 					<script>
 						 // JavaScript 코드: 문의하기 링크 클릭 시 리다이렉트
-				        document.querySelector("#inquire").addEventListener("click", function(e) {
-				            e.preventDefault();
-				            window.location.href = "${pageContext.request.contextPath}/support/support_inquire_inquireStatus";
-				        });
+						document.querySelector("#inquire").addEventListener("click", function(e) {
+							e.preventDefault();
+							window.location.href = "${pageContext.request.contextPath}/support/support_inquire_inquireStatus";
+						});
 					</script>
 				</c:when>
 				<c:otherwise>
@@ -74,7 +74,7 @@
 		<div class="main_content">
 		<!-- 자주하는 질문 세션 -->
 		<div class="area_faq">
-		  <h2 class="faq_title">자주하는 질문 10</h2>
+			<h2 class="faq_title">자주하는 질문 10</h2>
 			<a class="faq_more" href="${pageContext.request.contextPath }/support/support_faq">주제별 FAQ 더보기</a>
 			<ul>
 				<c:forEach var="tmp" items="${list }">
@@ -94,7 +94,7 @@
 				</c:forEach>
 			</ul>
 		</div>
-   		<!-- 공지사항 세션 -->
+		<!-- 공지사항 세션 -->
 		<div class="area_notice">
 				<h2 class="title">공지사항</h2>
 				<a class="view_more" href="${pageContext.request.contextPath }/support/support_notice">더보기</a>

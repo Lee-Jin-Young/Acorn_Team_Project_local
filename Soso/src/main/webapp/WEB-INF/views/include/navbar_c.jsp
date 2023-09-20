@@ -91,7 +91,7 @@
 			 </nav>
 			 <div class="sns">
                 <div class="iconWrap">
-                    <a href="#" class="btn">
+                    <a href="#" class="btn" onclick="return false;">
                         <span class="circle01"></span>
                         <span class="circle02"></span>
                         <span class="circle03"></span>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,25 +32,28 @@
 				<input class="form-control" type="text" name="id" id="id" autocomplete='off'/>
 				<div><span id="result_checkId" style="font-size: 12px;"></span></div>
 			</div>
-			<div class="mb-4 abc" >
-				<label class="control-label mb-2" for="pwd">비밀번호</label>
-				<div class="input-group">
-					<input class="form-control" type="password" name="pwd" id="pwd" onkeyup="checkCapsLock(event)"/> 
-					<button class="btn btn-outline-gray bi-eye-slash" type="button" id="openpwd"></button>
-					<div id="capsLockMessage" class="arrow_box">Caps Lock이 켜져 있습니다</div>
-				</div> 
-				<div class="invalid-feedback" id="pwd-feedback">최소 8자 이상, 20글자 이하로 문자와 숫자, 특수 문자를 각각 하나 이상 조합하세요.</div>
-				<div><small>비밀번호는 대소문자 구분이 됩니다.</small></div>
-			</div>
-			<div class="mb-4">
-				<label class="control-label mb-2" for="pwd2">비밀번호 확인</label>
-				<div class="input-group">
-					<input class="form-control" type="password" name="pwd2" id="pwd2" onkeyup="checkCapsLock2(event)"/>
-					<button class="btn btn-outline-gray bi-eye-slash" type="button" id="openpwd2"></button>
-					<div id="capsLockMessage2" class="arrow_box">Caps Lock이 켜져 있습니다</div>
+			<%-- 소셜 가입시에는 비밀번호를 요구하지 않는다. email이 request영역에 있으면 소셜 로그인이다. --%>
+			<c:if test="${empty email }">
+				<div class="mb-4 abc" >
+					<label class="control-label mb-2" for="pwd">비밀번호</label>
+					<div class="input-group">
+						<input class="form-control" type="password" name="pwd" id="pwd" onkeyup="checkCapsLock(event)"/> 
+						<button class="btn btn-outline-gray bi-eye-slash" type="button" id="openpwd"></button>
+						<div id="capsLockMessage" class="arrow_box">Caps Lock이 켜져 있습니다</div>
+					</div> 
+					<div class="invalid-feedback" id="pwd-feedback">최소 8자 이상, 20글자 이하로 문자와 숫자, 특수 문자를 각각 하나 이상 조합하세요.</div>
+					<div><small>비밀번호는 대소문자 구분이 됩니다.</small></div>
 				</div>
-				<div class="invalid-feedback" id="pwd2-feedback">비밀번호가 일치하지 않습니다.</div>
-			</div>
+				<div class="mb-4">
+					<label class="control-label mb-2" for="pwd2">비밀번호 확인</label>
+					<div class="input-group">
+						<input class="form-control" type="password" name="pwd2" id="pwd2" onkeyup="checkCapsLock2(event)"/>
+						<button class="btn btn-outline-gray bi-eye-slash" type="button" id="openpwd2"></button>
+						<div id="capsLockMessage2" class="arrow_box">Caps Lock이 켜져 있습니다</div>
+					</div>
+					<div class="invalid-feedback" id="pwd2-feedback">비밀번호가 일치하지 않습니다.</div>
+				</div>
+			</c:if>			
 			<script>
 				const capsLockMessage = document.getElementById("capsLockMessage");
 				function checkCapsLock(event)  {
@@ -68,11 +72,23 @@
 					}
 				}
 			</script>
-			<div class="mb-4">
-				<label class="control-label mb-2" for="email">이메일</label> <input
-					class="form-control" type="text" name="email" id="email" autocomplete='off'/>
-				<div class="invalid-feedback">이메일 형식에 맞게 입력하세요.</div>
-			</div>
+			
+			<c:choose>
+				<c:when test="${not empty email }">
+					<div class="mb-4">
+						<label class="control-label mb-2" for="email">이메일</label> <input
+							class="form-control is-valid" type="text" name="email" id="email" autocomplete='on' value="${email }" readonly/>
+						<div class="invalid-feedback">이메일 형식에 맞게 입력하세요.</div>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="mb-4">
+						<label class="control-label mb-2" for="email">이메일</label> <input
+							class="form-control" type="text" name="email" id="email" autocomplete='off'/>
+						<div class="invalid-feedback">이메일 형식에 맞게 입력하세요.</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
 			<div>
 				<fieldset class="fieldarea f2">
 					<div class="d-flex justify-content-between align-items-center mb-2">
@@ -342,6 +358,15 @@ QR코드 등록 정보:삭제 시점으로부터6개월 보관
 			}
 			
 			checkFormState();
+		});
+		
+		$(document).ready(function() {
+		    const emailInput = $("#email");
+		    
+		    if (emailInput.prop("readonly")) {/* readOnly면 소셜 로그인이니 비밀번호도 true처리 */
+		        isEmailValid = true;
+		    	isPwdValid = true;
+		    }
 		});
 
 		$(document).ready(function() {

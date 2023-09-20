@@ -1,4 +1,4 @@
-# <img src="Soso/src/main/webapp/resources/images/common/bookmate_logo_w_main.svg">
+<#img src="Soso/src/main/webapp/resources/images/common/bookmate_logo_w_main.svg">
 
 ## **목차**
 
