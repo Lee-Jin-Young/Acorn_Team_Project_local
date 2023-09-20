@@ -20,7 +20,7 @@ h3.black{ color: #333; }
 
 
 /* main */
-main {width: 100%; height: 100%; min-height: 500px; }
+main {width: 100%; height: 100%; min-height: 500px; position:relative;}
 main .swiper { width: 100%; }
 main .swiper-wrapper { width: 100%; height: 100%; }
 main .swiper-slide{ width: 100%; height: 100%; background-repeat: no-repeat; background-size: cover; background-position: center;}
@@ -31,33 +31,18 @@ main .swiper-slide.main04{ background-image: url(../images/sub/004.jpg); }
 main .swiper-slide.main05{ background-image: url(../images/sub/005.jpg); }
 
 
-main .main-txt { z-index: 1; position: absolute; left: 0; right: 0; top: 30%;}
-main .main-txt h4{ letter-spacing: 0;}
-main .main-txt .hearts{ margin-top: 100px; }
-
 main .swiper{ width: 100%; height: 100%; }
 main .swiper-wrapper{ height: 100%; }
-
-main .slide-btn { font-size: 18px; width: 130px; height: 24px; position: absolute; bottom: 7%; right: 15%; z-index: 1; }
-
-main .slide-btn .swiper-pagination { width: auto; color: white; font-family: 'Montserrat'; bottom: -3%; right: 25%; }
-main .slide-btn .swiper-pagination-current { font-weight: bold; font-size: 18px; color: #fff; margin-left: 1px; }
-main .slide-btn .swiper-pagination-total { color: #fff; font-size: 18px; }
-
+main .slide-btn { z-index: 999; font-size: 18px; width:90%; margin:0 auto; position:absolute; display: flex; justify-content: flex-end; top: 52%; }
 main .slide-btn .swiper-button-next, main .swiper-button-prev { background-image: url(../images/common/prev-btn.svg); background-repeat: no-repeat; top: 100%; width: 12px; height: 100%; background-size: 12px; }
 main .slide-btn .swiper-button-next:after, main .swiper-button-prev:after {display: none;}
 main .slide-btn .swiper-button-prev { bottom: 1px; left: 0; } 
-main .slide-btn .swiper-button-next { transform: rotate(180deg); top: 85%; right: 25%;}
-
-main .slide-btn .swiper-play-stop-btn { width: 20px; height: 20px; position: absolute; right: 0px; top: 2px; cursor: pointer; }
-main .slide-btn .swiper-play-stop-btn img { width: 100%; height: 100%; }
-main .slide-btn .stop-btn.active, main .slide-btn .play-btn.active { display: block; }
 main .slide-btn .stop-btn, main .slide-btn .play-btn { display: none; }
 
 /* 타이핑 효과  */
-#box{z-index: 999; position: absolute; top: 44%; left: 48%;}
-.text{font-weight: bold; color: #fff; font-size: 3rem;}
-.blink { animation: blink 0.5s infinite; font-size: 3rem;}
+#box{z-index: 999; width:80%; margin: 0 auto; left:0;right:0; position:absolute; display: flex; justify-content: flex-end; top: 52%;}
+.text{font-weight: bold; color: #fff; font-size: 2.8rem;}
+.blink { animation: blink 0.5s infinite; font-size: 2.8rem;}
 @keyframes blink {
   to {
     opacity: 0;
@@ -113,7 +98,7 @@ main .slide-btn .stop-btn, main .slide-btn .play-btn { display: none; }
 .our-business .inner-wrap { display: flex; flex-direction: row-reverse; }
 .our-business .business-content { margin-right: 3%; }
 .our-business .business-content ul li { display: flex; justify-content: space-between; padding: 5.2% 10%; }
-
+.our-business .bi-github:hover{color:#ceb6a0;}
 .our-business .business-content ul li p{ font-size: 1.25rem; }
 .our-business .business-content ul li span { display: flex; vertical-align: middle; width: 5%; }
 .our-business .business-content ul li span img { width: 100%; height: 100%; }
@@ -138,15 +123,10 @@ main .slide-btn .stop-btn, main .slide-btn .play-btn { display: none; }
 
 
 /* fix-image */
-.fixed01{ width: 100%; height: 500px; background-image: url(../images/main/authentic-book-club-scene.png); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;}
-.fixed02{
-    width: 100%; height: 500px;
-    background-image: url(../images/main/high-angle-people-reading-together.png);
-    background-repeat: no-repeat; 
-    background-size: cover;
-    background-position: center; 
-    background-attachment: fixed; 
-  }
+.fixed01{ background-image: url(../images/sub/003.jpg); }
+.fixed02{ background-image: url(../images/sub/004.jpg); }
+.fixed03{ background-image: url(../images/sub/005.jpg); }
+.fixed01, .fixed02, .fixed03{width: 100%; height: 500px; background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;}
 
 
 
@@ -187,7 +167,6 @@ main .slide-btn .stop-btn, main .slide-btn .play-btn { display: none; }
 /*=========================== ~1399 ==================================*/
 @media screen and (max-width: 1399px) {
     section{padding: 150px 10px;}
-    .hearts h2{ font-size: 4.5rem; }
 }
 
 
@@ -198,8 +177,7 @@ main .slide-btn .stop-btn, main .slide-btn .play-btn { display: none; }
 /*=========================== ~1023 ==================================*/
 @media screen and (max-width: 1023px) {
     *{font-size: 16px;}
-	.text{font-size: 2rem;}
-    .hearts h2{ font-size: 3rem; }
+	.text, .blink{font-size: 1.9rem;}
     h3{ font-size: 3.6rem; }
     h4{ font-size: 2rem; }
 
@@ -210,14 +188,19 @@ main .slide-btn .stop-btn, main .slide-btn .play-btn { display: none; }
 
     .about-us ul li{ width: 240px; height: 240px; line-height: 240px; font-size: 1.5rem; }
     .about-us p{ font-size: 1rem; }
-    .about-button{ padding: 10px 70px; font-size: 1.33rem; }
-
-    .our-business .business-content { margin-right: 10px; }
+    .about-button{ padding: 10px 50px; font-size: 1.1rem; }
+    .our-business .business-content { margin-top: 10px; }
     .our-business .slide-btn { right: -7%;  }
 
     .process ul { padding: 0 2%; }
 
-
+	.mate_content_text {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
     .br{ display: block; }
     .mate_content .mate_content_list {min-width: 100%; margin-bottom: 6%;}
     .mate_content .mate_content_list a{display:flex;}
@@ -228,6 +211,9 @@ main .slide-btn .stop-btn, main .slide-btn .play-btn { display: none; }
 	.map .inner-wrap {
     display: flex;
     flex-direction: column;
+    }
+    .about-us p {
+    font-size: 0.8rem;
 }
     
 }
@@ -239,11 +225,17 @@ main .slide-btn .stop-btn, main .slide-btn .play-btn { display: none; }
 /*=========================== ~767 ==================================*/
 @media screen and (max-width: 767px) {
     section{ padding: 80px 10px; }
-	.text{font-size: 1.5rem;}
+	#box{justify-content:center;}
+	.text{font-size: 1.7rem; }
+	.blink{font-size: 1.9rem;}
     .about-us ul li{ width: 180px; height: 180px; line-height: 180px; font-size: 1.2rem; }
+	h3.title{ margin-bottom: 40px; font-size: 2.3rem; }
+	.mate_content .mate_content_list a {
+	    display: flex;
+	    flex-direction: column;
+	}
 
-	.mate_content .mate_contents a{display:flex;}
-
+	.mate_content_img, .mate_content_text {width: 100%;}
     .our-business .inner-wrap { display: block; }
     .our-business .slide-btn { right: -5%; }
 
@@ -262,21 +254,17 @@ main .slide-btn .stop-btn, main .slide-btn .play-btn { display: none; }
 /*=========================== ~414 ==================================*/
 @media screen and (max-width: 414px) {
     *{font-size: 14px;}
-
     section{ padding: 60px 10px; }
     section.our-business { padding: 60px 0; }
-
-    h3.title{ margin-bottom: 40px; font-size: 2.8rem; }
-
-    .hearts h2{ font-size: 2.1rem; }
-    .hearts h2:first-child { top: 10px; }
-    h3{ font-size: 2.9rem; }
-    h4{ font-size: 1.6rem; margin-bottom: 0; line-height: 1.8rem; }
+	#box{justify-content:center;}
+	.text{font-size: 1.5rem; }
+	.blink{font-size: 1.5rem;}
+    h3.title{ margin-bottom: 40px; font-size: 2rem; }
 
     main{max-height: 500px;}
-
+	.mate_content_img {width: 100%;}
     .about-us ul li{ width: 120px; height: 120px; line-height: 120px; font-size: 1rem; }
-    .about-button{ padding: 10px 50px;}
+    .about-button{ padding: 10px 30px;}
 
     .our-business .slide-btn { right: -9%; bottom: 10%; }
 
@@ -292,8 +280,7 @@ main .slide-btn .stop-btn, main .slide-btn .play-btn { display: none; }
 /* ============================ iphone567 ============================= */
 @media screen and (max-width: 375px){
     *{ font-size: 12px; }
-	.text{font-size: 1rem;}
-    .hearts h2{ font-size: 1.8rem; }
+	.text, .bilnk{font-size: 1.2rem;}
 
     .about-us ul li{ width: 100px; height: 100px; border: 1px solid #DBD2CC; line-height: 100px; font-size: 1rem; }
 
