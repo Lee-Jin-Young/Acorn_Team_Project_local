@@ -17,8 +17,8 @@
 
 	<insert id="insert" parameterType="usersDto">
 		INSERT INTO users
-		(id, pwd, email, regdate, name, SVC_USE_PCY_AGMT_YN, PS_INFO_PROC_AGMT_YN, MKT_INFO_RECV_AGMT_YN)
-		VALUES(#{id}, #{pwd}, #{email}, TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'), #{name}, 0, 0, 0)
+		(id, pwd, email, regdate, name, SVC_USE_PCY_AGMT_YN, PS_INFO_PROC_AGMT_YN, MKT_INFO_RECV_AGMT_YN, social)
+		VALUES(#{id}, #{pwd}, #{email}, TO_DATE(TO_CHAR(SYSDATE, 'RR/MM/DD'), 'RR/MM/DD'), #{name}, 0, 0, 0, #{social})
 	</insert>
 	
 	<select id="getData" parameterType="string" resultType="usersDto">
@@ -27,11 +27,17 @@
 		WHERE id = #{id}
 	</select>
 	<!-- 네이버 인증 위해서 email로 유저 정보 습득 -->
-	<select id="getData2" parameterType="string" resultType="usersDto">
-		SELECT id, pwd, profile, email, regdate, Name, SVC_USE_PCY_AGMT_YN, PS_INFO_PROC_AGMT_YN, MKT_INFO_RECV_AGMT_YN
+	<select id="getNaver" parameterType="string" resultType="usersDto">
+		SELECT id, pwd, profile, email, regdate, Name, SVC_USE_PCY_AGMT_YN, PS_INFO_PROC_AGMT_YN, MKT_INFO_RECV_AGMT_YN, social
 		FROM users
 		WHERE email = #{email}
 	</select>
+	<!-- 네이버 소셜 로그인(통합 로그인 위한) 업데이트 -->
+	<update id="updateSocial" parameterType="string">
+		UPDATE users
+		SET social = 1
+		WHERE id = #{id}
+	</update>
 	
 	<update id="updatePwd" parameterType="usersDto">
 		UPDATE users

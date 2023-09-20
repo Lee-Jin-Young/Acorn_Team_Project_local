@@ -39,8 +39,8 @@ public class UsersDaoImpl implements UsersDao{
 		return session.selectOne("users.getData", id);
 	}
 	@Override
-	public UsersDto getData2(String email) {
-		return session.selectOne("users.getData2", email);
+	public UsersDto getNaver(String email) {
+		return session.selectOne("users.getNaver", email);
 	}
 	
 	@Override
@@ -61,5 +61,11 @@ public class UsersDaoImpl implements UsersDao{
 	@Override
 	public UsersDto getId(String userName) {
 		return session.selectOne("users.getId", userName);
+	}
+
+	@Override
+	public void UpdateSocail(String id) {
+		session.update("users.updateSocial", id);
+		
 	}
 }

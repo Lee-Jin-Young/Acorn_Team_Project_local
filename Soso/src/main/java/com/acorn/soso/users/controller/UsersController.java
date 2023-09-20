@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,6 +83,17 @@ public class UsersController {
 		return "users/loginform";
 	}
 	
+	@GetMapping("/users/socialaccess")
+	public String socialAccess(HttpServletRequest request, HttpSession session) {
+		//파라미터를 얻어와서
+		String id = (String)request.getParameter("id");
+		//소셜로그인 여부를 업데이트 해주고
+		service.updateSocial(id);
+		//세션 영역에 id를 넣어준다.
+		session.setAttribute("id", id);
+		return "main";
+	}
+	
 	@PostMapping("/users/login")
 	public String login(Model model, UsersDto dto, String url, HttpSession session){
 		/*
@@ -142,7 +154,7 @@ public class UsersController {
 		//서비스를 이용해서 이미지를 upload 폴더에 저장하고 리턴되는 Map을 리턴해서 json 문자열 응답하기
 		return service.saveProfileImage(request, image);
 	};
-	
+
 	@GetMapping(
 		value = "/users/images/{imageName}",
 		produces = {MediaType.IMAGE_GIF_VALUE,  MediaType.IMAGE_PNG_VALUE, 

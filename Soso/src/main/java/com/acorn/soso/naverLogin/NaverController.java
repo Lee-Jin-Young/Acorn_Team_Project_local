@@ -3,7 +3,8 @@ package com.acorn.soso.naverLogin;
 import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
- 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.acorn.soso.users.dto.UsersDto;
 import com.acorn.soso.users.service.UsersService;
@@ -84,10 +84,9 @@ public class NaverController {
 		JSONObject response_obj = (JSONObject)jsonObj.get("response");
 		//response의 nickname값 파싱
 		String nickname = (String)response_obj.get("nickname");
-		String profile = (String)response_obj.get("profile_image");
 		String email = (String)response_obj.get("email");
 		String id = (String)response_obj.get("id");
-		
+				
 		/*
 		 * 네이버 프로필 값을 가져왔으니 회원가입이나 로그인은 쉬울 것.
 		 * 0.getUser같은 메소드로 유저 정보 가져와서 해당 유저가 있는지 확인(현재 getUser는 id로 값을 가져오므로, email로 가져오는거 하나 추가하자)
@@ -96,27 +95,40 @@ public class NaverController {
 		 */
 		
 		//email을 매개로 해서 정보를 얻어온다.
-		UsersDto dto = userService.getInfo2(email);
-		//만약 dto의 결과가 null이라면
+		UsersDto dto = userService.getNaver(email);
+		//만약 dto의 결과가 null이라면 회원가입이 안된 것이다.
 		if(dto==null) {
 			//모델에 필요한 데이터를 넣어준다.
-			model.addAttribute("nickname", nickname);
 			model.addAttribute("email", email);
 			return "users/signup_form";
-		//dto가 null이 아니라면(회원가입되어있다는 뜻);
-		}else {
-			//아이디를 가져와서
-			String logginId = dto.getId();
-			session.setAttribute("id", logginId);
-			//최상단으로 리턴해준다.
-			return "main";
+		}else{//dto가 null이 아니라면(회원가입되어있다는 뜻);
+			/*
+			 * 가입은 했지만 소셜 가입이 아니면(0)이다.
+			 * 0이면 알림창을 띄우고(회원가입하시겠습니까)=>회원가입창 이동(바로 가입시키지 않는건 필수요소인 아이디, 이름, 약관 동의 위함)
+			 * 소셜 로그인 회원(2)이거나 통합 로그인 회원(1)이라면
+			 * 로그인 처리를 해준다.
+			 */
+			int isSocial = dto.getSocial();//소셜여부를 알아낸다.
+			if(isSocial == 0) {//만약 통합 로그인 회원이 아니라면 통합로그인 여부를 확인해준다.				
+				//아이디를 얻어온다.
+                String logginId = dto.getId();
+				//모델 영역에 id 넣어준다
+                model.addAttribute("id", logginId);
+                //이동
+                return "users/socialconfirm";
+			}else{//만약 소셜 로그인 회원이거나 통합회원이라면(값은 1, 2밖에 없다)
+				//아이디를 가져와서
+				String logginId = dto.getId();
+				session.setAttribute("id", logginId);
+				//최상단으로 리턴해준다.
+				return "main";				
+			}
 		}
 	}
 	
 	//로그아웃
 	@RequestMapping(value = "naver/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session)throws IOException {
-			System.out.println("여기는 logout");
 			session.invalidate();
  
 			return "redirect : home";

@@ -32,14 +32,24 @@ public class UsersServiceImpl implements UsersService{
 	//회원가입
 	@Override
 	public void addUser(UsersDto dto) {
-		//비밀번호를 암호화해줄 객체를 생성
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		//암호화된 비밀번호 얻어내서
-		String encodedPwd = encoder.encode(dto.getPwd());
-		//UsersDto 객체에 담고
-		dto.setPwd(encodedPwd);
-		//UsersDao 객체를 이용해서 DB에 저장하기
-		dao.insert(dto);
+		
+		//만약 소셜로그인(social=2)이면 dto.getPwd==null이다.
+		if(dto.getPwd() == null) {
+			dto.setPwd("");
+			dto.setSocial(2);
+			dao.insert(dto);
+		}else {//일반회원가입
+			//비밀번호를 암호화해줄 객체를 생성
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			//암호화된 비밀번호 얻어내서
+			String encodedPwd = encoder.encode(dto.getPwd());
+			//UsersDto 객체에 담고
+			dto.setPwd(encodedPwd);
+			//소셜은 0으로 설정해준다.
+			dto.setSocial(0);
+			//UsersDao 객체를 이용해서 DB에 저장하기
+			dao.insert(dto);
+		}
 	}
 	
 	//아이디 중복체크
@@ -94,9 +104,9 @@ public class UsersServiceImpl implements UsersService{
 	}
 	
 	@Override
-	public UsersDto getInfo2(String email) {
+	public UsersDto getNaver(String email) {
 		//로그인 된 아이디를 읽어온다.
-		UsersDto dto = dao.getData2(email);
+		UsersDto dto = dao.getNaver(email);
 		//view 페이지에서 필요한 정보를 서비스 페이지에서 dto로 담아준다.
 		return dto;
 	}
@@ -296,5 +306,10 @@ public class UsersServiceImpl implements UsersService{
 		model.addAttribute("isSuccess", isValid);
 		model.addAttribute("isSocial",isSocial);
 		model.addAttribute("id", id);
+	}
+
+	@Override
+	public void updateSocial(String id) {
+		dao.UpdateSocail(id);		
 	}
 }
