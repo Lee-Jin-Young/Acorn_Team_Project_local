@@ -1,4 +1,4 @@
-[![북메이트 로고](Soso/src/main/webapp/resources/images/common/bookmate_logo_w_main.svg)](https://bookmate.life)
+[![북메이트 로고](Soso/src/main/webapp/resources/images/common/bookmate_logo_w_main.png)](https://bookmate.life)
 
 ## 목차
 - [개요](#-프로젝트-개요)
