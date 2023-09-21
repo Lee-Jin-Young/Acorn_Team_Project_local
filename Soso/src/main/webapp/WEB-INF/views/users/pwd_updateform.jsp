@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" type="text/css">
 <link rel="shortcut icon" type="image/x-icon" href="${path }/resources/images/main/favicon.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/include/navbar_c.jsp">
@@ -21,12 +22,18 @@
         <form action="${pageContext.request.contextPath}/users/pwd_update" method="post" id="myForm">
             <div>
                 <label class="form-label mb-2" for="newPwd">새 비밀번호</label>
-                <input class="form-control" type="password" name="newPwd" id="newPwd"/>
+                <div class="input-group">
+                    <input class="form-control" type="password" name="newPwd" id="newPwd"/>
+                    <button class="btn btn-outline-gray bi-eye-slash" type="button" id="openpwd"></button>
+                </div>
                 <div class="invalid-feedback pwd-feedback">최소 8자 이상으로 문자와 숫자, 특수 문자를 각각 하나 이상 조합하세요.</div>
             </div>
             <div class="mt-2">
                 <label class="form-label mb-2" for="newPwd2">새 비밀번호 확인</label>
-                <input class="form-control" type="password" id="newPwd2"/>
+                <div class="input-group">
+                    <input class="form-control" type="password" id="newPwd2"/>
+                    <button class="btn btn-outline-gray bi-eye-slash" type="button" id="openpwd2"></button>
+                </div>
                 <div class="invalid-feedback pwd2-feedback">비밀번호가 일치하지 않습니다.</div> 
             </div>
             <div class="d-flex justify-content-center mt-3">
@@ -93,6 +100,30 @@
             const isAllValid = isPwdValid && isPwdValid2;
             $("button[type=submit]").prop("disabled", !isAllValid);
         }
+
+        $(document).ready(function(){
+        // 눈 아이콘을 누르면 입력한 비밀번호가 보이도록 설정
+            $('button[id=openpwd]').on('click', function() {
+                $('#newPwd').toggleClass('active');
+                if ($('#newPwd').hasClass('active')) {
+                    $(this).attr('class', "btn btn-outline-secondary bi-eye")
+                    $('#newPwd').attr('type', 'text');
+                } else {
+                    $(this).attr('class', "btn btn-outline-secondary bi-eye-slash")
+                    $('#newPwd').attr('type', 'password');
+                }
+            });
+            $('button[id=openpwd2]').on('click', function() {
+                $('#newPwd2').toggleClass('active');
+                if ($('#newPwd2').hasClass('active')) {
+                    $(this).attr('class', "btn btn-outline-secondary bi-eye")
+                    $('#newPwd2').attr('type', 'text');
+                } else {
+                    $(this).attr('class', "btn btn-outline-secondary bi-eye-slash")
+                    $('#newPwd2').attr('type', 'password');
+                }
+            });
+        })
     </script>
 </body>
 </html>
