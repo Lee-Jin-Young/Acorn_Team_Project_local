@@ -83,7 +83,9 @@
 								
 								<div class="user_content_btn">
 									<div class="user_content_community"><a href="${pageContext.request.contextPath}/group_managing/group_userdetail?num=${tmp.num}">커뮤니티</a></div>
-									<div class="user_content_delete" id="user_content_delete_${tmp.num}"><a href="#">탈퇴</a></div>
+									<div style="display: inline flex;" class="user_content_delete" style="margin-top:55px; background-color:rgb(241 146 146 / 97%)">
+										<div style="color:white;" class="deleteConfirm">탈퇴</div>
+									</div>
 								</div>
 							</div>   
 						</a>
@@ -96,7 +98,7 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	
 	<script>
-		$("#user_content_delete_${tmp.num}").css("cursor", "auto").click(()=>{
+		$(".deleteConfirm").css("cursor", "pointer").click(()=>{
 			Swal.fire({
 				title: `${tmp.name} 소모임에서 
 						탈퇴하시겠습니까?`,
