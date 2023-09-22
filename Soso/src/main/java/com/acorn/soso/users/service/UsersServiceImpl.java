@@ -211,10 +211,11 @@ public class UsersServiceImpl implements UsersService{
 		UsersDto resultDto = dao.getData(id);
 		
 		boolean isValid = false;
-		boolean isSocial = resultDto.getSocial() > 1;
+		boolean isSocial = false;
 		
 		//입력한 아이디가 존재하는 아이디일때
 		if(resultDto != null) {
+			isSocial = resultDto.getSocial() > 1;
 			//입력한 이메일과 회원가입 시 입력한 이메일이 같을경우 유효한 이메일 
 			//북메이트에서 가입 한 회원은 dto.getSocial()이 0,1
 			isValid = dto.getEmail().equals(resultDto.getEmail()) && !isSocial;
@@ -289,10 +290,11 @@ public class UsersServiceImpl implements UsersService{
 		UsersDto resultDto = dao.getId(userName);
 		
 		boolean isValid = false;
-		boolean isSocial = resultDto.getSocial() > 1;
+		boolean isSocial = false;
 		
 		//입력한 이름이 존재하는 이름일때
 		if(resultDto != null) {
+			isSocial = resultDto.getSocial() > 1;
 			//입력한 이메일과 회원가입 시 입력한 이메일이 같을경우 유효한 이메일 
 			//북메이트에서 가입 한 회원은 dto.getSocial()이 0,1
 			isValid = dto.getEmail().equals(resultDto.getEmail()) && !isSocial;
